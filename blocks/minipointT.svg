@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg">
+  <g id="g1" transform="matrix(2.892091989517212, 0, 0, -2.8895139694213867, -6598.008349940243, 5074.1045299925245)" style="height: 100%;">
+    <g class="endpoint" style="" transform="matrix(-1, 0, 0, -1, 4574.199999, 3500.659995)">
+      <path id="path5403-1" d="m 0,0 c 0,-2.074 -1.681,-3.752 -3.752,-3.752 -2.072,0 -3.753,1.678 -3.753,3.752 0,2.071 1.681,3.752 3.753,3.752 C -1.681,3.752 0,2.071 0,0" style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.043;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" clip-path="url(#clipPath5404-7)" transform="matrix(1.3333333,0,0,-1.3333333,2292.1021,1750.3323)"/>
+      <path id="path5405-5" d="m 0,0 c 0,-1.066 -0.862,-1.93 -1.928,-1.93 -1.065,0 -1.927,0.864 -1.927,1.93 0,1.063 0.862,1.928 1.927,1.928 C -0.862,1.928 0,1.063 0,0" style="fill:#fcc907;fill-opacity:1;fill-rule:evenodd;stroke:none" clip-path="url(#clipPath5406-9)" transform="matrix(1.3333333,0,0,-1.3333333,2289.6699,1750.331)"/>
+    </g>
+  </g>
+</svg>

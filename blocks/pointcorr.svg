@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+  <g id="g-1" transform="matrix(-1.0671249628067017, 0, 0, 2.9695010185241704, 2497.95167876744, -5167.613319751719)" style="height: 100%;">
+    <g class="path" transform="matrix(1, 0, 0, 1, -2.502188, 0.005053)">
+      <path id="path1159" d="m 2287.0999,1750.3323 56.2259,-0.01" style="fill:none;stroke:#fcc907;stroke-width:7.17943;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"/>
+    </g>
+  </g>
+  <g id="g1" transform="matrix(2.9033830165863037, 0, 0, -2.9739670753479004, -6610.331592219559, 5235.417031194396)" style="height: 100%;">
+    <g class="endpoint" style="" transform="matrix(-1, 0, 0, -1, 4574.199999, 3500.659995)">
+      <path id="path5403-1" d="m 0,0 c 0,-2.074 -1.681,-3.752 -3.752,-3.752 -2.072,0 -3.753,1.678 -3.753,3.752 0,2.071 1.681,3.752 3.753,3.752 C -1.681,3.752 0,2.071 0,0" style="fill: rgb(255, 255, 255); fill-opacity: 1; fill-rule: nonzero; stroke-width: 1.043; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-dasharray: none; stroke-opacity: 1; stroke: rgb(0, 0, 0);" clip-path="url(#clipPath5404-7)" transform="matrix(1.3333333,0,0,-1.3333333,2292.1021,1750.3323)"/>
+    </g>
+  </g>
+</svg>

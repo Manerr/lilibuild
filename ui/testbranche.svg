@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
+  <g id="g1" transform="matrix(-2.9033830165863037, 0, 0, 2.9739670753479004, 6814.684621085857, -5125.019569434371)" style="height: 100%;">
+    <g class="path" transform="matrix(1, 0, 0, 1, -2.502188, 0.005053)">
+      <path id="path1159" d="M 2284.083 1779.14 C 2298.336 1779.208 2296.725 1758.597 2315.213 1756.914 L 2343.326 1756.914" style="fill:none;stroke:#fcc907;stroke-width:7.17943;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"/>
+    </g>
+  </g>
+  <g id="g-1" transform="matrix(-2.9033830165863037, 0, 0, -2.9739670753479004, 6814.676320304545, 5325.019082643234)" style="height: 100%;">
+    <g class="path" transform="matrix(1, 0, 0, 1, -2.502188, 0.005053)">
+      <path id="path-1" d="M 2284.083 1785.276 C 2298.336 1785.344 2296.725 1758.597 2315.213 1756.914 L 2343.326 1756.914" style="fill:none;stroke:#fcc907;stroke-width:7.17943;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"/>
+    </g>
+  </g>
+</svg>

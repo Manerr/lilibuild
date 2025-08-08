@@ -1,0 +1,24 @@
+body{
+	margin: 0px;
+	background: initial !important;
+	-webkit-print-color-adjust: exact !important;
+	print-color-adjust: exact !important;
+	color-adjust: exact !important;
+}
+
+@page{
+	margin: 0px;
+	size: landscape;
+
+}
+
+main{
+	display: none !important;
+}
+
+#printmodeonlyImg{
+	display: block;
+	margin: auto;
+	width: 100vmin;
+	height: auto;
+}

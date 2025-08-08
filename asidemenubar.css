@@ -1,0 +1,92 @@
+#asidecontainer{
+	display: flex;
+	flex-direction: column;
+	
+	background-color: #0d0e18;
+/*	width: 4rem;*/
+	border-top-right-radius: .5rem;
+	border-bottom-right-radius: .5rem;
+	overflow-x: hidden;
+	/*will-change: width;
+	align-items: flex-start;
+	transition: .5s width;*/
+}
+
+/*#asidecontainer:hover{*/
+	/*width: 8rem;
+	transition: .5s width;*/
+
+/*}*/
+
+.mtop{
+	margin-top: auto !important;
+}
+
+
+.modern{
+	position: relative;
+	cursor: pointer;
+	appearance: none;
+	border: none;
+	outline: none;
+	color: white;
+	background: none;
+	width: 2.4rem;
+	height: 2.4rem;
+	margin: .3rem .4rem;
+	font-family: "dmsans";
+	border-radius: .26rem;
+	padding: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: .2s transform;
+	transform: scale(1);
+	border: 1px solid transparent;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.modern img{
+	pointer-events: none;
+	width: 1.2rem;
+	margin:auto;
+}
+
+/*a.modern{
+	padding: 0;
+}*/
+
+
+.modern:hover{
+	transition: .3s transform;
+	transform: scale(1.1);
+	border-color: #aaa;
+}
+
+.modern:active{
+	border-width: 2px;
+}
+
+
+
+.selected{
+	background-color: white;
+}
+
+.selected img{
+	filter: invert(100%);
+}
+
+
+.space{
+	height: 2rem;
+}
+
+#bDelete.selected{
+	background-color: #ff2323;
+}
+
+#bDelete img{
+	filter: none !important;
+}

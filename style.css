@@ -1,0 +1,605 @@
+@font-face{
+
+	font-family: "dmsans";
+	src : url("resources/DMSans-Light.ttf");
+}
+
+
+
+
+
+html,:root{
+	height: 100%;
+}
+
+body{
+	display: -ms-flex;
+	display: flex;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	width: 100%;
+	margin: 0px;
+	height: 100%;
+	min-height: 100%;
+	max-height: 100%;
+	font-family: "dmsans",system-ui,sans-serif !important;
+	font-weight: 100 !important;
+}
+
+
+
+::-webkit-scrollbar{
+	width: .3rem;
+	height: .3rem;
+	background: transparent;
+}
+
+::-webkit-scrollbar-corner{
+	/* width:1em; */
+	/* height:1em; */
+	display:block;
+}
+
+
+
+::-webkit-scrollbar-thumb{
+	width: 90%;
+	height: 90%;
+	border: 3px solid transparent;
+    background-color: #0d0e18; 
+	/* background: linear-gradient(90deg, #f2f3f2, #c2c3f2); */
+    /* border: .08rem solid #a2a2a2; */
+    cursor: pointer;
+    border-radius: .5rem;
+    display: block;
+}
+
+
+::-webkit-scrollbar-track{
+	background: white;
+}
+
+
+
+
+
+
+
+
+header{
+	display: none;
+    box-shadow: 2px 0.1rem 0.3rem #a9a1a1;
+    z-index: 2;
+}
+
+
+#app{
+	-ms-flex: 1;
+	flex: 1;
+	display: -ms-flex;
+	display: flex;
+
+	-ms-flex-direction: row;
+	flex-direction: row;
+
+	background-color: #ebebeb;
+}
+
+
+
+
+.result{
+	max-width:85%;
+	display: flex;
+	margin: auto;
+	overflow-x: auto;
+	max-height: 100%;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 0 .4rem #aaa,0 0 .2rem #999;
+
+}
+
+.allsvgcontainer{
+	display: flex;
+	max-height: 100%;
+    margin: auto 0px;
+    align-items: center;
+    position:relative;
+
+}
+
+#dragtarget{
+	box-sizing: border-box;
+	min-width: 100%;
+	display: flex;
+	flex-direction: row;
+    /* max-width: 100%; */
+    padding-left: 4rem;
+    padding: .1rem;
+    overflow-x:auto;
+}
+
+
+
+#dragtarget::after{
+	content: "";
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 12rem;
+	top: -7rem;
+	right: 0;
+	padding-right: 4rem;
+	background-color: white;
+	z-index: -1;
+
+}
+
+
+
+
+
+
+div.terminus{
+	margin-right: auto !important;
+}
+
+
+
+
+.deleting .img:hover{
+    box-shadow: 0px 0px .2rem #777;
+	outline: .3rem solid #222;
+	border-radius: .3rem;
+}
+
+
+
+.deleting .connectionpoint:hover{
+    box-shadow: 0px 0px .2rem #777;
+	outline: .3rem solid #222;
+	border-radius: .3rem;
+}
+
+
+.point{
+	position: relative;
+	z-index: 8;
+}
+
+.name{
+	position: absolute;
+	color: #1f3c90;
+	bottom: 80%;
+	left: 70%;
+	font-weight: 800;
+	font-size: 1.2rem;
+	font-family: "dmsans",sans-serif;
+	padding: .25rem 0rem;
+	border-radius: .1rem;
+	transform-origin: bottom left;
+	rotate: -30deg;
+	white-space: nowrap;
+	text-decoration-line: none;
+	text-decoration-style: unset !important;
+	cursor: text;
+	min-width: 1.5rem;
+}
+
+.name:hover{
+	box-shadow: 0px 0px .2rem #888;
+}
+
+.name.terminus{
+	background-color: #1f3c90;
+	color: white !important;
+	padding: .25rem .9rem !important;
+}
+
+
+.name:focus{
+	outline: none;
+}
+
+.connection::before{
+	height: 1.5rem;
+	content: "";
+	display: block;
+	width: .1rem;
+	border-radius: .1rem;
+	background-color: #1f3c90;;
+}
+
+.connection{
+	left: 1rem;
+	top: 70%;
+	position: absolute;
+	display: none;
+}
+
+
+
+.blockcontainer.connected .connection{
+	display: block;
+}
+
+.connectionpoint{
+	display: inline-block;
+	text-align: center;
+	color: white;
+	font-weight: 700;
+	width: 1.9rem;
+	height: 1.9rem;
+	border-radius: 50%;
+	background-color: #f59fb3;
+	margin: 0px .1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.22rem;
+	font-family: sans-serif;
+	line-height: 159.5%;
+	overflow-y: hidden;
+}
+
+.connectionline[type=RER] .connectionpoint{
+	border-radius: .3rem;
+}
+.connectionline[type=Transilien] .connectionpoint{
+	border-radius: .3rem;
+}
+
+.connectionline[type=Tram] span.connectionpoint{
+	border-radius: 0px;
+    background-color: transparent !important;
+    color: transparent;
+}
+
+
+.connectionpoint::after{
+	height: 100%;
+	width: 100%;
+	text-align: center;
+	content: attr(truename);
+}
+
+
+.connectionline[type=Tram] span.connectionpoint::after{
+	display: none !important;
+}
+
+.connectionpoint[bis=bis]{
+	background-image: url("blocks/connections/pointbis.svg");
+    background-size: .9rem;
+    background-position: 86% 48%;
+    background-repeat: no-repeat;
+}
+
+
+button.connectionpoint{
+	background: #fff;
+	background-repeat: no-repeat;
+
+	border: none;
+	background-image: url("ui/plus2.svg");
+	background-size: 100%;
+	background-position: center;
+	opacity: 0;
+	cursor: pointer;
+	order: 28;
+}
+
+.connectionline button{
+	margin-left: .2rem;
+
+}
+
+.addConnectionLine{
+	opacity: 0;
+	display: block;
+	margin-left: 0px;
+    position: relative;
+    right: .9rem;
+    margin-top: .2rem;
+}
+
+.connection:hover button.addConnectionLine{
+	opacity: 1;
+}
+
+
+
+.connectionline:hover button.connectionpoint{
+	opacity: 1;
+
+}
+
+button.connectionpoint:hover{
+	box-shadow: 0 0 .3rem #777;
+}
+
+
+/*
+.emptyforhovering{
+	opacity: 0;
+	user-select: none;
+	order: 27;
+}
+
+.connection:hover .emptyforhovering{
+	display: none;
+}
+*/
+
+.connectionline{
+	margin-top: .2rem;
+	margin-bottom: .2rem;
+	position: relative;
+	right: .95rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.connectionline[type=metro] .RER {
+	display: none;
+}
+.connectionline[type=metro] .Transilien {
+	display: none;
+}
+.connectionline[type=metro] .Tram {
+	display: none;
+}
+
+
+
+.connectionline[type=RER] .metro {
+	display: none;
+}
+.connectionline[type=RER] .Transilien {
+	display: none;
+}
+.connectionline[type=RER] .Tram {
+	display: none;
+}
+
+
+
+.connectionline[type=Transilien] .metro {
+	display: none;
+}
+.connectionline[type=Transilien] .RER {
+	display: none;
+}
+.connectionline[type=Transilien] .Tram {
+	display: none;
+}
+
+
+
+.connectionline[type=Tram] .metro {
+	display: none;
+}
+.connectionline[type=Tram] .RER {
+	display: none;
+}
+.connectionline[type=Tram] .Transilien {
+	display: none;
+}
+
+
+
+.connectionline img,.connectionline .img{
+	width: 2rem;
+	margin-right: .2rem;
+
+}
+
+img.connectionType{
+	margin-left: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+body .indicator{
+	width: 4rem !important;
+	height: 3.6rem !important;
+	border-radius: .35rem;
+	border: .3rem solid #222;
+	background-color: #222222aa;
+	z-index: 0;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	overflow:hidden !important;
+/*    background-image: url(blocks/pathline.svg);*/
+/*    background-position: center;*/
+/*    background-repeat: no-repeat;*/
+/*    background-size: cover;*/
+    box-shadow: 0px 0px .2rem #777;
+}
+
+
+body .InsertBeforeit img{
+
+	opacity: 0;
+	width: 4rem;
+}
+
+
+body .InsertBeforeit{
+	opacity: 0;
+	position: relative;
+	width:4rem !important;
+	border-radius: .35rem;
+	box-sizing: border-box;
+	border: .3rem solid #222;
+	background-color: #222222aa;
+	z-index: 0;
+    background-image: url(blocks/pathline.svg);
+    background-position: center;
+
+}
+
+
+
+
+
+
+
+
+.img svg path{
+	transition: .3s stroke,.3s fill;
+}
+
+.line.dashed .img svg path{
+	stroke-dasharray: 24px, 10px !important;
+}
+
+.img g .endpoint :last-child{
+	stroke: none !important;
+}
+
+
+/*For terminus point which has a different handling*/
+
+body .img svg g.endpoint :first-child{
+	stroke: black !important;
+}
+
+html body .img svg g.corrpoint path{
+	stroke: black !important;
+}
+
+
+
+
+
+
+
+.img svg{
+	min-width: 100%;
+	height: 100%;
+	pointer-events: none;
+    overflow: visible;
+}
+
+
+.point .img{
+	width: 2rem;
+	height: 2rem;
+}
+
+.img:hover svg{
+	filter: invert(15%);
+}
+
+
+.point{
+	z-index: 8;
+	border-radius: 50%;
+	cursor: pointer;
+	height:6rem !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.line{
+
+	width: 5rem;
+	height: unset !important;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: visible;
+	cursor: pointer;
+}
+
+.line .img{
+	position: relative;
+	left: .1rem;
+	height:2rem;
+	width: 115%;
+
+/*	background-color: red;*/
+}
+
+.line{
+	width: 7rem;
+}
+
+
+
+
+
+
+
+
+
+#dragtarget{
+/*	min-width: 100%;*/
+	background-color: white;
+	padding-top: 8rem;
+	padding-bottom: 4rem;
+	padding-left: 8rem;
+	padding-right: 3rem;
+	position: relative;
+}
+
+
+.emptyfordraggingend,.emptyfordraggingstart{
+	width: 4.4rem;
+	height: 10rem;
+	opacity: 0;
+
+}
+
+.linename .connectionline::before{
+	content:"";
+	position: absolute;
+	top: -.65rem;
+	width: 66.5%;
+	height: 0px;
+	border-top: .61rem solid #1f3c90;
+}
+
+
+.linename{
+	position: absolute !important;
+	left: 2rem;
+	top: 3rem;
+	transform: scale(1.75);
+	transform-origin: top left;
+}
+
+.linename .connectionline{
+	position: static;
+}
+
+.linename .connectionpoint{
+	cursor: pointer;
+}
+
+
+#printmodeonlyImg{
+	display: none;
+}
+
+
+@media all and (min-width: 960px){
+	.result{
+		min-width: 900px !important;
+	}
+}

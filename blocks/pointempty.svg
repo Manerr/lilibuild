@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+  <g id="g-1" transform="matrix(-1.0671249628067017, 0, 0, 2.96950101852417, 2497.9511904861874, -5167.613319751719)" style="height: 100%;">
+    <g class="path" transform="matrix(1, 0, 0, 1, -2.502188, 0.005053)">
+      <path id="path1159" d="m 2287.0999,1750.3323 56.2259,-0.01" style="fill:none;stroke:#fcc907;stroke-width:7.17943;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"/>
+    </g>
+  </g>
+  <g id="g1" transform="matrix(-2.903383016586304, 0, 0, 2.9739670753479004, 6833.591359507973, -5175.436561997507)" style="height: 100%;">
+    <g class="normalpoint" style="" transform="matrix(0, -0.976266, 1.024311, 0, 550.447821, 4038.043466)">
+      <path id="path3799-2" d="m 2338.8375,1750.3323 c 0,-2.4771 2.0101,-4.485 4.4871,-4.485 2.4793,0 4.4893,2.0079 4.4893,4.485 0,2.4792 -2.01,4.485 -4.4893,4.485 -2.477,0 -4.4871,-2.0058 -4.4871,-4.485" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#fcc907;stroke-width:2.24465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"/>
+    </g>
+  </g>
+</svg>
