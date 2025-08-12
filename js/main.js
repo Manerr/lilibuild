@@ -76,6 +76,7 @@ class App {
 		this.resetButton = document.getElementById("bReset");
 		this.saveButton = document.getElementById("bSave");
 		this.openButton = document.getElementById("bOpen");
+		this.githubButton = document.getElementById("bGithub");
 
 		// "windows" -> info / forms and settings popups 
 
@@ -254,20 +255,6 @@ class App {
 
 
 
-
-
-
-
-
-
-
-		// onDragOver={e => {
-		//     e.dataTransfer.dropEffect = "move";
-		//     e.preventDefault()
-		// }}
-		// onDragEnter={e => {
-		//     e.preventDefault()
-		// }}
 
 
 	removeIndicator(event = null){
@@ -455,10 +442,13 @@ class App {
 		performExport(format) {
 			document.body.style.overflow = "visible";
 			this.output.style.overflowX = "visible";
+			// this.output.style.overflowY = "hidden";
 			this.outputContainer.style.overflowX = "visible";
+			this.outputContainer.style.overflowY = "hidden";
 			this.outputContainer.style.maxWidth = "unset";
 			let promised;
 			let filename;
+			
 
 			if( format == 0){
 				promised = htmlToImage.toPng(document.getElementById("dragtarget"));
@@ -539,7 +529,7 @@ class App {
 			document.body.style.overflow = "visible";
 			this.output.style.overflowX = "visible";
 			this.outputContainer.style.overflowX = "visible";
-			this.outputContainer.style.maxWidth = "unset";
+			this.outputContainer.style.maxWidth = "unset !important";
 			let promised = htmlToImage.toSvg(document.getElementById("dragtarget"));
 
 			promised.then(function (dataUrl) { 

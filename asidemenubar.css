@@ -4,19 +4,14 @@
 	
 	background-color: #0d0e18;
 /*	width: 4rem;*/
-	border-top-right-radius: .5rem;
-	border-bottom-right-radius: .5rem;
+	/* border-top-right-radius: .5rem; */
+	/* border-bottom-right-radius: .5rem; */
 	overflow-x: hidden;
 	/*will-change: width;
 	align-items: flex-start;
 	transition: .5s width;*/
 }
 
-/*#asidecontainer:hover{*/
-	/*width: 8rem;
-	transition: .5s width;*/
-
-/*}*/
 
 .mtop{
 	margin-top: auto !important;
@@ -31,8 +26,8 @@
 	outline: none;
 	color: white;
 	background: none;
-	width: 2.4rem;
-	height: 2.4rem;
+	width: 2.5rem;
+	height: 2.5rem;
 	margin: .3rem .4rem;
 	font-family: "dmsans";
 	border-radius: .26rem;
@@ -49,7 +44,7 @@
 
 .modern img{
 	pointer-events: none;
-	width: 1.2rem;
+	width: 1.3rem;
 	margin:auto;
 }
 

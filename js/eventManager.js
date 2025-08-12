@@ -122,8 +122,8 @@ class EventManager {
             console.log(this.app.fileInput.files[0]);
             this.app.fileInput.files[0].text().then(function(result){
                 this.app.exporter.importJSON(JSON.parse(result));
-            });
-        };
+            }.bind(this));
+        }.bind(this);
     }
 
     // Bind export format popup events

@@ -18,6 +18,7 @@ class Exporter{
 
 
 	let lineColor = getComputedStyle(lineNumber).color;
+	console.log(lineColor);
 	// if it's actually not the tram-color tricks -> I use color when using trams
 	if(lineColor == "transparent" || lineColor == "rgb(35, 31, 32)" || lineColor == "rgb(255, 255, 255)" ){lineColor = getComputedStyle(lineNumber).backgroundColor;}
 
@@ -117,7 +118,9 @@ class Exporter{
     // Set the line's name/number
     lineNameContainer.setAttribute("type",lineType);
     lineNumberBox.setAttribute("truename",lineNumber);
-    lineNumberBox.className = object.line[0] + " connectionpoint line"+object.line[1];
+	lineNumberBox.className = object.line[0] + " connectionpoint line"+lineNumber.toUpperCase();
+
+
 
 	// Set the full line's color 
 	GLOBALColor = lineColor;
