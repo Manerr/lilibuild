@@ -106,7 +106,21 @@ header{
     margin: auto 0px;
     align-items: center;
     position:relative;
+}
 
+.pad2{
+	padding-bottom: 1rem;
+}
+
+
+.pad3{
+	padding-bottom: 3rem;
+}
+.pad4{
+	padding-bottom: 6rem;
+}
+.pad5{
+	padding-bottom: 8.8rem;
 }
 
 #dragtarget{
@@ -221,7 +235,25 @@ div.terminus{
 
 
 .blockcontainer.connected .connection{
-	display: block;
+	display: flex;
+	flex-direction: column;
+	width: 16rem;
+	flex-wrap: wrap;
+}
+
+
+.connectionline{
+	margin-top: .2rem;
+	margin-bottom: .2rem;
+	position: relative;
+	right: .95rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	flex-wrap: wrap;
+	width: 100%;
+	gap: .3rem;
+	max-width: 14.1rem;
 }
 
 .connectionpoint{
@@ -233,7 +265,7 @@ div.terminus{
 	height: 1.9rem;
 	border-radius: 50%;
 	background-color: #f59fb3;
-	margin: 0px .1rem;
+	/* margin: 0px .1rem; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -243,12 +275,14 @@ div.terminus{
 	overflow-y: hidden;
 }
 
-.connectionline[type=RER] .connectionpoint{
-	border-radius: .3rem;
+[type=RER] .connectionpoint,.RER{
+	border-radius: .42rem;
 }
-.connectionline[type=Transilien] .connectionpoint{
-	border-radius: .3rem;
+[type=Train] .connectionpoint,.Train{
+	border-radius: .42rem;
 }
+
+
 
 .connectionline[type=Tram] span.connectionpoint{
 	border-radius: 0px;
@@ -262,6 +296,10 @@ div.terminus{
 	width: 100%;
 	text-align: center;
 	content: attr(truename);
+}
+
+.window-container .connectionpoint::after{
+	height: unset;
 }
 
 
@@ -320,32 +358,11 @@ button.connectionpoint:hover{
 }
 
 
-/*
-.emptyforhovering{
-	opacity: 0;
-	user-select: none;
-	order: 27;
-}
-
-.connection:hover .emptyforhovering{
-	display: none;
-}
-*/
-
-.connectionline{
-	margin-top: .2rem;
-	margin-bottom: .2rem;
-	position: relative;
-	right: .95rem;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-}
 
 .connectionline[type=metro] .RER {
 	display: none;
 }
-.connectionline[type=metro] .Transilien {
+.connectionline[type=metro] .Train {
 	display: none;
 }
 .connectionline[type=metro] .Tram {
@@ -353,11 +370,25 @@ button.connectionpoint:hover{
 }
 
 
+.connectionline[type=metro]{
+	order: 1;
+}
+.connectionline[type=RER]{
+	order: 2;
+}
+.connectionline[type=Train]{
+	order: 3;
+}
+.connectionline[type=Tram]{
+	order: 4;
+}
+
+
 
 .connectionline[type=RER] .metro {
 	display: none;
 }
-.connectionline[type=RER] .Transilien {
+.connectionline[type=RER] .Train {
 	display: none;
 }
 .connectionline[type=RER] .Tram {
@@ -366,13 +397,13 @@ button.connectionpoint:hover{
 
 
 
-.connectionline[type=Transilien] .metro {
+.connectionline[type=Train] .metro {
 	display: none;
 }
-.connectionline[type=Transilien] .RER {
+.connectionline[type=Train] .RER {
 	display: none;
 }
-.connectionline[type=Transilien] .Tram {
+.connectionline[type=Train] .Tram {
 	display: none;
 }
 
@@ -384,8 +415,26 @@ button.connectionpoint:hover{
 .connectionline[type=Tram] .RER {
 	display: none;
 }
-.connectionline[type=Tram] .Transilien {
+.connectionline[type=Tram] .Train {
 	display: none;
+}
+
+
+.connectionline::before{
+	content: "";
+	width: 2rem;
+	height: 2rem;
+	background-image: url("./blocks/connections/pointM.svg");
+	background-size: cover;
+}
+.connectionline[type=Tram]::before{
+	background-image: url("./blocks/connections/pointTram.svg");
+}
+.connectionline[type=Train]::before{
+	background-image: url("./blocks/connections/pointTrain.svg");
+}
+.connectionline[type=RER]::before{
+	background-image: url("./blocks/connections/pointRER.svg");
 }
 
 
@@ -393,11 +442,13 @@ button.connectionpoint:hover{
 .connectionline img,.connectionline .img{
 	width: 2rem;
 	margin-right: .2rem;
+	pointer-events: none;
 
 }
 
 img.connectionType{
 	margin-left: 0px;
+	margin-right: 0px;
 }
 
 
@@ -603,3 +654,4 @@ html body .img svg g.corrpoint path{
 		min-width: 900px !important;
 	}
 }
+

@@ -98,11 +98,11 @@ class Exporter{
 	let lineNumberBox = lineNameContainer.children[1];
 
 	let lineType = object.line[0];
-	console.log(lineType);
+	// console.log(lineType);
 	let lineNumber = object.line[1];
-	console.log(lineNumber);
+	// console.log(lineNumber);
 	let lineColor = object.line[2];
-	console.log(lineColor);
+	// console.log(lineColor);
 
 
     lineNumberBox.setAttribute("value",lineNumber);
@@ -132,12 +132,12 @@ class Exporter{
 		case "RER":
 			lineTypeBox.src = "blocks/connections/pointRER.svg";
 		break;
-		case "Transilien":
-			lineTypeBox.src = "blocks/connections/pointTransilien.svg";
+		case "Train":
+			lineTypeBox.src = "blocks/connections/pointTrain.svg";
 		break;
 		case "Tram":
 			lineTypeBox.src = "blocks/connections/pointTram.svg";
-			lineNumberBox.style.backgroundImage = "url('blocks/connections/trams/" + lineNumber + ".svg')";
+			lineNumberBox.style.backgroundImage = "url('blocks/connections/trams/" + lineNumber.substring(0,lineNumber.length-1) + lineNumber.substring(lineNumber.length-1).toUpperCase() + ".svg')";
 
 		break;
 
@@ -149,6 +149,10 @@ class Exporter{
 		this.parent.output.removeChild(this.parent.output.children[i]);
 	}
 
+	// console.log(object);			
+	// console.log(object.parts);
+	// console.log(object.parts.length);
+
 
 	// Now it get back all the parts (here the blocks)
 
@@ -156,10 +160,12 @@ class Exporter{
 		let DOMpart = object.parts[i];
 		let toAdd;
 
+		// console.log(DOMpart);			
+
+
 		// If block
 		if ( typeof DOMpart == "string" ){
 
-			
 
 			toAdd = document.createElement("div");
 			this.parent.output.insertBefore(toAdd,this.parent.lastZone);
@@ -220,9 +226,9 @@ class Exporter{
 
 				let addedMetro = false;
 				let addedRER = false;
-				let addedTransilien = false;
+				let addedTrain = false;
 				let addedTram = false;
-
+				
 
 				for (var y = DOMpart.connections.length - 1; y >= 0; y--) {
 					let localConnection = DOMpart.connections[y];
@@ -246,14 +252,14 @@ class Exporter{
 
 						newConnectionLine.className = "connectionline";
 						newConnectionLine.setAttribute("type","RER");
-						newConnectionLine.innerHTML='<img src="blocks/connections/pointRER.svg" class="connectionType" /><button class="connectionpoint addConnection"></button>';						
+						// newConnectionLine.innerHTML='<button class="connectionpoint addConnection"></button>';						
 						addedRER = true;
 
 					}
 					if( localType == "metro" && !addedMetro ){
 						let newConnectionLine = document.createElement("div");
 						
-						if(addedRER || addedTram || addedTransilien){
+						if(addedRER || addedTram || addedTrain){
 							newPointConnection.insertBefore(newConnectionLine,newPointConnection.firstElementChild);
 						}
 						else{
@@ -262,10 +268,10 @@ class Exporter{
 
 						newConnectionLine.className = "connectionline";
 						newConnectionLine.setAttribute("type","metro");
-						newConnectionLine.innerHTML='<img src="blocks/connections/pointM.svg" class="connectionType" /><button class="connectionpoint addConnection"></button>';						
+						// newConnectionLine.innerHTML='<button class="connectionpoint addConnection"></button>';						
 						addedMetro = true;
 					}
-					if( localType == "Transilien" && !addedTransilien ){
+					if( localType == "Train" && !addedTrain ){
 						let newConnectionLine = document.createElement("div");
 						if( addedTram ){
 							newPointConnection.insertBefore(newConnectionLine,newPointConnection.lastElementChild.previousElementSibling);
@@ -275,9 +281,9 @@ class Exporter{
 						}
 
 						newConnectionLine.className = "connectionline";
-						newConnectionLine.setAttribute("type","Transilien");
-						newConnectionLine.innerHTML='<img src="blocks/connections/pointTrain.svg" class="connectionType" /><span class="connectionpoint emptyforhovering" value="0"></span><button class="connectionpoint addConnection"></button>';						
-						addedTransilien = true;
+						newConnectionLine.setAttribute("type","Train");
+						// newConnectionLine.innerHTML='<button class="connectionpoint addConnection"></button>';						
+						addedTrain = true;
 
 					}
 					if( localType == "Tram" && !addedTram ){
@@ -285,7 +291,7 @@ class Exporter{
 						newPointConnection.insertBefore(newConnectionLine,newPointConnection.lastElementChild);
 						newConnectionLine.className = "connectionline";
 						newConnectionLine.setAttribute("type","Tram");
-						newConnectionLine.innerHTML='<img src="blocks/connections/pointTram.svg" class="connectionType" /><span class="connectionpoint emptyforhovering" value="0"></span><button class="connectionpoint addConnection"></button>';						
+						// newConnectionLine.innerHTML='<button class="connectionpoint addConnection"></button>';						
 						addedTram = true;
 					}
 
@@ -310,7 +316,7 @@ class Exporter{
 					numericOrder = parseInt(trueNumber);
 
 					if(numericOrder == null || !numericOrder || numericOrder < 1 || numericOrder > 19 ){
-						return;
+						continue;
 					}
 
 					if( trueNumber == "3B" || numericOrder > 3 ){
@@ -336,20 +342,20 @@ class Exporter{
 					else if (localType == "RER"){
 
 
-						if( trueNumber.length !=1  ||  trueNumber.charCodeAt(0)<65 || trueNumber.charCodeAt(0) > 69 ){return;}
+						if( trueNumber.length !=1  ||  trueNumber.charCodeAt(0)<65 || trueNumber.charCodeAt(0) > 69 ){continue;}
 						numericOrder = trueNumber.charCodeAt(0);
 
 
 						newConnectionNumber.style.order = numericOrder - 65;
 					}
 
-					// Case Transilien 
-					else if (localType == "Transilien"){
+					// Case Train 
+					else if (localType == "Train"){
 
-						let lines = ["H","J","K","L","N","P","R","U"];
+						let lines = ["H","J","K","L","N","P","R","U","V"];
 
 
-						if( trueNumber.length !=1  ||  lines.indexOf(trueNumber) == -1 ){return;}
+						if( trueNumber.length !=1  ||  lines.indexOf(trueNumber) == -1 ){continue;}
 						numericOrder = lines.indexOf(trueNumber)
 
 
@@ -361,7 +367,7 @@ class Exporter{
 						trueNumber = trueNumber.slice(1);
 						
 						let numericOrder = parseInt(trueNumber);
-						if(!numericOrder || numericOrder < 1 || numericOrder > 13){return;}
+						if(!numericOrder || numericOrder < 1 || numericOrder > 13){continue;}
 						if( trueNumber == "3B" || trueNumber > 3 ){
 							numericOrder++;
 						}
@@ -386,7 +392,22 @@ class Exporter{
 				}
 
 
-				// console.log(newPointConnection.lastElementChild);
+				// After creating all connection lines, adjust bottom padding based on number of rows
+				let maxConnectionLines = newPointConnection.childElementCount - 1; // exclude addConnectionLine button
+				switch(maxConnectionLines){
+					case 2:
+						if(!this.parent.output.classList.contains("pad2")) this.parent.output.classList.add("pad2");
+						break;
+					case 3:
+						if(!this.parent.output.classList.contains("pad3")) this.parent.output.classList.add("pad3");
+						break;
+					case 4:
+						if(!this.parent.output.classList.contains("pad4")) this.parent.output.classList.add("pad4");
+						break;
+					case 5:
+						if(!this.parent.output.classList.contains("pad5")) this.parent.output.classList.add("pad5");
+						break;
+				}
 
 
 			}
@@ -425,7 +446,7 @@ class Exporter{
 // importJSON(JSON.parse(ligne7bis));
 
 let ligne7bis = '{"line":["metro","7B","rgb(117, 205, 137)"],"parts":[{"name":"Terminus 1","type":"pointterminus","connected":true,"connections":["RER connectionpoint lineA","RER connectionpoint lineC"]},"block",{"name":"Station 1","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Station 2","type":"pointcorr","connected":true,"connections":\
-["Tram connectionpoint lineT4","metro connectionpoint line7B","RER connectionpoint lineA","metro connectionpoint line7","metro connectionpoint line8","metro connectionpoint line3B","Transilien connectionpoint lineJ","RER connectionpoint lineE"]},"block",{"name":"Terminus 2","type":"pointterminus","connected":false,"connections":[]}]}';
+["Tram connectionpoint lineT4","metro connectionpoint line7B","RER connectionpoint lineA","metro connectionpoint line7","metro connectionpoint line8","metro connectionpoint line3B","Train connectionpoint lineJ","RER connectionpoint lineE"]},"block",{"name":"Terminus 2","type":"pointterminus","connected":false,"connections":[]}]}';
 
 
-ligne7bis = '{"line":["metro","1","rgb(117, 205, 137)"],"parts":[{"name":"Terminus 1","type":"pointterminus","connected":true,"connections":["RER connectionpoint lineC","RER connectionpoint lineA"]},"block",{"name":"Station 1","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Station 2","type":"pointcorr","connected":true,"connections":["metro connectionpoint line3B","metro connectionpoint line8","metro connectionpoint line7","metro connectionpoint line7B","RER connectionpoint lineE","RER connectionpoint lineA","Transilien connectionpoint lineJ","Tram connectionpoint lineT4"]},"block",{"name":"Terminus 2","type":"pointterminus","connected":false,"connections":[]},"block","block","block","block",{"name":"Station","type":"pointterminus","connected":true,"connections":["metro connectionpoint line1","Transilien connectionpoint lineH","Tram connectionpoint lineT2","Tram connectionpoint lineT4","Tram connectionpoint lineT3B"]}]}';
+ligne7bis = '{"line":["metro","1","rgb(117, 205, 137)"],"parts":[{"name":"Terminus 1","type":"pointterminus","connected":true,"connections":["RER connectionpoint lineC","RER connectionpoint lineA"]},"block",{"name":"Station 1","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Station 2","type":"pointcorr","connected":true,"connections":["metro connectionpoint line3B","metro connectionpoint line8","metro connectionpoint line7","metro connectionpoint line7B","RER connectionpoint lineE","RER connectionpoint lineA","Train connectionpoint lineJ","Tram connectionpoint lineT4"]},"block",{"name":"Terminus 2","type":"pointterminus","connected":false,"connections":[]},"block","block","block","block",{"name":"Station","type":"pointterminus","connected":true,"connections":["metro connectionpoint line1","Train connectionpoint lineH","Tram connectionpoint lineT2","Tram connectionpoint lineT4","Tram connectionpoint lineT3B"]}]}';

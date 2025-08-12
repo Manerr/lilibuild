@@ -26,6 +26,7 @@
 	background-color: #0d0e18;
 	background-color: #0d0e18dd;
 	box-shadow: 0 0 .6rem #454545;
+	padding: 2rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -119,7 +120,8 @@
 	max-width: 5.2rem;
 }
 
-#about h2{
+.window h2{
+	text-align: center;
 	margin-bottom: 0rem;
 	font-weight: 100;
 }
@@ -203,4 +205,74 @@
 .format-desc {
 	font-size: 0.9rem;
 	color: #ccc;
+}
+
+.window-input {
+    font-size: 1.2rem;
+    padding: .5rem;
+    border-radius: .3rem;
+    border: 1px solid #444;
+    background: #222;
+    color: #fafafa;
+    margin-bottom: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.window-choice-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin: 2rem 0 1rem 0;
+}
+.window-choice-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #222;
+    border: 2px solid #444;
+    border-radius: .5rem;
+    color: #fafafa;
+    font-size: 1.1rem;
+	line-height: 0;
+    /* padding: .7rem .9rem .4rem .9rem; */
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    width: 3.5rem;
+    height: 3.5rem;
+    outline: none;
+	background-color: white;
+}
+.window-choice-btn.selected, .window-choice-btn:focus, .window-choice-btn:hover {
+    border-color: #fcc907;
+    /* background: #ffffff; */
+}
+.window-choice-btn > * {
+    width: 2.2rem;
+    height: 2.2rem;
+    pointer-events: none;
+}
+.window-choice-btn .choice-label {
+    font-size: 1rem;
+    margin-top: .1rem;
+    color: #fafafa;
+    text-align: center;
+	pointer-events: none;
+}
+
+
+#customPromptForm{
+	max-width: 88vw;
+	min-width: 300px;
+	padding: 0 .57rem;
+}
+
+#customPromptFrom .window-choice-btn{
+	
+}
+
+.customPromptTitle{
+	
 }

@@ -153,12 +153,15 @@
 	background-color: #B90C47;	
 }
 
+.lineV{
+	background-color: #9F9825;
+}
 
 
 
 
 
-/* I use color instead of background-color beacuse the svg has transparent part.... try to delete it n' you'll have weird issue */
+/* I use color instead of background-color because the svg has transparent part.... try to delete it n' you'll have weird issue */
 
 .lineT1{
 	color: #196ABD !important;	

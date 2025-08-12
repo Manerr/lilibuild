@@ -77,9 +77,12 @@ class App {
 		this.saveButton = document.getElementById("bSave");
 		this.openButton = document.getElementById("bOpen");
 
-		// "windows" -> info and settings popups 
+		// "windows" -> info / forms and settings popups 
 
 		this.aboutWindow = document.getElementById('about');
+		this.choicesGrid = document.getElementById("customPromptChoices");
+		this.custompromptWindow = document.getElementById('custom-prompt-window');
+
 
 		// hidden zone for printing a clean thing
 
@@ -99,11 +102,9 @@ class App {
 
 		document.body.appendChild(this.fileInput);
 
-		// Initialize EventManager
 		this.eventManager = new EventManager(this);
 		this.eventManager.initializeEvents();
 
-		// Bind methods that need to be bound
 		this.saveLocalStorage = this.saveLocalStorage.bind(this);
 		this.loadLocalStorage = this.loadLocalStorage.bind(this);
 	}
@@ -241,321 +242,7 @@ class App {
 
 
 		//Has to be completely rewritten (like the full app lol)
-	manageClick(event){
-
-			let currentElement = event.target;
-			let currentType = currentElement.name;
-
-			if(!currentType){
-				currentType = currentElement.getAttribute("name");
-			}
-
-			if(CURRENTLY_DOING && currentType == "path"){
-
-				if(currentElement.parentElement.classList.contains("dashed")) currentElement.parentElement.classList.remove("dashed");
-				else currentElement.parentElement.classList.add("dashed");
-
-			}
-
-
-
-
-			
-
-			if( CURRENTLY_DOING == drawingpath || CURRENTLY_DOING == drawingpoint ){
-				this.outputOnclick(event);
-				return;
-			}
-
-
-
-
-			let trueCurrentElement = currentElement.parentElement;
-
-
-			if(CURRENTLY_DOING == deleting){
-
-
-				// Deleting a single connection
-				if ( currentElement.className.search("connectionpoint") != -1 && currentElement.className.search("addConnection") == -1 ){
-					currentElement.remove();
-					return;
-				}
-				// Deleting connection type
-				if ( currentElement.className == "connectionType" ){
-					currentElement.parentElement.remove();
-					return;
-				}
-
-
-				if(trueCurrentElement.className != "blockcontainer line this.insertbeforeit"){this.output.removeChild(trueCurrentElement);}
-				if(this.output.childElementCount == 1){
-					this.insertbeforeit.style.display = "block";
-				}
-				return;
-
-			}
-
-			if(SWITCHING_CONNECTION && currentType && currentType.indexOf("point") != -1 && currentElement.type != "submit" ){
-
-				console.log(currentType);
-
-					if(trueCurrentElement.className == "blockcontainer point"){
-						trueCurrentElement.className = "blockcontainer point connected";
-						if( currentType != "pointterminus" ){
-
-
-							currentElement.innerHTML = pointCorr.replace("#fcc907",GLOBALColor);
-							currentElement.setAttribute("name","pointcorr");
-							// currentElement.setname = "pointcorr";
-						}
-						// }
-
-					}
-					else{
-						trueCurrentElement.className = "blockcontainer point";
-					}
-
-
-			}
-
-			//then you're not deleting but interacting
-			else if(!DELETING_POINTS){
-
-				// Managaing connection type
-				if( currentElement.className=="connectionType" ){
-					if( currentElement.parentElement.getAttribute("type") == "metro" ){
-						currentElement.parentElement.setAttribute("type","RER");
-						currentElement.src = "blocks/connections/pointRER.svg"; 
-					}
-					else if ( currentElement.parentElement.getAttribute("type") == "RER" ) {
-						currentElement.parentElement.setAttribute("type","Transilien");
-						currentElement.src = "blocks/connections/pointTrain.svg"; 
-					}
-					else if ( currentElement.parentElement.getAttribute("type") == "Transilien" ) {
-						currentElement.parentElement.setAttribute("type","Tram");
-						currentElement.src = "blocks/connections/pointTram.svg"; 
-					}
-					else if ( currentElement.parentElement.getAttribute("type") == "Tram" ) {
-						currentElement.parentElement.setAttribute("type","metro");
-						currentElement.src = "blocks/connections/pointM.svg"; 
-					}
-				}
-				// Adding new connection
-				else if( currentElement.className=="connectionpoint addConnection" ||  (currentElement.className.indexOf("connectionpoint") !=-1 && currentElement.className.indexOf("addConnection") == -1 && currentElement.parentElement.parentElement.className == "linename") ){
-					let line = prompt("(BETA) Nouvelle connection? Entrez la ligne à rajouter");
-
-					if(line){
-						line = line.toUpperCase();
-
-					}
-
-					// line = Math.floor( Math.random() * 18 + 1 );
-					let parentType = currentElement.parentElement.getAttribute("type");
-					console.log(parentType);
-					if(parentType == "Tram" ){
-						line = "T"+line;
-					}
-
-					if(line && currentElement.parentElement.querySelector(".line"+line) == null){
-
-
-						let newConnection = document.createElement("span");
-						newConnection.setAttribute("bis","");
-						newConnection.className = currentElement.parentElement.getAttribute("type")+" connectionpoint line"+line;
-						newConnection.setAttribute("value",line);
-						newConnection.setAttribute("truename",line);
-
-						let numericOrder;
-
-						// Case metro
-
-						
-						if( parentType == "metro" ){
-
-						let numericOrder = parseInt(line);
-
-						if(numericOrder == null || !numericOrder || numericOrder < 1 || numericOrder > 19 ){
-							return;
-						}
-
-						if( line == "3B" || numericOrder > 3 ){
-							numericOrder += 1;
-							if(line == "3B"){
-								newConnection.setAttribute("bis","bis");
-								newConnection.setAttribute("truename","3    ");
-							}
-
-						}
-						if( line == "7B" || numericOrder > 8 ){
-							numericOrder += 1;
-							if(line == "7B"){
-								newConnection.setAttribute("bis","bis");
-								newConnection.setAttribute("truename","7   ");
-							}
-						}
-						
-							newConnection.style.order = numericOrder;
-
-						}
-						// Case RER
-						else if (parentType == "RER"){
-
-
-							if( line.length !=1  ||  line.charCodeAt(0)<65 || line.charCodeAt(0) > 69 ){return;}
-							numericOrder = line.charCodeAt(0);
-
-
-							newConnection.style.order = numericOrder - 65;
-						}
-
-						// Case Transilien 
-						else if (parentType == "Transilien"){
-
-							let lines = ["H","J","K","L","N","P","R","U"];
-
-
-							if( line.length !=1  ||  lines.indexOf(line) == -1 ){return;}
-							numericOrder = lines.indexOf(line)
-
-
-							newConnection.style.order = numericOrder;
-						}
-
-						else if (parentType == "Tram" ){
-
-							line = line.slice(1);
-							
-							let numericOrder = parseInt(line);
-							if(!numericOrder || numericOrder < 1 || numericOrder > 13){return;}
-							if( line == "3B" || line > 3 ){
-								numericOrder++;
-							}
-
-							newConnection.style.order = numericOrder;
-							newConnection.setAttribute("value","t" + line);
-							newConnection.setAttribute("truename","t" + line);
-							newConnection.style.backgroundImage = "url('blocks/connections/trams/t" + line + ".svg')";
-							newConnection.className = currentElement.parentElement.getAttribute("type")+" connectionpoint lineT"+line;
-
-							
-							
-						}
-
-
-
-
-						// consolef.log(currentElement);
-						
-						// CURRENTLY JUST CHANGING CURRENT LINE'S
-						if(currentElement.parentElement.parentElement.className == "linename" && currentElement.className.indexOf("addConnection") != -1){
-							let cleaningElements = document.querySelectorAll(".linename .connectionpoint");
-							for (let i = cleaningElements.length - 1; i >= 0; i--) {
-								let el = cleaningElements[i];
-								if(el.className.indexOf("addConnection") == -1 ){currentElement.parentElement.removeChild(el);}
-							}
-						}
-
-						currentElement.parentElement.insertBefore(newConnection,currentElement);
-						let newColor = getComputedStyle(newConnection).color;
-
-						// console.log(newColor);
-
-						// if it's actually not the tram-color tricks -> I use color when using trams
-						if(newColor == "transparent" || newColor == "rgb(35, 31, 32)" || newColor == "rgb(255, 255, 255)" ){newColor = getComputedStyle(newConnection).backgroundColor;}
-
-
-						if(currentElement.parentElement.parentElement.className == "linename" && currentElement.className.indexOf("addConnection") != -1){
-							this.ChangeSVGColors(newColor);					
-						}
-						// CURRENTLY JUST CHANGING CURRENT LINE'S
-						if(currentElement.className.indexOf("connectionpoint") !=-1 && currentElement.className.indexOf("addConnection") == -1 ){
-							this.ChangeSVGColors(newColor);
-							currentElement.parentElement.removeChild(currentElement);
-						}
-
-
-
-
-
-					}
-				}
-				// Adding new connection line
-				else if( currentElement.className=="connectionpoint addConnectionLine" ){
-					let newConnectionLine = document.createElement("div");
-					newConnectionLine.className = "connectionline";
-					newConnectionLine.setAttribute("type","metro");
-					// <span class="connectionpoint emptyforhovering" value="0"></span>\
-					newConnectionLine.innerHTML='<img src="blocks/connections/pointM.svg" class="connectionType" />\
-					<button class="connectionpoint addConnection"></button>';
-					currentElement.parentElement.insertBefore(newConnectionLine,currentElement);
-					
-				}
-
-
-
-				//type is a station point
-				else if( currentType && currentType.indexOf("point") != -1  ){
-					
-					// console.log(currentType);
-
-
-					switch(currentType){
-
-						case "pointterminus" :
-							if(currentElement.parentElement.className == "blockcontainer point" ){ 
-								currentElement.parentElement.className = "blockcontainer point connected";
-								return;
-							}
-
-
-							currentElement.innerHTML = pointEmpty.replace("#fcc907",GLOBALColor);
-							currentElement.setAttribute("name","pointempty");
-
-
-							currentElement.parentElement.querySelector(".name").className = "name";
-							currentElement.parentElement.className = "blockcontainer point";
-							break;
-						case "pointempty" :
-							currentElement.innerHTML = pointCorr.replace("#fcc907",GLOBALColor);
-							currentElement.setAttribute("name","pointcorr");
-							currentElement.parentElement.querySelector(".name").className = "name";
-							currentElement.parentElement.className = "blockcontainer point connected";
-							break;
-						case "pointcorr" :
-								// console.warn(currentElement)
-							// First of the line... 
-							if( trueCurrentElement.previousElementSibling.previousElementSibling == null  ){
-								currentElement.innerHTML = pointTerminus.replace("#fcc907",GLOBALColor);
-								currentElement.setAttribute("name","pointterminus");
-								// currentElement.src = "blocks/pointterminusLeft.svg";
-							}
-							if( trueCurrentElement.nextElementSibling.nextElementSibling == null  ){
-								currentElement.innerHTML = pointTerminus.replace("#fcc907",GLOBALColor);
-								currentElement.setAttribute("name","pointterminus");
-								// currentElement.src = "blocks/pointterminusRight.svg";
-							}
-							else{
-								currentElement.innerHTML = pointTerminus.replace("#fcc907",GLOBALColor);
-								currentElement.setAttribute("name","pointterminus");
-				
-
-								// currentElement.src = "blocks/pointterminus.svg";
-							}
-							// currentElement.name = "pointterminus";
-
-							currentElement.parentElement.querySelector(".name").className = "name terminus";
-							currentElement.parentElement.className = "blockcontainer point";
-							break;
-					}
-
-
-				}
-
-
-
-			}
-		}
+	
 
 
 
@@ -652,18 +339,22 @@ class App {
 			if(target == this.trueIndicator){return}
 			// console.log(target);
 
-
-			if( mouseX > targetMid ){
-				if( target.nextElementSibling && target.nextElementSibling != this.trueIndicator ){
-					this.output.insertBefore(this.trueIndicator,target.nextElementSibling);
+			try {
+	
+				if( mouseX > targetMid ){
+					if( target.nextElementSibling && target.nextElementSibling != this.trueIndicator ){
+						this.output.insertBefore(this.trueIndicator,target.nextElementSibling);
+					}
 				}
-			}
-			else{
-				if( target.previousElementSibling && target.previousElementSibling != this.trueIndicator ){
-					this.output.insertBefore(this.trueIndicator,target);
+				else{
+					if( target.previousElementSibling && target.previousElementSibling != this.trueIndicator ){
+						this.output.insertBefore(this.trueIndicator,target);
+					}
 				}
+	
+			} catch (error) {
+				
 			}
-
 
 
 		}
@@ -717,6 +408,8 @@ class App {
 
 
 	loadLocalStorage(){
+
+
 			try{
 				this.exporter.importJSON( JSON.parse( window.localStorage.lilibuild ) );
 			}
@@ -932,6 +625,83 @@ class App {
 			this.output.insertBefore(element, beforeElement);
 			return;
 		}
+
+		showCustomPrompt = function({ title = "Select a line", type = "metro" } = {}) {
+
+			// const choices = //{
+			//     // metro: 
+			// 	[
+			//         { value: "1", label: "1" ,type :"metro"}, { value: "2", label: "2" ,type :"metro"}, { value: "3", label: "3" ,type :"metro"}, { value: "3B", label: "3B" ,type :"metro"},
+			//         { value: "4", label: "4" ,type :"metro"}, { value: "5", label: "5" ,type :"metro"}, { value: "6", label: "6" ,type :"metro"}, { value: "7", label: "7" ,type :"metro"}, { value: "7B", label: "7B" },
+			//         { value: "8", label: "8" ,type :"metro"}, { value: "9", label: "9" ,type :"metro"}, { value: "10", label: "10" ,type :"metro"}, { value: "11", label: "11" ,type :"metro"}, { value: "12", label: "12" ,type :"metro"}, { value: "13", label: "13" ,type :"metro"}, { value: "14", label: "14" ,type :"metro"}, { value: "15", label: "15" ,type :"metro"}, { value: "16", label: "16" ,type :"metro"}, { value: "17", label: "17" ,type :"metro"}, { value: "18", label: "18" ,type :"metro"}, { value: "19", label: "19" ,type :"metro"}
+			//     // ],
+			//     // RER: [
+			//         ,{ value: "A", label: "A" ,type :"rer"}, { value: "B", label: "B" ,type :"rer"}, { value: "C", label: "C" ,type :"rer"}, { value: "D", label: "D" ,type :"rer"}, { value: "E", label: "E" ,type :"rer"}
+			//     // ],
+			//     // Train: [
+			//         ,{ value: "H", label: "H" ,type :"Train"}, { value: "J", label: "J" ,type :"Train"}, { value: "K", label: "K" ,type :"Train"}, { value: "L", label: "L" ,type :"Train"}, { value: "N", label: "N" ,type :"Train"}, { value: "P", label: "P" ,type :"Train"}, { value: "R", label: "R" ,type :"Train"}, { value: "U", label: "U" ,type :"Train"},{ value: "V", label: "V" ,type :"Train"}
+			//     // ],
+			//     // Tram: [
+			//         ,{ value: "T1", label: "T1", icon: "blocks/connections/trams/t1.svg" },
+			//         { value: "T2", label: "T2", icon: "blocks/connections/trams/t2.svg" },
+			//         { value: "T3A", label: "T3A", icon: "blocks/connections/trams/t3A.svg" },
+			//         { value: "T3B", label: "T3B", icon: "blocks/connections/trams/t3B.svg" },
+			//         { value: "T4", label: "T4", icon: "blocks/connections/trams/t4.svg" },
+			//         { value: "T5", label: "T5", icon: "blocks/connections/trams/t5.svg" },
+			//         { value: "T6", label: "T6", icon: "blocks/connections/trams/t6.svg" },
+			//         { value: "T7", label: "T7", icon: "blocks/connections/trams/t7.svg" },
+			//         { value: "T8", label: "T8", icon: "blocks/connections/trams/t8.svg" },
+			//         { value: "T9", label: "T9", icon: "blocks/connections/trams/t9.svg" },
+			//         { value: "T10", label: "T10", icon: "blocks/connections/trams/t10.svg" },
+			//         { value: "T11", label: "T11", icon: "blocks/connections/trams/t11.svg" },
+			//         { value: "T12", label: "T12", icon: "blocks/connections/trams/t12.svg" },
+			//         { value: "T13", label: "T13", icon: "blocks/connections/trams/t13.svg" },
+			//         { value: "T14", label: "T14", icon: "blocks/connections/trams/t14.svg" },
+			//     ]
+			// // };
+		
+			return new Promise((resolve) => {
+		
+				const promptWindow = document.getElementById("custom-prompt-window");
+				const titleElem = document.getElementById("customPromptTitle");
+				const choicesGrid = document.getElementById("customPromptChoices");
+		
+				titleElem.textContent = title;
+				choicesGrid.onclick = function(event){
+					let origine = event.target;
+					let value = origine.dataset.value;
+		
+					promptWindow.style.display = "none";
+		
+					if(value) {
+						resolve(value);
+					}
+					else{
+						resolve(null);
+					}
+		
+				}
+		
+		
+				promptWindow.style.display = "flex";
+		
+				// Close on background click
+				promptWindow.onclick = function(e) {
+					if (e.target === promptWindow) {
+						promptWindow.style.display = "none";
+						resolve(null);
+					}
+				};
+				// Close on X button
+				const closeBtn = promptWindow.querySelector(".close-button");
+				closeBtn.onclick = function() {
+					promptWindow.style.display = "none";
+					resolve(null);
+				};
+			});
+		};
+
+
 	}
 
 

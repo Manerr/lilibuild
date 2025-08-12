@@ -270,7 +270,7 @@
 			<img src="logo2.svg"/>
 			<h2>LiLiBuild</h2>
 			<p>A Lite Line Builder for the Web</p>
-			<pre>V.1.0.1</pre>
+			<pre>V.1.1.0</pre>
 
 		</div>
 	</section>
@@ -311,6 +311,70 @@
 			</div>
 		</div>
 	</section>
+
+
+	<section class="window" id="custom-prompt-window" style="display: none;">
+        <div class="window-container">
+            <button title="Close" type="button" class="close-button">
+                <img class="close-image-button" src="ui/new/plus.svg" alt="close" />
+            </button>
+            <form class="window-form" id="customPromptForm" autocomplete="off" onsubmit="return false;">
+                <h2 id="customPromptTitle">Select a new line</h2>
+				<div id="customPromptChoices" class="window-choice-grid display-all">
+					<button type="button" class="window-choice-btn" data-value="1" ><span class="connectionpoint metro line1" value="1" truename="1"></span></button>
+					<button type="button" class="window-choice-btn" data-value="2" ><span class="connectionpoint metro line2" value="2" truename="2"></span></button>
+					<button type="button" class="window-choice-btn" data-value="3" ><span class="connectionpoint metro line3" value="3" truename="3"></span></button>
+					<button type="button" class="window-choice-btn" data-value="3B" ><span value="3B" truename="3 &hairsp;&hairsp;&hairsp;" class="connectionpoint metro line3B" bis="bis"></span></button>
+					<button type="button" class="window-choice-btn" data-value="4" ><span class="connectionpoint metro line4" value="4" truename="4"></span></button>
+					<button type="button" class="window-choice-btn" data-value="5" ><span class="connectionpoint metro line5" value="5" truename="5"></span></button>
+					<button type="button" class="window-choice-btn" data-value="6" ><span class="connectionpoint metro line6" value="6" truename="6"></span></button>
+					<button type="button" class="window-choice-btn" data-value="7" ><span class="connectionpoint metro line7" value="7" truename="7"></span></button>
+					<button type="button" class="window-choice-btn" data-value="7B" ><span value="7B" truename="7 &hairsp;&hairsp;&hairsp;" class="connectionpoint metro line7B" bis="bis"></span></button>
+					<button type="button" class="window-choice-btn" data-value="8" ><span class="connectionpoint metro line8" value="8" truename="8"></span></button>
+					<button type="button" class="window-choice-btn" data-value="9" ><span class="connectionpoint metro line9" value="9" truename="9"></span></button>
+					<button type="button" class="window-choice-btn" data-value="10" ><span class="connectionpoint metro line10" value="10" truename="10"></span></button>
+					<button type="button" class="window-choice-btn" data-value="11" ><span class="connectionpoint metro line11" value="11" truename="11"></span></button>
+					<button type="button" class="window-choice-btn" data-value="12" ><span class="connectionpoint metro line12" value="12" truename="12"></span></button>
+					<button type="button" class="window-choice-btn" data-value="13" ><span class="connectionpoint metro line13" value="13" truename="13"></span></button>
+					<button type="button" class="window-choice-btn" data-value="14" ><span class="connectionpoint metro line14" value="14" truename="14"></span></button>
+					<button type="button" class="window-choice-btn" data-value="15" ><span class="connectionpoint metro line15" value="15" truename="15"></span></button>
+					<button type="button" class="window-choice-btn" data-value="16" ><span class="connectionpoint metro line16" value="16" truename="16"></span></button>
+					<button type="button" class="window-choice-btn" data-value="17" ><span class="connectionpoint metro line17" value="17" truename="17"></span></button>
+					<button type="button" class="window-choice-btn" data-value="18" ><span class="connectionpoint metro line18" value="18" truename="18"></span></button>
+					<button type="button" class="window-choice-btn" data-value="19" ><span class="connectionpoint metro line19" value="19" truename="19"></span></button>
+					<button type="button" class="window-choice-btn" data-value="A" ><span class="connectionpoint RER lineA" value="A" truename="A"></span></button>
+					<button type="button" class="window-choice-btn" data-value="B" ><span class="connectionpoint RER lineB" value="B" truename="B"></span></button>
+					<button type="button" class="window-choice-btn" data-value="C" ><span class="connectionpoint RER lineC" value="C" truename="C"></span></button>
+					<button type="button" class="window-choice-btn" data-value="D" ><span class="connectionpoint RER lineD" value="D" truename="D"></span></button>
+					<button type="button" class="window-choice-btn" data-value="E" ><span class="connectionpoint RER lineE" value="E" truename="E"></span></button>
+					<button type="button" class="window-choice-btn" data-value="H" ><span class="connectionpoint Train lineH" value="H" truename="H"></span></button>
+					<button type="button" class="window-choice-btn" data-value="J" ><span class="connectionpoint Train lineJ" value="J" truename="J"></span></button>
+					<button type="button" class="window-choice-btn" data-value="K" ><span class="connectionpoint Train lineK" value="K" truename="K"></span></button>
+					<button type="button" class="window-choice-btn" data-value="L" ><span class="connectionpoint Train lineL" value="L" truename="L"></span></button>
+					<button type="button" class="window-choice-btn" data-value="N" ><span class="connectionpoint Train lineN" value="N" truename="N"></span></button>
+					<button type="button" class="window-choice-btn" data-value="P" ><span class="connectionpoint Train lineP" value="P" truename="P"></span></button>
+					<button type="button" class="window-choice-btn" data-value="R" ><span class="connectionpoint Train lineR" value="R" truename="R"></span></button>
+					<button type="button" class="window-choice-btn" data-value="U" ><span class="connectionpoint Train lineU" value="U" truename="U"></span></button>
+					<button type="button" class="window-choice-btn" data-value="V" ><span class="connectionpoint Train lineV" value="V" truename="V"></span></button>
+					<button type="button" class="window-choice-btn" data-value="T1"><img src="blocks/connections/trams/t1.svg" alt="T1"></button>
+					<button type="button" class="window-choice-btn" data-value="T2"><img src="blocks/connections/trams/t2.svg" alt="T2"></button>
+					<button type="button" class="window-choice-btn" data-value="T3A"><img src="blocks/connections/trams/t3A.svg" alt="T3A"></button>
+					<button type="button" class="window-choice-btn" data-value="T3B"><img src="blocks/connections/trams/t3B.svg" alt="T3B"></button>
+					<button type="button" class="window-choice-btn" data-value="T4"><img src="blocks/connections/trams/t4.svg" alt="T4"></button>
+					<button type="button" class="window-choice-btn" data-value="T5"><img src="blocks/connections/trams/t5.svg" alt="T5"></button>
+					<button type="button" class="window-choice-btn" data-value="T6"><img src="blocks/connections/trams/t6.svg" alt="T6"></button>
+					<button type="button" class="window-choice-btn" data-value="T7"><img src="blocks/connections/trams/t7.svg" alt="T7"></button>
+					<button type="button" class="window-choice-btn" data-value="T8"><img src="blocks/connections/trams/t8.svg" alt="T8"></button>
+					<button type="button" class="window-choice-btn" data-value="T9"><img src="blocks/connections/trams/t9.svg" alt="T9"></button>
+					<button type="button" class="window-choice-btn" data-value="T10"><img src="blocks/connections/trams/t10.svg" alt="T10"></button>
+					<button type="button" class="window-choice-btn" data-value="T11"><img src="blocks/connections/trams/t11.svg" alt="T11"></button>
+					<button type="button" class="window-choice-btn" data-value="T12"><img src="blocks/connections/trams/t12.svg" alt="T12"></button>
+					<button type="button" class="window-choice-btn" data-value="T13"><img src="blocks/connections/trams/t13.svg" alt="T13"></button>
+					<button type="button" class="window-choice-btn" data-value="T14"><img src="blocks/connections/trams/t14.svg" alt="T14"></button>
+				</div>
+			</form>
+        </div>
+    </section>
 
 
 	<img src="" alt="temp hidden picture for printing pdf" id="printmodeonlyImg" />
