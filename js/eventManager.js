@@ -289,7 +289,7 @@ class EventManager {
                     currentElement.src = "blocks/connections/pointM.svg"; 
                 }
             }
-            else if( currentElement.className=="connectionpoint addConnection" ||  (currentElement.className.indexOf("connectionpoint") !=-1 && currentElement.className.indexOf("addConnection") == -1 && currentElement.parentElement.parentElement.className == "linename") ){
+            else if( currentElement.className=="addConnection" ||  (currentElement.className.indexOf("connectionpoint") !=-1 && currentElement.className.indexOf("addConnection") == -1 && currentElement.parentElement.parentElement.className == "linename") ){
                 const lineNameContainer = currentElement.parentElement; // .connectionline in .linename
                 this.showCustomPrompt({ type: "connection" }).then((line) => {
                         if(!line) return;

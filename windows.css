@@ -126,6 +126,36 @@
 	font-weight: 100;
 }
 
+
+#changelog-box{
+	max-width: 80%;
+	margin-top: .7rem;
+	margin-bottom: .4rem;
+	font-weight: 100;
+}
+
+#changelog{
+	font-size: 10pt;
+	list-style-type: none;
+}
+
+#changelog-box h3{
+	margin: 0;
+	margin-top: 1rem;
+	text-align: center;
+	font-size: 1rem;
+	font-weight: 100;
+}
+
+#changelog li::before{
+	display: inline-block;
+	content: "◗";
+	padding-right: .5rem;
+	line-height: 0;
+	font-size: 6pt;
+	vertical-align: middle;
+}
+
 #about p{
 	margin-top: 0px;
 	color: #ccc;
@@ -133,7 +163,7 @@
 
 #about pre{
 	margin-bottom: .3rem;
-	margin-top: 2rem;
+	margin-top: 1.2rem;
 }
 
 #export-format .window-container {
@@ -269,10 +299,3 @@
 	padding: 0 .57rem;
 }
 
-#customPromptFrom .window-choice-btn{
-	
-}
-
-.customPromptTitle{
-	
-}
