@@ -18,7 +18,9 @@ class Exporter{
 
 
 	let lineColor = getComputedStyle(lineNumber).color;
-	console.log(lineColor);
+
+
+	// console.log(lineColor);
 	// if it's actually not the tram-color tricks -> I use color when using trams
 	if(lineColor == "transparent" || lineColor == "rgb(35, 31, 32)" || lineColor == "rgb(255, 255, 255)" ){lineColor = getComputedStyle(lineNumber).backgroundColor;}
 
@@ -118,7 +120,14 @@ class Exporter{
     // Set the line's name/number
     lineNameContainer.setAttribute("type",lineType);
     lineNumberBox.setAttribute("truename",lineNumber);
-	lineNumberBox.className = object.line[0] + " connectionpoint line"+lineNumber.toUpperCase();
+
+	if(lineNumber.slice(1) == "   "){
+		lineNumberBox.className = object.line[0] + " connectionpoint line"+lineNumber.slice(0,1).toUpperCase()+"B";	
+	}
+	else{
+		lineNumberBox.className = object.line[0] + " connectionpoint line"+lineNumber.toUpperCase();
+	}
+
 
 
 
@@ -152,10 +161,6 @@ class Exporter{
 		this.parent.output.removeChild(this.parent.output.children[i]);
 	}
 
-	// console.log(object);			
-	// console.log(object.parts);
-	// console.log(object.parts.length);
-
 
 	// Now it get back all the parts (here the blocks)
 
@@ -177,7 +182,7 @@ class Exporter{
 			if (DOMpart === "block-dashed") {
 				toAdd.classList.add("dashed");
 			}
-			toAdd.innerHTML = pathHTML.replace("#fcc907",GLOBALColor);
+			toAdd.innerHTML = pathHTML.replace(this.parent.DEFAULT_COLOR,GLOBALColor);
 			toAdd = null;
 
 
@@ -197,7 +202,8 @@ class Exporter{
 			
 			toAdd.className = "blockcontainer point";
 			toAdd.draggable = "true";
-			toAdd.innerHTML = pointHTML.replace("#fcc907",GLOBALColor).replace("Station",DOMpart.name);
+			toAdd.innerHTML = pointHTML.replace(this.parent.DEFAULT_COLOR,GLOBALColor);
+			toAdd.children[1].innerText = DOMpart.name;
 
 			let newPointImg = toAdd.children[0];
 			let newPointImgContainer = newPointImg.children[0];
@@ -208,15 +214,15 @@ class Exporter{
 
 			if( pointType == "pointterminus" ){
 				newPointName.className = "name terminus";
-				newPointImg.innerHTML = pointTerminus.replace("#fcc907",GLOBALColor)
+				newPointImg.innerHTML = pointTerminus.replace(this.parent.DEFAULT_COLOR,GLOBALColor)
 			}
 			if( pointType == "pointempty" ){
 				newPointName.className = "name";
-				newPointImg.innerHTML = pointEmpty.replace("#fcc907",GLOBALColor)
+				newPointImg.innerHTML = pointEmpty.replace(this.parent.DEFAULT_COLOR,GLOBALColor)
 			}
 			if( pointType == "pointcorr" ){
 				newPointName.className = "name";
-				newPointImg.innerHTML = pointCorr.replace("#fcc907",GLOBALColor)
+				newPointImg.innerHTML = pointCorr.replace(this.parent.DEFAULT_COLOR,GLOBALColor)
 			}
 
 

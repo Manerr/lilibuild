@@ -27,6 +27,9 @@ body{
 }
 
 
+.ui *,.ui{
+	font-family: system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
 
 ::-webkit-scrollbar{
 	width: .3rem;
@@ -43,8 +46,8 @@ body{
 
 
 ::-webkit-scrollbar-thumb{
-	width: 90%;
-	height: 90%;
+	width: 80%;
+	height: 80%;
 	border: 3px solid transparent;
     background-color: #0d0e18; 
 	/* background: linear-gradient(90deg, #f2f3f2, #c2c3f2); */
@@ -85,7 +88,13 @@ header{
 	background-color: #ebebeb;
 }
 
-
+.flex-line{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: .33rem;;
+	width: 100%;
+}
 
 
 .result{
@@ -624,11 +633,11 @@ html body .img svg g.corrpoint path{
 .linename .connectionline::before{
 	content:"";
 	position: absolute;
-    top: -1rem;
+    top: -1.2rem;
     width: 120%;
     left: -10%;
 	height: 0%;
-	border-top: .61rem solid #1f3c90;
+	border-top: 1.07rem solid #1f3c90;
 }
 
 

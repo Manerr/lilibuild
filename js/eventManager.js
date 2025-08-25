@@ -1,15 +1,12 @@
+
+
 class EventManager {
     constructor(app) {
         this.app = app;
         this.boundMethods = new Map();
     }
 
-    // bindMethod(methodName) {
-    //     if (!this.boundMethods.has(methodName)) {
-    //         this.boundMethods.set(methodName, this.app[methodName].bind(this.app));
-    //     }
-    //     return this.boundMethods.get(methodName);
-    // }
+    
 
     // Initialize all event listeners
     initializeEvents() {
@@ -71,7 +68,7 @@ class EventManager {
 
         // Save button
         this.app.saveButton.onclick = () => {
-            this.app.download("line" + document.querySelector(".linename span").getAttribute("value") + ".json", JSON.stringify(this.app.exporter.exportJSON()));
+            this.app.download(dumbLineName() + ".json", JSON.stringify(this.app.exporter.exportJSON()));
         };
 
         // Open button
@@ -196,7 +193,7 @@ class EventManager {
             currentType = currentElement.getAttribute("name");
         }
 
-        if(CURRENTLY_DOING && currentType == "path"){
+        if(CURRENTLY_DOING == pointing && currentType == "path"){
 
             if(currentElement.parentElement.classList.contains("dashed")) currentElement.parentElement.classList.remove("dashed");
             else currentElement.parentElement.classList.add("dashed");
@@ -251,7 +248,7 @@ class EventManager {
                     if( currentType != "pointterminus" ){
 
 
-                        currentElement.innerHTML = pointCorr.replace("#fcc907",GLOBALColor);
+                        currentElement.innerHTML = pointCorr.replace("rgb(13, 140, 93)",GLOBALColor);
                         currentElement.setAttribute("name","pointcorr");
                         // currentElement.setname = "pointcorr";
                     }
@@ -518,7 +515,7 @@ class EventManager {
                         }
 
 
-                        currentElement.innerHTML = pointEmpty.replace("#fcc907",GLOBALColor);
+                        currentElement.innerHTML = pointEmpty.replace(this.DEFAULT_COLOR,GLOBALColor);
                         currentElement.setAttribute("name","pointempty");
 
 
@@ -526,7 +523,7 @@ class EventManager {
                         currentElement.parentElement.className = "blockcontainer point";
                         break;
                     case "pointempty" :
-                        currentElement.innerHTML = pointCorr.replace("#fcc907",GLOBALColor);
+                        currentElement.innerHTML = pointCorr.replace(this.DEFAULT_COLOR,GLOBALColor);
                         currentElement.setAttribute("name","pointcorr");
                         currentElement.parentElement.querySelector(".name").className = "name";
                         currentElement.parentElement.className = "blockcontainer point connected";
@@ -535,17 +532,17 @@ class EventManager {
                             // console.warn(currentElement)
                         // First of the line... 
                         if( trueCurrentElement.previousElementSibling.previousElementSibling == null  ){
-                            currentElement.innerHTML = pointTerminus.replace("#fcc907",GLOBALColor);
+                            currentElement.innerHTML = pointTerminus.replace(this.DEFAULT_COLOR,GLOBALColor);
                             currentElement.setAttribute("name","pointterminus");
                             // currentElement.src = "blocks/pointterminusLeft.svg";
                         }
                         if( trueCurrentElement.nextElementSibling.nextElementSibling == null  ){
-                            currentElement.innerHTML = pointTerminus.replace("#fcc907",GLOBALColor);
+                            currentElement.innerHTML = pointTerminus.replace(this.DEFAULT_COLOR,GLOBALColor);
                             currentElement.setAttribute("name","pointterminus");
                             // currentElement.src = "blocks/pointterminusRight.svg";
                         }
                         else{
-                            currentElement.innerHTML = pointTerminus.replace("#fcc907",GLOBALColor);
+                            currentElement.innerHTML = pointTerminus.replace(this.DEFAULT_COLOR,GLOBALColor);
                             currentElement.setAttribute("name","pointterminus");
             
 
@@ -568,10 +565,8 @@ class EventManager {
 
     bindConnectionsEvents(){
 
-        // console.log(this.app.choicesGrid)
 
         this.app.choicesGrid.onclick = function(event){
-            // console.log(this.app.choicesGrid)
 			let origine = event.target;
 			let value = origine.dataset.value;
 

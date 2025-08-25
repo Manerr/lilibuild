@@ -7,7 +7,7 @@ let SAVE_INTERVAL = 15;
 
 let CURRENTLY_DOING = pointing;
 
-let GLOBALColor = "#fcc907";
+let GLOBALColor = "rgb(13, 140, 93)";
 
 let	DELETING_POINTS = false;
 
@@ -20,6 +20,10 @@ let LAST_X = null;
 class App {
 	
 	constructor() {
+
+		//Default blocks btw
+		this.DEFAULT_COLOR = "rgb(13, 140, 93)";
+
 
         this.exporter = new Exporter(this);
 
@@ -312,12 +316,12 @@ class App {
 
 
 			if( CURRENTLY_DOING == drawingpath && this.trueIndicator.className != "indicator line" ){
-				this.trueIndicator.innerHTML = pathHTML.replace("#fcc907",GLOBALColor);
+				this.trueIndicator.innerHTML = pathHTML.replace(this.DEFAULT_COLOR,GLOBALColor);
 				this.trueIndicator.className = "indicator line";
 			}
 
 			else if( CURRENTLY_DOING == drawingpoint && this.trueIndicator.className != "indicator point" ){
-				this.trueIndicator.innerHTML = editedpointHTML.replace("#fcc907",GLOBALColor);
+				this.trueIndicator.innerHTML = editedpointHTML.replace(this.DEFAULT_COLOR,GLOBALColor);
 				this.trueIndicator.className = "indicator point";
 			}
 
@@ -349,7 +353,7 @@ class App {
 
 
 		outputOnclick(event){
-			console.log("ok!");
+			// console.log("ok!");
 			if( CURRENTLY_DOING == deleting || CURRENTLY_DOING == pointing ){
 				return;
 			}
@@ -363,7 +367,7 @@ class App {
 
 				toAdd.draggable = "true";
 
-				toAdd.innerHTML = pathHTML.replace("#fcc907",GLOBALColor);
+				toAdd.innerHTML = pathHTML.replace(this.DEFAULT_COLOR,GLOBALColor);
 
 			}	
 			else if(CURRENTLY_DOING == drawingpoint){
@@ -373,7 +377,7 @@ class App {
 
 				toAdd.draggable = "true";
 
-				toAdd.innerHTML = pointHTML.replace("#fcc907",GLOBALColor);
+				toAdd.innerHTML = pointHTML.replace(this.DEFAULT_COLOR,GLOBALColor);
 
 			}
 
@@ -442,25 +446,26 @@ class App {
 		performExport(format) {
 			document.body.style.overflow = "visible";
 			this.output.style.overflowX = "visible";
-			// this.output.style.overflowY = "hidden";
 			this.outputContainer.style.overflowX = "visible";
-			this.outputContainer.style.overflowY = "hidden";
+			this.outputdragzone.style.overflowY = "hidden";
+			this.outputdragzone.style.minWidth = this.outputdragzone.scrollWidth + "px";
 			this.outputContainer.style.maxWidth = "unset";
 			let promised;
 			let filename;
 			
+			filename = dumbLineName();
 
 			if( format == 0){
-				promised = htmlToImage.toPng(document.getElementById("dragtarget"));
-				filename = "mynewline.png";
+				promised = htmlToImage.toPng(this.outputdragzone);
+				filename += ".png";
 			} 
 			else if( format == 1 ){
-				promised = htmlToImage.toSvg(document.getElementById("dragtarget"));
-				filename = "mynewline.svg";
+				promised = htmlToImage.toSvg(this.outputdragzone);
+				filename += ".svg";
 			}
 			else if( format == 2 ){
-				promised = htmlToImage.toJpeg(document.getElementById("dragtarget"));
-				filename = "mynewline.jpg";
+				promised = htmlToImage.toJpeg(this.outputdragzone);
+				filename += ".jpg";
 			}
 
 			if( !promised ){
@@ -481,12 +486,13 @@ class App {
 				console.error("Error exporting picture:", error);
 			});
 			promised.finally(function(){
-
 				document.body.style.overflow = "";
 				this.output.style.overflowX = "";
 				this.outputContainer.style.overflowX = "";
+				this.outputdragzone.style.overflowY = "";
+				this.outputdragzone.style.minWidth = "";
 				this.outputContainer.style.maxWidth = "";
-
+		
 
 			}.bind(this) );
 		}
@@ -661,9 +667,11 @@ class App {
 					let origine = event.target;
 					let value = origine.dataset.value;
 		
-					promptWindow.style.display = "none";
+
+
 		
 					if(value) {
+						promptWindow.style.display = "none";
 						resolve(value);
 					}
 					else{

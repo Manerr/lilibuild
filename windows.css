@@ -120,6 +120,10 @@
 	max-width: 5.2rem;
 }
 
+#about .window-container{
+	width: 20rem;
+}
+
 .window h2{
 	text-align: center;
 	margin-bottom: 0rem;
@@ -135,8 +139,12 @@
 }
 
 #changelog{
-	font-size: 10pt;
+	max-height: 7.2rem;
+    overflow-y: auto;
+	padding-left: 0;
+	font-size: 9.5pt;
 	list-style-type: none;
+	margin-bottom: 0px;
 }
 
 #changelog-box h3{
@@ -296,6 +304,52 @@
 #customPromptForm{
 	max-width: 88vw;
 	min-width: 300px;
-	padding: 0 .57rem;
 }
 
+.window-container ::-webkit-scrollbar-thumb{
+	background: white;
+}
+
+.window-container ::-webkit-scrollbar-track{
+	background: none;
+}
+
+/* coming soon */
+
+#options-popup{
+	position: absolute;
+    /* width: 15rem; */
+    /* height: 10rem; */
+    left: 3.7rem;
+    bottom: .3rem;
+    background: #0d0e18;
+    border-radius: .3rem;
+	color: #fafafa;
+    font-size: .7rem;
+	z-index: 88;
+}
+
+#options-popup > div{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: .4rem;
+	box-sizing: border-box;
+}
+
+
+
+
+#options-popup button{
+	background-color: white;
+}
+
+#options-popup .indicator{
+	background-color: white;
+}
+
+.options-icon{
+	margin-right: auto;
+	width: 1.3rem;
+}
