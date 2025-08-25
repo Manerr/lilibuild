@@ -443,13 +443,28 @@ class App {
 			this.eventManager.bindExportFormatPopupEvents(exportPopup, formatOptions);
 		}
 
-		performExport(format) {
+		hideforExport(){
 			document.body.style.overflow = "visible";
 			this.output.style.overflowX = "visible";
 			this.outputContainer.style.overflowX = "visible";
 			this.outputdragzone.style.overflowY = "hidden";
 			this.outputdragzone.style.minWidth = this.outputdragzone.scrollWidth + "px";
 			this.outputContainer.style.maxWidth = "unset";
+		}
+
+		showafterExport(){
+			document.body.style.overflow = "";
+			this.output.style.overflowX = "";
+			this.outputContainer.style.overflowX = "";
+			this.outputdragzone.style.overflowY = "";
+			this.outputdragzone.style.minWidth = "";
+			this.outputContainer.style.maxWidth = "";
+		}
+
+		performExport(format) {
+
+			this.hideforExport();
+
 			let promised;
 			let filename;
 			
@@ -486,13 +501,7 @@ class App {
 				console.error("Error exporting picture:", error);
 			});
 			promised.finally(function(){
-				document.body.style.overflow = "";
-				this.output.style.overflowX = "";
-				this.outputContainer.style.overflowX = "";
-				this.outputdragzone.style.overflowY = "";
-				this.outputdragzone.style.minWidth = "";
-				this.outputContainer.style.maxWidth = "";
-		
+				this.showafterExport();
 
 			}.bind(this) );
 		}
@@ -532,10 +541,7 @@ class App {
 
 		preparePrint(event){
 
-			document.body.style.overflow = "visible";
-			this.output.style.overflowX = "visible";
-			this.outputContainer.style.overflowX = "visible";
-			this.outputContainer.style.maxWidth = "unset !important";
+			this.hideforExport();
 			let promised = htmlToImage.toSvg(document.getElementById("dragtarget"));
 
 			promised.then(function (dataUrl) { 
@@ -547,11 +553,7 @@ class App {
 			}.bind(this))
 			promised.finally(function(){
 
-				document.body.style.overflow = "";
-				this.output.style.overflowX = "";
-				this.outputContainer.style.overflowX = "";
-				this.outputContainer.style.maxWidth = "";
-
+				this.showafterExport();
 
 			}.bind(this));
 
