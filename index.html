@@ -1,83 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>LiliBuild - Lite Line Builder</title>
-	<link rel="stylesheet" type="text/css" href="style.css"/>
-	<link rel="stylesheet" type="text/css" href="asidemenubar.css"/>
-	<link rel="stylesheet" type="text/css" href="windows.css"/>
-	<link rel="stylesheet" type="text/css" href="colors.css"/>
-	<link rel="stylesheet" media="print" type="text/css" href="print.css"/>
-	<link rel=icon href="favicon.png" sizes="32x32" type="image/png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LiliBuild - Lite Line Builder</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="asidemenubar.css" />
+    <link rel="stylesheet" type="text/css" href="windows.css" />
+    <link rel="stylesheet" type="text/css" href="colors.css" />
+    <link rel="stylesheet" media="print" type="text/css" href="print.css" />
+    <link rel=icon href="favicon.png" sizes="32x32" type="image/png">
 
 </head>
+
 <body>
 
 
-	<main id="app">
-		
+    <main id="app">
 
-		<div id="asidecontainer">
 
-			<div class="space"></div>
+        <div id="asidecontainer">
 
-			<button class="modern switch selected" type="button" title="Manage existing blocks" value="1" id="bPointer" name="editButtonsValue">
+            <div class="space"></div>
+
+            <button class="modern switch selected" type="button" title="Manage existing blocks" value="1" id="bPointer" name="editButtonsValue">
 				<img src="ui/new/pointer.svg"/>
 			</button>
-			<button class="modern switch" type="button" title="Add path" value="2" id="bEdit" name="editButtonsValue">
+            <button class="modern switch" type="button" title="Add path" value="2" id="bEdit" name="editButtonsValue">
 				<img src="ui/new/edit.svg"/>
 			</button>
-			<button class="modern switch" type="button" title="Add point" value="3" id="bEditPoint" name="editButtonsValue">
+            <button class="modern switch" type="button" title="Add point" value="3" id="bEditPoint" name="editButtonsValue">
 				<img src="ui/new/editpoint.svg"/>
 			</button>
 
- 			<button class="modern switch" type="button" title="Delete blocks" value="0" id="bDelete" name="editButtonsValue">
+            <button class="modern switch" type="button" title="Delete blocks" value="0" id="bDelete" name="editButtonsValue">
 				<img src="ui/new/delete.svg"/>
 			</button>
 
-			<div class="space"></div>
+            <div class="space"></div>
 
-<!--  			<button class="modern" type="button" title="Settings">
+            <!--  			<button class="modern" type="button" title="Settings">
 				<img src="ui/new/settings.svg"/>
 			</button>
- -->		
- 			<div class="space"></div>
+ -->
+            <div class="space"></div>
 
-			<button class="modern" type="button" title="Open JSON" id="bOpen">
+            <button class="modern" type="button" title="Open JSON" id="bOpen">
 				<img src="ui/new/open.svg"/>
 			</button>
-			<button class="modern" type="button" title="Save JSON" id="bSave">
+            <button class="modern" type="button" title="Save JSON" id="bSave">
 				<img src="ui/new/download.svg"/>
 			</button>
-			<button class="modern" type="button" title="Export to picture" id="bExport">
+            <button class="modern" type="button" title="Export to picture" id="bExport">
 				<img src="ui/new/picture.svg"/>
 			</button>
 
-			<button class="modern" type="button" title="Print" id="bPrint">
+            <button class="modern" type="button" title="Print" id="bPrint">
 				<img src="ui/new/print.svg"/>
 			</button>
-			
-			<button class="modern" type="button" title="Reset" id="bReset">
+
+            <button class="modern" type="button" title="Reset" id="bReset">
 				<img src="ui/new/reset.svg"/>
 			</button>
 
- 			<div class="space"></div>
+            <div class="space"></div>
 
-			<button class="modern" type="button" title="About" id="bInfo">
+            <button class="modern" type="button" title="About" id="bInfo">
 				<img src="ui/new/info.svg"/>
 			</button>
-			<a href="https://github.com/manerr/lilibuild" rel="noopener" target="_blank" class="modern mtop" type="button" title="Github repo" id="bGithub">
-				<img src="ui/new/github.svg"/>
-			</a>
+            <a href="https://github.com/manerr/lilibuild" rel="noopener" target="_blank" class="modern mtop" type="button" title="Github repo" id="bGithub">
+                <img src="ui/new/github.svg" />
+            </a>
 
 
-		</div>
+        </div>
 
-		<div class="result">
+        <div class="result">
 
-		<!-- Coming soon -->
-<!-- 
+            <!-- Coming soon -->
+            <!-- 
 			<section id="options-popup" class="ui">
 				<div id="path-options">
 					<div id="style" class="flex-line">
@@ -100,225 +102,225 @@
 				</div>
 			</section>
  -->
-			<div id="dragtarget">
+            <div id="dragtarget">
 
-				<div class="linename">
-					<div class="connectionline" type="metro">
-						<img src="blocks/connections/pointM.svg" class="connectionType">
-						<span class="metro connectionpoint line12" value="12" truename="12" style="order: 14;"></span>
-						<button class="addConnection"></button>
-					</div>
-				</div>
+                <div class="linename">
+                    <div class="connectionline" type="metro">
+                        <img src="blocks/connections/pointM.svg" class="connectionType">
+                        <span class="metro connectionpoint line12" value="12" truename="12" style="order: 14;"></span>
+                        <button class="addConnection"></button>
+                    </div>
+                </div>
 
-				<div class="allsvgcontainer pad3 pad4 pad2">
-
-
-					<div class="emptyfordraggingstart"></div>
+                <div class="allsvgcontainer pad3 pad4 pad2">
 
 
-					<div class="blockcontainer point" draggable="true"><div class="img" name="pointterminus"><svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">              <g id="g1" transform="matrix(2.892091989517212, 0, 0, -2.8895139694213867, -6598.008349940242, 5074.1045299925245)" style="height: 100%;">                <g class="endpoint" style="" transform="matrix(-1, 0, 0, -1, 4574.199999, 3500.659995)">                  <path id="path5403-1" d="m 0,0 c 0,-2.074 -1.681,-3.752 -3.752,-3.752 -2.072,0 -3.753,1.678 -3.753,3.752 0,2.071 1.681,3.752 3.753,3.752 C -1.681,3.752 0,2.071 0,0" style="fill: rgb(255, 255, 255); fill-opacity: 1; fill-rule: nonzero; stroke: rgb(13, 140, 93); stroke-width: 1.043; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-dasharray: none; stroke-opacity: 1;" transform="matrix(1.3333333,0,0,-1.3333333,2292.1021,1750.3323)"></path>                  <path id="path5405-5" d="m 0,0 c 0,-1.066 -0.862,-1.93 -1.928,-1.93 -1.065,0 -1.927,0.864 -1.927,1.93 0,1.063 0.862,1.928 1.927,1.928 C -0.862,1.928 0,1.063 0,0" style="fill: rgb(13, 140, 93); fill-opacity: 1; fill-rule: evenodd; stroke: rgb(13, 140, 93);" transform="matrix(1.3333333,0,0,-1.3333333,2289.6699,1750.331)"></path>                </g>              </g>            </svg>          </div><div class="name terminus" spellcheck="false" contenteditable="">Mairie<div>d'Aubervilliers</div></div><div class="connection">         <div class="connectionline" type="metro"><span class="metro connectionpoint line15" value="15" truename="15" style="order: 17;"></span></div><div class="connectionline" type="Train"><span class="Train connectionpoint lineN" value="N" truename="N" style="order: 4;"></span></div><div class="connectionline" type="Tram"><span class="Tram connectionpoint lineT4" value="T4" truename="T4" style="background-image: url(&quot;blocks/connections/trams/t4.svg&quot;); order: 5;"></span><span class="Tram connectionpoint lineT11" value="T11" truename="T11" style="background-image: url(&quot;blocks/connections/trams/t11.svg&quot;); order: 12;"></span></div><button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point" draggable="true"><div class="img" name="pointempty"><svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">                <g id="g1" transform="matrix(-2.840665102005005, 0, 0, 2.9739670753479004, 6673.122120031134, -5188.936562098089)" style="height: 100%;">                  <g class="normalpoint" style="" transform="matrix(0, -0.976266, 1.024311, 0, 550.447821, 4038.043466)">                    <path id="path3799-2" d="m 2338.8375,1750.3323 c 0,-2.4771 2.0101,-4.485 4.4871,-4.485 2.4793,0 4.4893,2.0079 4.4893,4.485 0,2.4792 -2.01,4.485 -4.4893,4.485 -2.477,0 -4.4871,-2.0058 -4.4871,-4.485" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:rgb(13, 140, 93);stroke-width:2.24465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"></path>                  </g>                </g>              </svg></div><div class="name" spellcheck="false" contenteditable="">Aimé Césaire</div><div class="connection">         <div class="connectionline" type="metro"><span class="metro connectionpoint line13" value="13" truename="13" style="order: 15;"></span><span class="metro connectionpoint line5" value="5" truename="5" style="order: 6;"></span></div><div class="connectionline" type="RER"><span class="RER connectionpoint lineA" value="A" truename="A" style="order: 0;"></span></div><div class="connectionline" type="Train"><span class="Train connectionpoint lineR" value="R" truename="R" style="order: 6;"></span></div><div class="connectionline" type="Tram"><span class="Tram connectionpoint lineT6" value="T6" truename="T6" style="background-image: url(&quot;blocks/connections/trams/t6.svg&quot;); order: 7;"></span></div><button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point" draggable="true"><div class="img" name="pointempty"><svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">                <g id="g1" transform="matrix(-2.840665102005005, 0, 0, 2.9739670753479004, 6673.122120031134, -5188.936562098089)" style="height: 100%;">                  <g class="normalpoint" style="" transform="matrix(0, -0.976266, 1.024311, 0, 550.447821, 4038.043466)">                    <path id="path3799-2" d="m 2338.8375,1750.3323 c 0,-2.4771 2.0101,-4.485 4.4871,-4.485 2.4793,0 4.4893,2.0079 4.4893,4.485 0,2.4792 -2.01,4.485 -4.4893,4.485 -2.477,0 -4.4871,-2.0058 -4.4871,-4.485" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:rgb(13, 140, 93);stroke-width:2.24465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"></path>                  </g>                </g>              </svg></div><div class="name" spellcheck="false" contenteditable="">Front Populaire</div><div class="connection">         <div class="connectionline" type="metro"><span class="metro connectionpoint line19" value="19" truename="19" style="order: 21;"></span></div><div class="connectionline" type="Tram"><span class="Tram connectionpoint lineT10" value="T10" truename="T10" style="background-image: url(&quot;blocks/connections/trams/t10.svg&quot;); order: 11;"></span></div><button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point connected" draggable="true"><div class="img" name="pointcorr"><svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">                <g id="g1" transform="matrix(2.8880960941314697, 0, 0, -2.889010906219482, -6588.868701434645, 5073.215858110902)" style="height: 100%;">                  <g class="corrpoint" style="" transform="matrix(-1, 0, 0, -1, 4574.199999, 3500.659995)">                    <path id="path5403-1" d="m 0,0 c 0,-2.074 -1.681,-3.752 -3.752,-3.752 -2.072,0 -3.753,1.678 -3.753,3.752 0,2.071 1.681,3.752 3.753,3.752 C -1.681,3.752 0,2.071 0,0" style="fill: rgb(255, 255, 255); fill-opacity: 1; fill-rule: nonzero; stroke-width: 1.043; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-dasharray: none; stroke-opacity: 1; stroke: rgb(0, 0, 0);" transform="matrix(1.3333333,0,0,-1.3333333,2292.1021,1750.3323)"></path>                  </g>                </g>              </svg></div><div class="name" spellcheck="false" contenteditable="">Porte de la Chapelle</div><div class="connection">         <div class="connectionline" type="Tram"><span bis="" class="Tram connectionpoint lineT3B" value="t3b" truename="t3b" style="order: 4; background-image: url(&quot;blocks/connections/trams/t3B.svg&quot;);"></span></div><button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point" draggable="true"><div class="img" name="pointempty">    <svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">         <g id="g1" transform="matrix(-2.840665102005005, 0, 0, 2.9739670753479004, 6673.122120031134, -5188.936562098089)" style="height: 100%;">    <g class="normalpoint" style="" transform="matrix(0, -0.976266, 1.024311, 0, 550.447821, 4038.043466)">    <path id="path3799-2" d="m 2338.8375,1750.3323 c 0,-2.4771 2.0101,-4.485 4.4871,-4.485 2.4793,0 4.4893,2.0079 4.4893,4.485 0,2.4792 -2.01,4.485 -4.4893,4.485 -2.477,0 -4.4871,-2.0058 -4.4871,-4.485" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:rgb(13, 140, 93);stroke-width:2.24465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"></path>    </g>  </g></svg></div><div class="name" spellcheck="false" contenteditable="">Marx Dormoy</div><div class="connection">         <button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point connected" draggable="true"><div class="img" name="pointcorr"><svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">                <g id="g1" transform="matrix(2.8880960941314697, 0, 0, -2.889010906219482, -6588.868701434645, 5073.215858110902)" style="height: 100%;">                  <g class="corrpoint" style="" transform="matrix(-1, 0, 0, -1, 4574.199999, 3500.659995)">                    <path id="path5403-1" d="m 0,0 c 0,-2.074 -1.681,-3.752 -3.752,-3.752 -2.072,0 -3.753,1.678 -3.753,3.752 0,2.071 1.681,3.752 3.753,3.752 C -1.681,3.752 0,2.071 0,0" style="fill: rgb(255, 255, 255); fill-opacity: 1; fill-rule: nonzero; stroke-width: 1.043; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-dasharray: none; stroke-opacity: 1; stroke: rgb(0, 0, 0);" transform="matrix(1.3333333,0,0,-1.3333333,2292.1021,1750.3323)"></path>                  </g>                </g>              </svg></div><div class="name" spellcheck="false" contenteditable="">Marcadet-Poissonniers</div><div class="connection">         <div class="connectionline" type="metro"><span bis="" class="metro connectionpoint line4" value="4" truename="4" style="order: 5;"></span></div><button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point" draggable="true"><div class="img" name="pointempty">    <svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">         <g id="g1" transform="matrix(-2.840665102005005, 0, 0, 2.9739670753479004, 6673.122120031134, -5188.936562098089)" style="height: 100%;">    <g class="normalpoint" style="" transform="matrix(0, -0.976266, 1.024311, 0, 550.447821, 4038.043466)">    <path id="path3799-2" d="m 2338.8375,1750.3323 c 0,-2.4771 2.0101,-4.485 4.4871,-4.485 2.4793,0 4.4893,2.0079 4.4893,4.485 0,2.4792 -2.01,4.485 -4.4893,4.485 -2.477,0 -4.4871,-2.0058 -4.4871,-4.485" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:rgb(13, 140, 93);stroke-width:2.24465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"></path>    </g>  </g></svg></div><div class="name" spellcheck="false" contenteditable="">Jules Joffrin</div><div class="connection">         <button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point" draggable="true"><div class="img" name="pointempty">    <svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">         <g id="g1" transform="matrix(-2.840665102005005, 0, 0, 2.9739670753479004, 6673.122120031134, -5188.936562098089)" style="height: 100%;">    <g class="normalpoint" style="" transform="matrix(0, -0.976266, 1.024311, 0, 550.447821, 4038.043466)">    <path id="path3799-2" d="m 2338.8375,1750.3323 c 0,-2.4771 2.0101,-4.485 4.4871,-4.485 2.4793,0 4.4893,2.0079 4.4893,4.485 0,2.4792 -2.01,4.485 -4.4893,4.485 -2.477,0 -4.4871,-2.0058 -4.4871,-4.485" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:rgb(13, 140, 93);stroke-width:2.24465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"></path>    </g>  </g></svg></div><div class="name" spellcheck="false" contenteditable="">Abbesses</div><div class="connection">         <button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point connected" draggable="true"><div class="img" name="pointcorr"><svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">                <g id="g1" transform="matrix(2.8880960941314697, 0, 0, -2.889010906219482, -6588.868701434645, 5073.215858110902)" style="height: 100%;">                  <g class="corrpoint" style="" transform="matrix(-1, 0, 0, -1, 4574.199999, 3500.659995)">                    <path id="path5403-1" d="m 0,0 c 0,-2.074 -1.681,-3.752 -3.752,-3.752 -2.072,0 -3.753,1.678 -3.753,3.752 0,2.071 1.681,3.752 3.753,3.752 C -1.681,3.752 0,2.071 0,0" style="fill: rgb(255, 255, 255); fill-opacity: 1; fill-rule: nonzero; stroke-width: 1.043; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-dasharray: none; stroke-opacity: 1; stroke: rgb(0, 0, 0);" transform="matrix(1.3333333,0,0,-1.3333333,2292.1021,1750.3323)"></path>                  </g>                </g>              </svg></div><div class="name" spellcheck="false" contenteditable="">Pigalle</div><div class="connection">         <div class="connectionline" type="metro"><span bis="" class="metro connectionpoint line2" value="2" truename="2" style="order: 2;"></span></div><button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point" draggable="true"><div class="img" name="pointempty">    <svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">         <g id="g1" transform="matrix(-2.840665102005005, 0, 0, 2.9739670753479004, 6673.122120031134, -5188.936562098089)" style="height: 100%;">    <g class="normalpoint" style="" transform="matrix(0, -0.976266, 1.024311, 0, 550.447821, 4038.043466)">    <path id="path3799-2" d="m 2338.8375,1750.3323 c 0,-2.4771 2.0101,-4.485 4.4871,-4.485 2.4793,0 4.4893,2.0079 4.4893,4.485 0,2.4792 -2.01,4.485 -4.4893,4.485 -2.477,0 -4.4871,-2.0058 -4.4871,-4.485" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:rgb(13, 140, 93);stroke-width:2.24465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"></path>    </g>  </g></svg></div><div class="name" spellcheck="false" contenteditable="">Saint-Georges</div><div class="connection">         <button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point" draggable="true"><div class="img" name="pointempty">    <svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">         <g id="g1" transform="matrix(-2.840665102005005, 0, 0, 2.9739670753479004, 6673.122120031134, -5188.936562098089)" style="height: 100%;">    <g class="normalpoint" style="" transform="matrix(0, -0.976266, 1.024311, 0, 550.447821, 4038.043466)">    <path id="path3799-2" d="m 2338.8375,1750.3323 c 0,-2.4771 2.0101,-4.485 4.4871,-4.485 2.4793,0 4.4893,2.0079 4.4893,4.485 0,2.4792 -2.01,4.485 -4.4893,4.485 -2.477,0 -4.4871,-2.0058 -4.4871,-4.485" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:rgb(13, 140, 93);stroke-width:2.24465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"></path>    </g>  </g></svg></div><div class="name" spellcheck="false" contenteditable="">Notre-Dame-de-Lorette</div><div class="connection">         <button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point" draggable="true"><div class="img" name="pointempty">    <svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">         <g id="g1" transform="matrix(-2.840665102005005, 0, 0, 2.9739670753479004, 6673.122120031134, -5188.936562098089)" style="height: 100%;">    <g class="normalpoint" style="" transform="matrix(0, -0.976266, 1.024311, 0, 550.447821, 4038.043466)">    <path id="path3799-2" d="m 2338.8375,1750.3323 c 0,-2.4771 2.0101,-4.485 4.4871,-4.485 2.4793,0 4.4893,2.0079 4.4893,4.485 0,2.4792 -2.01,4.485 -4.4893,4.485 -2.477,0 -4.4871,-2.0058 -4.4871,-4.485" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:rgb(13, 140, 93);stroke-width:2.24465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"></path>    </g>  </g></svg></div><div class="name" spellcheck="false" contenteditable="">Trinité-d'Estienne d'Orves</div><div class="connection">         <button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point connected" draggable="true"><div class="img" name="pointcorr"><svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">                <g id="g1" transform="matrix(2.8880960941314697, 0, 0, -2.889010906219482, -6588.868701434645, 5073.215858110902)" style="height: 100%;">                  <g class="corrpoint" style="" transform="matrix(-1, 0, 0, -1, 4574.199999, 3500.659995)">                    <path id="path5403-1" d="m 0,0 c 0,-2.074 -1.681,-3.752 -3.752,-3.752 -2.072,0 -3.753,1.678 -3.753,3.752 0,2.071 1.681,3.752 3.753,3.752 C -1.681,3.752 0,2.071 0,0" style="fill: rgb(255, 255, 255); fill-opacity: 1; fill-rule: nonzero; stroke-width: 1.043; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-dasharray: none; stroke-opacity: 1; stroke: rgb(0, 0, 0);" transform="matrix(1.3333333,0,0,-1.3333333,2292.1021,1750.3323)"></path>                  </g>                </g>              </svg></div><div class="name" spellcheck="false" contenteditable="">Saint-Lazare</div><div class="connection">         <div class="connectionline" type="metro"><span bis="" class="metro connectionpoint line3" value="3" truename="3" style="order: 3;"></span><span bis="" class="metro connectionpoint line13" value="13" truename="13" style="order: 15;"></span><span bis="" class="metro connectionpoint line14" value="14" truename="14" style="order: 16;"></span></div><div class="connectionline" type="RER"><span bis="" class="RER connectionpoint lineE" value="E" truename="E" style="order: 4;"></span></div><div class="connectionline" type="Train"><span bis="" class="Train connectionpoint lineJ" value="J" truename="J" style="order: 1;"></span><span bis="" class="Train connectionpoint lineL" value="L" truename="L" style="order: 3;"></span></div><button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point connected" draggable="true"><div class="img" name="pointcorr"><svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">                <g id="g1" transform="matrix(2.8880960941314697, 0, 0, -2.889010906219482, -6588.868701434645, 5073.215858110902)" style="height: 100%;">                  <g class="corrpoint" style="" transform="matrix(-1, 0, 0, -1, 4574.199999, 3500.659995)">                    <path id="path5403-1" d="m 0,0 c 0,-2.074 -1.681,-3.752 -3.752,-3.752 -2.072,0 -3.753,1.678 -3.753,3.752 0,2.071 1.681,3.752 3.753,3.752 C -1.681,3.752 0,2.071 0,0" style="fill: rgb(255, 255, 255); fill-opacity: 1; fill-rule: nonzero; stroke-width: 1.043; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-dasharray: none; stroke-opacity: 1; stroke: rgb(0, 0, 0);" transform="matrix(1.3333333,0,0,-1.3333333,2292.1021,1750.3323)"></path>                  </g>                </g>              </svg></div><div class="name" spellcheck="false" contenteditable="">Madeleine</div><div class="connection">         <div class="connectionline" type="metro"><span bis="" class="metro connectionpoint line8" value="8" truename="8" style="order: 10;"></span><span bis="" class="metro connectionpoint line14" value="14" truename="14" style="order: 16;"></span></div><button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point connected" draggable="true"><div class="img" name="pointcorr"><svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">                <g id="g1" transform="matrix(2.8880960941314697, 0, 0, -2.889010906219482, -6588.868701434645, 5073.215858110902)" style="height: 100%;">                  <g class="corrpoint" style="" transform="matrix(-1, 0, 0, -1, 4574.199999, 3500.659995)">                    <path id="path5403-1" d="m 0,0 c 0,-2.074 -1.681,-3.752 -3.752,-3.752 -2.072,0 -3.753,1.678 -3.753,3.752 0,2.071 1.681,3.752 3.753,3.752 C -1.681,3.752 0,2.071 0,0" style="fill: rgb(255, 255, 255); fill-opacity: 1; fill-rule: nonzero; stroke-width: 1.043; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-dasharray: none; stroke-opacity: 1; stroke: rgb(0, 0, 0);" transform="matrix(1.3333333,0,0,-1.3333333,2292.1021,1750.3323)"></path>                  </g>                </g>              </svg></div><div class="name" spellcheck="false" contenteditable="">Concorde</div><div class="connection">         <div class="connectionline" type="metro"><span bis="" class="metro connectionpoint line1" value="1" truename="1" style="order: 1;"></span><span bis="" class="metro connectionpoint line8" value="8" truename="8" style="order: 10;"></span></div><button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point" draggable="true"><div class="img" name="pointempty">    <svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">         <g id="g1" transform="matrix(-2.840665102005005, 0, 0, 2.9739670753479004, 6673.122120031134, -5188.936562098089)" style="height: 100%;">    <g class="normalpoint" style="" transform="matrix(0, -0.976266, 1.024311, 0, 550.447821, 4038.043466)">    <path id="path3799-2" d="m 2338.8375,1750.3323 c 0,-2.4771 2.0101,-4.485 4.4871,-4.485 2.4793,0 4.4893,2.0079 4.4893,4.485 0,2.4792 -2.01,4.485 -4.4893,4.485 -2.477,0 -4.4871,-2.0058 -4.4871,-4.485" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:rgb(13, 140, 93);stroke-width:2.24465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"></path>    </g>  </g></svg></div><div class="name" spellcheck="false" contenteditable="">Assemblée Nationale</div><div class="connection">         <button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point connected" draggable="true"><div class="img" name="pointcorr"><svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">                <g id="g1" transform="matrix(2.8880960941314697, 0, 0, -2.889010906219482, -6588.868701434645, 5073.215858110902)" style="height: 100%;">                  <g class="corrpoint" style="" transform="matrix(-1, 0, 0, -1, 4574.199999, 3500.659995)">                    <path id="path5403-1" d="m 0,0 c 0,-2.074 -1.681,-3.752 -3.752,-3.752 -2.072,0 -3.753,1.678 -3.753,3.752 0,2.071 1.681,3.752 3.753,3.752 C -1.681,3.752 0,2.071 0,0" style="fill: rgb(255, 255, 255); fill-opacity: 1; fill-rule: nonzero; stroke-width: 1.043; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-dasharray: none; stroke-opacity: 1; stroke: rgb(0, 0, 0);" transform="matrix(1.3333333,0,0,-1.3333333,2292.1021,1750.3323)"></path>                  </g>                </g>              </svg></div><div class="name" spellcheck="false" contenteditable="">Solférino</div><div class="connection">         <div class="connectionline" type="RER"><span bis="" class="RER connectionpoint lineC" value="C" truename="C" style="order: 2;"></span></div><button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point" draggable="true"><div class="img" name="pointempty">    <svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">         <g id="g1" transform="matrix(-2.840665102005005, 0, 0, 2.9739670753479004, 6673.122120031134, -5188.936562098089)" style="height: 100%;">    <g class="normalpoint" style="" transform="matrix(0, -0.976266, 1.024311, 0, 550.447821, 4038.043466)">    <path id="path3799-2" d="m 2338.8375,1750.3323 c 0,-2.4771 2.0101,-4.485 4.4871,-4.485 2.4793,0 4.4893,2.0079 4.4893,4.485 0,2.4792 -2.01,4.485 -4.4893,4.485 -2.477,0 -4.4871,-2.0058 -4.4871,-4.485" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:rgb(13, 140, 93);stroke-width:2.24465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"></path>    </g>  </g></svg></div><div class="name" spellcheck="false" contenteditable="">Rue du Bac</div><div class="connection">         <button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point connected" draggable="true"><div class="img" name="pointcorr"><svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">                <g id="g1" transform="matrix(2.8880960941314697, 0, 0, -2.889010906219482, -6588.868701434645, 5073.215858110902)" style="height: 100%;">                  <g class="corrpoint" style="" transform="matrix(-1, 0, 0, -1, 4574.199999, 3500.659995)">                    <path id="path5403-1" d="m 0,0 c 0,-2.074 -1.681,-3.752 -3.752,-3.752 -2.072,0 -3.753,1.678 -3.753,3.752 0,2.071 1.681,3.752 3.753,3.752 C -1.681,3.752 0,2.071 0,0" style="fill: rgb(255, 255, 255); fill-opacity: 1; fill-rule: nonzero; stroke-width: 1.043; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-dasharray: none; stroke-opacity: 1; stroke: rgb(0, 0, 0);" transform="matrix(1.3333333,0,0,-1.3333333,2292.1021,1750.3323)"></path>                  </g>                </g>              </svg></div><div class="name" spellcheck="false" contenteditable="">Sèvres-Babylone</div><div class="connection">         <div class="connectionline" type="metro"><span bis="" class="metro connectionpoint line10" value="10" truename="10" style="order: 12;"></span></div><button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point" draggable="true"><div class="img" name="pointempty">    <svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">         <g id="g1" transform="matrix(-2.840665102005005, 0, 0, 2.9739670753479004, 6673.122120031134, -5188.936562098089)" style="height: 100%;">    <g class="normalpoint" style="" transform="matrix(0, -0.976266, 1.024311, 0, 550.447821, 4038.043466)">    <path id="path3799-2" d="m 2338.8375,1750.3323 c 0,-2.4771 2.0101,-4.485 4.4871,-4.485 2.4793,0 4.4893,2.0079 4.4893,4.485 0,2.4792 -2.01,4.485 -4.4893,4.485 -2.477,0 -4.4871,-2.0058 -4.4871,-4.485" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:rgb(13, 140, 93);stroke-width:2.24465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"></path>    </g>  </g></svg></div><div class="name" spellcheck="false" contenteditable="">Rennes</div><div class="connection">         <button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point" draggable="true"><div class="img" name="pointempty">    <svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">         <g id="g1" transform="matrix(-2.840665102005005, 0, 0, 2.9739670753479004, 6673.122120031134, -5188.936562098089)" style="height: 100%;">    <g class="normalpoint" style="" transform="matrix(0, -0.976266, 1.024311, 0, 550.447821, 4038.043466)">    <path id="path3799-2" d="m 2338.8375,1750.3323 c 0,-2.4771 2.0101,-4.485 4.4871,-4.485 2.4793,0 4.4893,2.0079 4.4893,4.485 0,2.4792 -2.01,4.485 -4.4893,4.485 -2.477,0 -4.4871,-2.0058 -4.4871,-4.485" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:rgb(13, 140, 93);stroke-width:2.24465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"></path>    </g>  </g></svg></div><div class="name" spellcheck="false" contenteditable="">Notre-Dame-des-Champs</div><div class="connection">         <button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point connected" draggable="true"><div class="img" name="pointcorr"><svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">                <g id="g1" transform="matrix(2.8880960941314697, 0, 0, -2.889010906219482, -6588.868701434645, 5073.215858110902)" style="height: 100%;">                  <g class="corrpoint" style="" transform="matrix(-1, 0, 0, -1, 4574.199999, 3500.659995)">                    <path id="path5403-1" d="m 0,0 c 0,-2.074 -1.681,-3.752 -3.752,-3.752 -2.072,0 -3.753,1.678 -3.753,3.752 0,2.071 1.681,3.752 3.753,3.752 C -1.681,3.752 0,2.071 0,0" style="fill: rgb(255, 255, 255); fill-opacity: 1; fill-rule: nonzero; stroke-width: 1.043; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-dasharray: none; stroke-opacity: 1; stroke: rgb(0, 0, 0);" transform="matrix(1.3333333,0,0,-1.3333333,2292.1021,1750.3323)"></path>                  </g>                </g>              </svg></div><div class="name" spellcheck="false" contenteditable="">Montparnasse<div>Bienvenüe</div></div><div class="connection">         <div class="connectionline" type="metro"><span bis="" class="metro connectionpoint line4" value="4" truename="4" style="order: 5;"></span><span bis="" class="metro connectionpoint line13" value="13" truename="13" style="order: 15;"></span><span bis="" class="metro connectionpoint line6" value="6" truename="6" style="order: 7;"></span></div><div class="connectionline" type="Train"><span bis="" class="Train connectionpoint lineN" value="N" truename="N" style="order: 4;"></span></div><button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point" draggable="true"><div class="img" name="pointempty">    <svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">         <g id="g1" transform="matrix(-2.840665102005005, 0, 0, 2.9739670753479004, 6673.122120031134, -5188.936562098089)" style="height: 100%;">    <g class="normalpoint" style="" transform="matrix(0, -0.976266, 1.024311, 0, 550.447821, 4038.043466)">    <path id="path3799-2" d="m 2338.8375,1750.3323 c 0,-2.4771 2.0101,-4.485 4.4871,-4.485 2.4793,0 4.4893,2.0079 4.4893,4.485 0,2.4792 -2.01,4.485 -4.4893,4.485 -2.477,0 -4.4871,-2.0058 -4.4871,-4.485" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:rgb(13, 140, 93);stroke-width:2.24465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"></path>    </g>  </g></svg></div><div class="name" spellcheck="false" contenteditable="">Falguière</div><div class="connection">         <button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point connected" draggable="true"><div class="img" name="pointcorr"><svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">                <g id="g1" transform="matrix(2.8880960941314697, 0, 0, -2.889010906219482, -6588.868701434645, 5073.215858110902)" style="height: 100%;">                  <g class="corrpoint" style="" transform="matrix(-1, 0, 0, -1, 4574.199999, 3500.659995)">                    <path id="path5403-1" d="m 0,0 c 0,-2.074 -1.681,-3.752 -3.752,-3.752 -2.072,0 -3.753,1.678 -3.753,3.752 0,2.071 1.681,3.752 3.753,3.752 C -1.681,3.752 0,2.071 0,0" style="fill: rgb(255, 255, 255); fill-opacity: 1; fill-rule: nonzero; stroke-width: 1.043; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-dasharray: none; stroke-opacity: 1; stroke: rgb(0, 0, 0);" transform="matrix(1.3333333,0,0,-1.3333333,2292.1021,1750.3323)"></path>                  </g>                </g>              </svg></div><div class="name" spellcheck="false" contenteditable="">Pasteur</div><div class="connection">         <div class="connectionline" type="metro"><span bis="" class="metro connectionpoint line6" value="6" truename="6" style="order: 7;"></span></div><button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point" draggable="true"><div class="img" name="pointempty">    <svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">         <g id="g1" transform="matrix(-2.840665102005005, 0, 0, 2.9739670753479004, 6673.122120031134, -5188.936562098089)" style="height: 100%;">    <g class="normalpoint" style="" transform="matrix(0, -0.976266, 1.024311, 0, 550.447821, 4038.043466)">    <path id="path3799-2" d="m 2338.8375,1750.3323 c 0,-2.4771 2.0101,-4.485 4.4871,-4.485 2.4793,0 4.4893,2.0079 4.4893,4.485 0,2.4792 -2.01,4.485 -4.4893,4.485 -2.477,0 -4.4871,-2.0058 -4.4871,-4.485" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:rgb(13, 140, 93);stroke-width:2.24465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"></path>    </g>  </g></svg></div><div class="name" spellcheck="false" contenteditable="">Volontaires</div><div class="connection">         <button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point" draggable="true"><div class="img" name="pointempty">    <svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">         <g id="g1" transform="matrix(-2.840665102005005, 0, 0, 2.9739670753479004, 6673.122120031134, -5188.936562098089)" style="height: 100%;">    <g class="normalpoint" style="" transform="matrix(0, -0.976266, 1.024311, 0, 550.447821, 4038.043466)">    <path id="path3799-2" d="m 2338.8375,1750.3323 c 0,-2.4771 2.0101,-4.485 4.4871,-4.485 2.4793,0 4.4893,2.0079 4.4893,4.485 0,2.4792 -2.01,4.485 -4.4893,4.485 -2.477,0 -4.4871,-2.0058 -4.4871,-4.485" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:rgb(13, 140, 93);stroke-width:2.24465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"></path>    </g>  </g></svg></div><div class="name" spellcheck="false" contenteditable="">Vaugirard</div><div class="connection">         <button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point" draggable="true"><div class="img" name="pointempty">    <svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">         <g id="g1" transform="matrix(-2.840665102005005, 0, 0, 2.9739670753479004, 6673.122120031134, -5188.936562098089)" style="height: 100%;">    <g class="normalpoint" style="" transform="matrix(0, -0.976266, 1.024311, 0, 550.447821, 4038.043466)">    <path id="path3799-2" d="m 2338.8375,1750.3323 c 0,-2.4771 2.0101,-4.485 4.4871,-4.485 2.4793,0 4.4893,2.0079 4.4893,4.485 0,2.4792 -2.01,4.485 -4.4893,4.485 -2.477,0 -4.4871,-2.0058 -4.4871,-4.485" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:rgb(13, 140, 93);stroke-width:2.24465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"></path>    </g>  </g></svg></div><div class="name" spellcheck="false" contenteditable="">Convention</div><div class="connection">         <button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point connected" draggable="true"><div class="img" name="pointcorr"><svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">                <g id="g1" transform="matrix(2.8880960941314697, 0, 0, -2.889010906219482, -6588.868701434645, 5073.215858110902)" style="height: 100%;">                  <g class="corrpoint" style="" transform="matrix(-1, 0, 0, -1, 4574.199999, 3500.659995)">                    <path id="path5403-1" d="m 0,0 c 0,-2.074 -1.681,-3.752 -3.752,-3.752 -2.072,0 -3.753,1.678 -3.753,3.752 0,2.071 1.681,3.752 3.753,3.752 C -1.681,3.752 0,2.071 0,0" style="fill: rgb(255, 255, 255); fill-opacity: 1; fill-rule: nonzero; stroke-width: 1.043; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-dasharray: none; stroke-opacity: 1; stroke: rgb(0, 0, 0);" transform="matrix(1.3333333,0,0,-1.3333333,2292.1021,1750.3323)"></path>                  </g>                </g>              </svg></div><div class="name" spellcheck="false" contenteditable="">Porte de Versailles</div><div class="connection">         <div class="connectionline" type="Tram"><span bis="" class="Tram connectionpoint lineT2" value="t2" truename="t2" style="order: 2; background-image: url(&quot;blocks/connections/trams/t2.svg&quot;);"></span><span bis="" class="Tram connectionpoint lineT3A" value="t3a" truename="t3a" style="order: 3; background-image: url(&quot;blocks/connections/trams/t3A.svg&quot;);"></span></div><button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point" draggable="true"><div class="img" name="pointempty">    <svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">         <g id="g1" transform="matrix(-2.840665102005005, 0, 0, 2.9739670753479004, 6673.122120031134, -5188.936562098089)" style="height: 100%;">    <g class="normalpoint" style="" transform="matrix(0, -0.976266, 1.024311, 0, 550.447821, 4038.043466)">    <path id="path3799-2" d="m 2338.8375,1750.3323 c 0,-2.4771 2.0101,-4.485 4.4871,-4.485 2.4793,0 4.4893,2.0079 4.4893,4.485 0,2.4792 -2.01,4.485 -4.4893,4.485 -2.477,0 -4.4871,-2.0058 -4.4871,-4.485" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:rgb(13, 140, 93);stroke-width:2.24465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"></path>    </g>  </g></svg></div><div class="name" spellcheck="false" contenteditable="">Corentin Celton</div><div class="connection">         <button class="connectionpoint addConnectionLine"></button></div></div><div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div><div class="blockcontainer point" draggable="true"><div class="img" name="pointterminus"><svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">              <g id="g1" transform="matrix(2.892091989517212, 0, 0, -2.8895139694213867, -6598.008349940242, 5074.1045299925245)" style="height: 100%;">                <g class="endpoint" style="" transform="matrix(-1, 0, 0, -1, 4574.199999, 3500.659995)">                  <path id="path5403-1" d="m 0,0 c 0,-2.074 -1.681,-3.752 -3.752,-3.752 -2.072,0 -3.753,1.678 -3.753,3.752 0,2.071 1.681,3.752 3.753,3.752 C -1.681,3.752 0,2.071 0,0" style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.043;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" transform="matrix(1.3333333,0,0,-1.3333333,2292.1021,1750.3323)"></path>                  <path id="path5405-5" d="m 0,0 c 0,-1.066 -0.862,-1.93 -1.928,-1.93 -1.065,0 -1.927,0.864 -1.927,1.93 0,1.063 0.862,1.928 1.927,1.928 C -0.862,1.928 0,1.063 0,0" style="fill:rgb(13, 140, 93);fill-opacity:1;fill-rule:evenodd;stroke:none" transform="matrix(1.3333333,0,0,-1.3333333,2289.6699,1750.331)"></path>                </g>              </g>            </svg>          </div><div class="name terminus" spellcheck="false" contenteditable="">Mairie d'Issy</div><div class="connection">         <button class="connectionpoint addConnectionLine"></button></div></div><div class="emptyfordraggingend"></div>
+                    <div class="emptyfordraggingstart"></div>
 
-
-
-				</div>
-
-
-				
-			</div>
-		</div>
+                    <div class="emptyfordraggingend"></div>
 
 
 
-	</main>
+                </div>
 
-	
 
-	<section class="window" id="settings" style="display: none;">
-		<div class="window-container">
-			<button title="Close" type="button" class="close-button">
+
+            </div>
+        </div>
+
+
+
+    </main>
+
+
+
+    <section class="window" id="settings" style="display: none;">
+        <div class="window-container">
+            <button title="Close" type="button" class="close-button">
 				<img class="close-image-button" src="ui/new/plus.svg" alt="close" />
 			</button>
 
-			<form class="window-form">
-				
-				<fieldset class="window-field">
-					<input type="checkbox" name="transitionsON" checked="true"/>
-					<span>Transitions and animations</span>
-				</fieldset>
-				<fieldset class="window-field">
-					<input type="checkbox" name="autoSave" checked="true"/>
-					<span>AutoSave in window.localStorage</span>
-				</fieldset>
+            <form class="window-form">
+
+                <fieldset class="window-field">
+                    <input type="checkbox" name="transitionsON" checked="true" />
+                    <span>Transitions and animations</span>
+                </fieldset>
+                <fieldset class="window-field">
+                    <input type="checkbox" name="autoSave" checked="true" />
+                    <span>AutoSave in window.localStorage</span>
+                </fieldset>
 
 
 
-				<nav>
-					<button class="window-button" id="settings-save">Save</button>
-					<button class="window-button" id="settings-reset">Reset</button>
-				</nav>
+                <nav>
+                    <button class="window-button" id="settings-save">Save</button>
+                    <button class="window-button" id="settings-reset">Reset</button>
+                </nav>
 
-			</form>
+            </form>
 
-		</div>
-	</section>
+        </div>
+    </section>
 
 
-	<section class="window" id="about">
-		<div class="window-container">
-			<button title="Close" type="button" class="close-button">
+    <section class="window" id="about">
+        <div class="window-container">
+            <button title="Close" type="button" class="close-button">
 				<img class="close-image-button" src="ui/new/plus.svg" alt="close" />
 			</button>
-			
-			<img src="logo2.svg"/>
-			<h2>LiLiBuild</h2>
-			<p>A Lite Line Builder for the Web</p>
-			<pre>V.1.1.4</pre>
 
-			<section id="changelog-box">
-				<hr/>
-				<ul id="changelog">
-					<li>[1.1.4] Fixed a dumb pdf/print issue</li>
-					<li>[1.1.3] Fixed names' newline import</li>
-					<li>[1.1.3] Fixed 3b/7bis save issue</li>
-					<li>[1.1.3] Added complete line 12 as default </li>
-					<li>[1.1.3] Fixed another export issue </li>
-					<li>[1.1.3] Fixed dashed toggling feature </li>
-					<li>[1.1.3] Removed the o-o-b click for lines </li>
-					<li>[1.1.2] Better line's name selection </li>
-					<li>[1.1.2] Added repo's link </li>
-					<li>[1.1.2] Added this changelog </li>
-					<li>[1.1.1] Fixed image exporting issue </li>
-					<li>[1.1.0] Fixed weird JSON bug </li>
-					<li>[1.1.0] Added T14 and transilien V lines (old code :/) </li>
-					<li>[1.1.0] New line selection popup </li>
-					<li>[1.0.1] Removed links </li>
-					<li>[1.0.0] First upload </li>
-				</ul>
-			</section>
+            <img src="logo2.svg" />
+            <h2>LiLiBuild</h2>
+            <p>A Lite Line Builder for the Web</p>
+            <pre>V.1.1.41</pre>
 
-		</div>
-	</section>
+            <section id="changelog-box">
+                <hr/>
+                <ul id="changelog">
+                    <li>[1.1.41] Little changes on default file</li>
+                    <li>[1.1.4] Fixed a dumb pdf/print issue</li>
+                    <li>[1.1.3] Fixed names' newline import</li>
+                    <li>[1.1.3] Fixed 3b/7bis save issue</li>
+                    <li>[1.1.3] Added complete line 12 as default </li>
+                    <li>[1.1.3] Fixed another export issue </li>
+                    <li>[1.1.3] Fixed dashed toggling feature </li>
+                    <li>[1.1.3] Removed the o-o-b click for lines </li>
+                    <li>[1.1.2] Better line's name selection </li>
+                    <li>[1.1.2] Added repo's link </li>
+                    <li>[1.1.2] Added this changelog </li>
+                    <li>[1.1.1] Fixed image exporting issue </li>
+                    <li>[1.1.0] Fixed weird JSON bug </li>
+                    <li>[1.1.0] Added T14 and transilien V lines (old code :/) </li>
+                    <li>[1.1.0] New line selection popup </li>
+                    <li>[1.0.1] Removed links </li>
+                    <li>[1.0.0] First upload </li>
+                </ul>
+            </section>
 
-	<section class="window" id="export-format">
-		<div class="window-container">
-			<button title="Close" type="button" class="close-button">
+        </div>
+    </section>
+
+    <section class="window" id="export-format">
+        <div class="window-container">
+            <button title="Close" type="button" class="close-button">
 				<img class="close-image-button" src="ui/new/plus.svg" alt="close" />
 			</button>
-			
-			<h2>Select export filetype</h2>
-			<p>Select the most suited picture file.</p>
-			
-			<div class="format-options">
-				<button class="format-option" data-format="0">
+
+            <h2>Select export filetype</h2>
+            <p>Select the most suited picture file.</p>
+
+            <div class="format-options">
+                <button class="format-option" data-format="0">
 					<div class="format-icon">🖼️</div>
 					<div class="format-info">
 						<div class="format-name">PNG</div>
 						<div class="format-desc">High quality but can lead to a large filesize</div>
 					</div>
 				</button>
-				
-				<button class="format-option" data-format="1">
+
+                <button class="format-option" data-format="1">
 					<div class="format-icon">📐</div>
 					<div class="format-info">
 						<div class="format-name">SVG</div>
 						<div class="format-desc">Vectorial, fully scalable</div>
 					</div>
 				</button>
-				
-				<button class="format-option" data-format="2">
+
+                <button class="format-option" data-format="2">
 					<div class="format-icon">📷</div>
 					<div class="format-info">
 						<div class="format-name">JPEG</div>
 						<div class="format-desc">Compressed and lightweight, made for sharing</div>
 					</div>
 				</button>
-			</div>
-		</div>
-	</section>
+            </div>
+        </div>
+    </section>
 
 
-	<section class="window" id="custom-prompt-window" style="display: none;">
+    <section class="window" id="custom-prompt-window" style="display: none;">
         <div class="window-container">
             <button title="Close" type="button" class="close-button">
                 <img class="close-image-button" src="ui/new/plus.svg" alt="close" />
             </button>
             <form class="window-form" id="customPromptForm" autocomplete="off" onsubmit="return false;">
                 <h2 id="customPromptTitle">Select a new line</h2>
-				<div id="customPromptChoices" class="window-choice-grid display-all">
-					<button type="button" class="window-choice-btn" data-value="1" ><span class="connectionpoint metro line1" value="1" truename="1"></span></button>
-					<button type="button" class="window-choice-btn" data-value="2" ><span class="connectionpoint metro line2" value="2" truename="2"></span></button>
-					<button type="button" class="window-choice-btn" data-value="3" ><span class="connectionpoint metro line3" value="3" truename="3"></span></button>
-					<button type="button" class="window-choice-btn" data-value="3B" ><span value="3B" truename="3 &hairsp;&hairsp;&hairsp;" class="connectionpoint metro line3B" bis="bis"></span></button>
-					<button type="button" class="window-choice-btn" data-value="4" ><span class="connectionpoint metro line4" value="4" truename="4"></span></button>
-					<button type="button" class="window-choice-btn" data-value="5" ><span class="connectionpoint metro line5" value="5" truename="5"></span></button>
-					<button type="button" class="window-choice-btn" data-value="6" ><span class="connectionpoint metro line6" value="6" truename="6"></span></button>
-					<button type="button" class="window-choice-btn" data-value="7" ><span class="connectionpoint metro line7" value="7" truename="7"></span></button>
-					<button type="button" class="window-choice-btn" data-value="7B" ><span value="7B" truename="7 &hairsp;&hairsp;&hairsp;" class="connectionpoint metro line7B" bis="bis"></span></button>
-					<button type="button" class="window-choice-btn" data-value="8" ><span class="connectionpoint metro line8" value="8" truename="8"></span></button>
-					<button type="button" class="window-choice-btn" data-value="9" ><span class="connectionpoint metro line9" value="9" truename="9"></span></button>
-					<button type="button" class="window-choice-btn" data-value="10" ><span class="connectionpoint metro line10" value="10" truename="10"></span></button>
-					<button type="button" class="window-choice-btn" data-value="11" ><span class="connectionpoint metro line11" value="11" truename="11"></span></button>
-					<button type="button" class="window-choice-btn" data-value="12" ><span class="connectionpoint metro line12" value="12" truename="12"></span></button>
-					<button type="button" class="window-choice-btn" data-value="13" ><span class="connectionpoint metro line13" value="13" truename="13"></span></button>
-					<button type="button" class="window-choice-btn" data-value="14" ><span class="connectionpoint metro line14" value="14" truename="14"></span></button>
-					<button type="button" class="window-choice-btn" data-value="15" ><span class="connectionpoint metro line15" value="15" truename="15"></span></button>
-					<button type="button" class="window-choice-btn" data-value="16" ><span class="connectionpoint metro line16" value="16" truename="16"></span></button>
-					<button type="button" class="window-choice-btn" data-value="17" ><span class="connectionpoint metro line17" value="17" truename="17"></span></button>
-					<button type="button" class="window-choice-btn" data-value="18" ><span class="connectionpoint metro line18" value="18" truename="18"></span></button>
-					<button type="button" class="window-choice-btn" data-value="19" ><span class="connectionpoint metro line19" value="19" truename="19"></span></button>
-					<button type="button" class="window-choice-btn" data-value="A" ><span class="connectionpoint RER lineA" value="A" truename="A"></span></button>
-					<button type="button" class="window-choice-btn" data-value="B" ><span class="connectionpoint RER lineB" value="B" truename="B"></span></button>
-					<button type="button" class="window-choice-btn" data-value="C" ><span class="connectionpoint RER lineC" value="C" truename="C"></span></button>
-					<button type="button" class="window-choice-btn" data-value="D" ><span class="connectionpoint RER lineD" value="D" truename="D"></span></button>
-					<button type="button" class="window-choice-btn" data-value="E" ><span class="connectionpoint RER lineE" value="E" truename="E"></span></button>
-					<button type="button" class="window-choice-btn" data-value="H" ><span class="connectionpoint Train lineH" value="H" truename="H"></span></button>
-					<button type="button" class="window-choice-btn" data-value="J" ><span class="connectionpoint Train lineJ" value="J" truename="J"></span></button>
-					<button type="button" class="window-choice-btn" data-value="K" ><span class="connectionpoint Train lineK" value="K" truename="K"></span></button>
-					<button type="button" class="window-choice-btn" data-value="L" ><span class="connectionpoint Train lineL" value="L" truename="L"></span></button>
-					<button type="button" class="window-choice-btn" data-value="N" ><span class="connectionpoint Train lineN" value="N" truename="N"></span></button>
-					<button type="button" class="window-choice-btn" data-value="P" ><span class="connectionpoint Train lineP" value="P" truename="P"></span></button>
-					<button type="button" class="window-choice-btn" data-value="R" ><span class="connectionpoint Train lineR" value="R" truename="R"></span></button>
-					<button type="button" class="window-choice-btn" data-value="U" ><span class="connectionpoint Train lineU" value="U" truename="U"></span></button>
-					<button type="button" class="window-choice-btn" data-value="V" ><span class="connectionpoint Train lineV" value="V" truename="V"></span></button>
-					<button type="button" class="window-choice-btn" data-value="T1"><img src="blocks/connections/trams/t1.svg" alt="T1"></button>
-					<button type="button" class="window-choice-btn" data-value="T2"><img src="blocks/connections/trams/t2.svg" alt="T2"></button>
-					<button type="button" class="window-choice-btn" data-value="T3A"><img src="blocks/connections/trams/t3A.svg" alt="T3A"></button>
-					<button type="button" class="window-choice-btn" data-value="T3B"><img src="blocks/connections/trams/t3B.svg" alt="T3B"></button>
-					<button type="button" class="window-choice-btn" data-value="T4"><img src="blocks/connections/trams/t4.svg" alt="T4"></button>
-					<button type="button" class="window-choice-btn" data-value="T5"><img src="blocks/connections/trams/t5.svg" alt="T5"></button>
-					<button type="button" class="window-choice-btn" data-value="T6"><img src="blocks/connections/trams/t6.svg" alt="T6"></button>
-					<button type="button" class="window-choice-btn" data-value="T7"><img src="blocks/connections/trams/t7.svg" alt="T7"></button>
-					<button type="button" class="window-choice-btn" data-value="T8"><img src="blocks/connections/trams/t8.svg" alt="T8"></button>
-					<button type="button" class="window-choice-btn" data-value="T9"><img src="blocks/connections/trams/t9.svg" alt="T9"></button>
-					<button type="button" class="window-choice-btn" data-value="T10"><img src="blocks/connections/trams/t10.svg" alt="T10"></button>
-					<button type="button" class="window-choice-btn" data-value="T11"><img src="blocks/connections/trams/t11.svg" alt="T11"></button>
-					<button type="button" class="window-choice-btn" data-value="T12"><img src="blocks/connections/trams/t12.svg" alt="T12"></button>
-					<button type="button" class="window-choice-btn" data-value="T13"><img src="blocks/connections/trams/t13.svg" alt="T13"></button>
-					<button type="button" class="window-choice-btn" data-value="T14"><img src="blocks/connections/trams/t14.svg" alt="T14"></button>
-				</div>
-			</form>
+                <div id="customPromptChoices" class="window-choice-grid display-all">
+                    <button type="button" class="window-choice-btn" data-value="1"><span class="connectionpoint metro line1" value="1" truename="1"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="2"><span class="connectionpoint metro line2" value="2" truename="2"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="3"><span class="connectionpoint metro line3" value="3" truename="3"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="3B"><span value="3B" truename="3 &hairsp;&hairsp;&hairsp;" class="connectionpoint metro line3B" bis="bis"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="4"><span class="connectionpoint metro line4" value="4" truename="4"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="5"><span class="connectionpoint metro line5" value="5" truename="5"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="6"><span class="connectionpoint metro line6" value="6" truename="6"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="7"><span class="connectionpoint metro line7" value="7" truename="7"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="7B"><span value="7B" truename="7 &hairsp;&hairsp;&hairsp;" class="connectionpoint metro line7B" bis="bis"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="8"><span class="connectionpoint metro line8" value="8" truename="8"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="9"><span class="connectionpoint metro line9" value="9" truename="9"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="10"><span class="connectionpoint metro line10" value="10" truename="10"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="11"><span class="connectionpoint metro line11" value="11" truename="11"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="12"><span class="connectionpoint metro line12" value="12" truename="12"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="13"><span class="connectionpoint metro line13" value="13" truename="13"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="14"><span class="connectionpoint metro line14" value="14" truename="14"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="15"><span class="connectionpoint metro line15" value="15" truename="15"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="16"><span class="connectionpoint metro line16" value="16" truename="16"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="17"><span class="connectionpoint metro line17" value="17" truename="17"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="18"><span class="connectionpoint metro line18" value="18" truename="18"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="19"><span class="connectionpoint metro line19" value="19" truename="19"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="A"><span class="connectionpoint RER lineA" value="A" truename="A"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="B"><span class="connectionpoint RER lineB" value="B" truename="B"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="C"><span class="connectionpoint RER lineC" value="C" truename="C"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="D"><span class="connectionpoint RER lineD" value="D" truename="D"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="E"><span class="connectionpoint RER lineE" value="E" truename="E"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="H"><span class="connectionpoint Train lineH" value="H" truename="H"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="J"><span class="connectionpoint Train lineJ" value="J" truename="J"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="K"><span class="connectionpoint Train lineK" value="K" truename="K"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="L"><span class="connectionpoint Train lineL" value="L" truename="L"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="N"><span class="connectionpoint Train lineN" value="N" truename="N"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="P"><span class="connectionpoint Train lineP" value="P" truename="P"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="R"><span class="connectionpoint Train lineR" value="R" truename="R"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="U"><span class="connectionpoint Train lineU" value="U" truename="U"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="V"><span class="connectionpoint Train lineV" value="V" truename="V"></span></button>
+                    <button type="button" class="window-choice-btn" data-value="T1"><img src="blocks/connections/trams/t1.svg" alt="T1"></button>
+                    <button type="button" class="window-choice-btn" data-value="T2"><img src="blocks/connections/trams/t2.svg" alt="T2"></button>
+                    <button type="button" class="window-choice-btn" data-value="T3A"><img src="blocks/connections/trams/t3A.svg" alt="T3A"></button>
+                    <button type="button" class="window-choice-btn" data-value="T3B"><img src="blocks/connections/trams/t3B.svg" alt="T3B"></button>
+                    <button type="button" class="window-choice-btn" data-value="T4"><img src="blocks/connections/trams/t4.svg" alt="T4"></button>
+                    <button type="button" class="window-choice-btn" data-value="T5"><img src="blocks/connections/trams/t5.svg" alt="T5"></button>
+                    <button type="button" class="window-choice-btn" data-value="T6"><img src="blocks/connections/trams/t6.svg" alt="T6"></button>
+                    <button type="button" class="window-choice-btn" data-value="T7"><img src="blocks/connections/trams/t7.svg" alt="T7"></button>
+                    <button type="button" class="window-choice-btn" data-value="T8"><img src="blocks/connections/trams/t8.svg" alt="T8"></button>
+                    <button type="button" class="window-choice-btn" data-value="T9"><img src="blocks/connections/trams/t9.svg" alt="T9"></button>
+                    <button type="button" class="window-choice-btn" data-value="T10"><img src="blocks/connections/trams/t10.svg" alt="T10"></button>
+                    <button type="button" class="window-choice-btn" data-value="T11"><img src="blocks/connections/trams/t11.svg" alt="T11"></button>
+                    <button type="button" class="window-choice-btn" data-value="T12"><img src="blocks/connections/trams/t12.svg" alt="T12"></button>
+                    <button type="button" class="window-choice-btn" data-value="T13"><img src="blocks/connections/trams/t13.svg" alt="T13"></button>
+                    <button type="button" class="window-choice-btn" data-value="T14"><img src="blocks/connections/trams/t14.svg" alt="T14"></button>
+                </div>
+            </form>
         </div>
     </section>
 
 
 
 
-	<img src="" alt="temp hidden picture for printing pdf" id="printmodeonlyImg" />
+    <img src="" alt="temp hidden picture for printing pdf" id="printmodeonlyImg" />
 
-	
-<script type="text/javascript" defer src="svgdata.js">
-</script>
-<script type="text/javascript" defer src="./js/html-to-image.min.js">
-</script>
-<script type="text/javascript" defer src="./js/domtoJSON.js">
-</script>
-<script type="text/javascript" defer src="./js/eventManager.js">
-</script>
-<script type="text/javascript" defer src="./js/main.js">
-</script>
-<script type="text/javascript" defer src="windows.js">
-</script>
-<script type="text/javascript" defer src="./js/smalltools.js"></script>
+
+    <script type="text/javascript" defer src="svgdata.js">
+    </script>
+    <script type="text/javascript" defer src="./js/html-to-image.min.js">
+    </script>
+    <script type="text/javascript" defer src="./js/domtoJSON.js">
+    </script>
+    <script type="text/javascript" defer src="./js/eventManager.js">
+    </script>
+    <script type="text/javascript" defer src="./js/main.js">
+    </script>
+    <script type="text/javascript" defer src="windows.js">
+    </script>
+    <script type="text/javascript" defer src="./js/smalltools.js"></script>
 
 
 
@@ -326,4 +328,5 @@
 
 
 </body>
+
 </html>
