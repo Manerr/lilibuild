@@ -2,84 +2,84 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LiliBuild - Lite Line Builder</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <link rel="stylesheet" type="text/css" href="asidemenubar.css" />
-    <link rel="stylesheet" type="text/css" href="windows.css" />
-    <link rel="stylesheet" type="text/css" href="colors.css" />
-    <link rel="stylesheet" media="print" type="text/css" href="print.css" />
-    <link rel=icon href="favicon.png" sizes="32x32" type="image/png">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>LiliBuild - Lite Line Builder</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="stylesheet" type="text/css" href="asidemenubar.css" />
+	<link rel="stylesheet" type="text/css" href="windows.css" />
+	<link rel="stylesheet" type="text/css" href="colors.css" />
+	<link rel="stylesheet" media="print" type="text/css" href="print.css" />
+	<link rel=icon href="favicon.png" sizes="32x32" type="image/png">
 
 </head>
 
 <body>
 
 
-    <main id="app">
+	<main id="app">
 
 
-        <div id="asidecontainer">
+		<div id="asidecontainer">
 
-            <div class="space"></div>
+			<div class="space"></div>
 
-            <button class="modern switch selected" type="button" title="Manage existing blocks" value="1" id="bPointer" name="editButtonsValue">
+			<button class="modern switch selected" type="button" title="Manage existing blocks" value="1" id="bPointer" name="editButtonsValue">
 				<img src="ui/new/pointer.svg"/>
 			</button>
-            <button class="modern switch" type="button" title="Add path" value="2" id="bEdit" name="editButtonsValue">
+			<button class="modern switch" type="button" title="Add path" value="2" id="bEdit" name="editButtonsValue">
 				<img src="ui/new/edit.svg"/>
 			</button>
-            <button class="modern switch" type="button" title="Add point" value="3" id="bEditPoint" name="editButtonsValue">
+			<button class="modern switch" type="button" title="Add point" value="3" id="bEditPoint" name="editButtonsValue">
 				<img src="ui/new/editpoint.svg"/>
 			</button>
 
-            <button class="modern switch" type="button" title="Delete blocks" value="0" id="bDelete" name="editButtonsValue">
+			<button class="modern switch" type="button" title="Delete blocks" value="0" id="bDelete" name="editButtonsValue">
 				<img src="ui/new/delete.svg"/>
 			</button>
 
-            <div class="space"></div>
+			<div class="space"></div>
 
-            <!--  			<button class="modern" type="button" title="Settings">
+			<!--  			<button class="modern" type="button" title="Settings">
 				<img src="ui/new/settings.svg"/>
 			</button>
  -->
-            <div class="space"></div>
+			<div class="space"></div>
 
-            <button class="modern" type="button" title="Open JSON" id="bOpen">
+			<button class="modern" type="button" title="Open JSON" id="bOpen">
 				<img src="ui/new/open.svg"/>
 			</button>
-            <button class="modern" type="button" title="Save JSON" id="bSave">
+			<button class="modern" type="button" title="Save JSON" id="bSave">
 				<img src="ui/new/download.svg"/>
 			</button>
-            <button class="modern" type="button" title="Export to picture" id="bExport">
+			<button class="modern" type="button" title="Export to picture" id="bExport">
 				<img src="ui/new/picture.svg"/>
 			</button>
 
-            <button class="modern" type="button" title="Print" id="bPrint">
+			<button class="modern" type="button" title="Print" id="bPrint">
 				<img src="ui/new/print.svg"/>
 			</button>
 
-            <button class="modern" type="button" title="Reset" id="bReset">
+			<button class="modern" type="button" title="Reset" id="bReset">
 				<img src="ui/new/reset.svg"/>
 			</button>
 
-            <div class="space"></div>
+			<div class="space"></div>
 
-            <button class="modern" type="button" title="About" id="bInfo">
+			<button class="modern" type="button" title="About" id="bInfo">
 				<img src="ui/new/info.svg"/>
 			</button>
-            <a href="https://github.com/manerr/lilibuild" rel="noopener" target="_blank" class="modern mtop" type="button" title="Github repo" id="bGithub">
-                <img src="ui/new/github.svg" />
-            </a>
+			<a href="https://github.com/manerr/lilibuild" rel="noopener" target="_blank" class="modern mtop" type="button" title="Github repo" id="bGithub">
+				<img src="ui/new/github.svg" />
+			</a>
 
 
-        </div>
+		</div>
 
-        <div class="result">
+		<div class="result">
 
-            <!-- Coming soon -->
-            <!-- 
+			<!-- Coming soon -->
+			<!-- 
 			<section id="options-popup" class="ui">
 				<div id="path-options">
 					<div id="style" class="flex-line">
@@ -102,116 +102,120 @@
 				</div>
 			</section>
  -->
-            <div id="dragtarget">
+			<div id="dragtarget">
 
-                <div class="linename">
-                    <div class="connectionline" type="metro">
-                        <img src="blocks/connections/pointM.svg" class="connectionType">
-                        <span class="metro connectionpoint line12" value="12" truename="12" style="order: 14;"></span>
-                        <button class="addConnection"></button>
-                    </div>
-                </div>
+				<div class="linename">
+					<div class="connectionline" type="metro">
+						<img src="blocks/connections/pointM.svg" class="connectionType">
+						<span class="metro connectionpoint line12" value="12" truename="12" style="order: 14;"></span>
+						<button class="addConnection"></button>
+					</div>
+				</div>
 
-                <div class="allsvgcontainer pad3 pad4 pad2">
+				<div class="allsvgcontainer pad3 pad4 pad2">
 
 
-                    <div class="emptyfordraggingstart"></div>
-
-                    <div class="emptyfordraggingend"></div>
+					<div class="emptyfordraggingstart"></div><div class="emptyfordraggingend"></div>
 
 
 
-                </div>
+				</div>
 
 
 
-            </div>
-        </div>
+			</div>
+		</div>
 
 
 
-    </main>
+	</main>
 
 
 
-    <section class="window" id="settings" style="display: none;">
-        <div class="window-container">
-            <button title="Close" type="button" class="close-button">
+	<section class="window" id="settings" style="display: none;">
+		<div class="window-container">
+			<button title="Close" type="button" class="close-button">
 				<img class="close-image-button" src="ui/new/plus.svg" alt="close" />
 			</button>
 
-            <form class="window-form">
+			<form class="window-form">
 
-                <fieldset class="window-field">
-                    <input type="checkbox" name="transitionsON" checked="true" />
-                    <span>Transitions and animations</span>
-                </fieldset>
-                <fieldset class="window-field">
-                    <input type="checkbox" name="autoSave" checked="true" />
-                    <span>AutoSave in window.localStorage</span>
-                </fieldset>
-
-
-
-                <nav>
-                    <button class="window-button" id="settings-save">Save</button>
-                    <button class="window-button" id="settings-reset">Reset</button>
-                </nav>
-
-            </form>
-
-        </div>
-    </section>
+				<fieldset class="window-field">
+					<input type="checkbox" name="transitionsON" checked="true" />
+					<span>Transitions and animations</span>
+				</fieldset>
+				<fieldset class="window-field">
+					<input type="checkbox" name="autoSave" checked="true" />
+					<span>AutoSave in window.localStorage</span>
+				</fieldset>
 
 
-    <section class="window" id="about">
-        <div class="window-container">
-            <button title="Close" type="button" class="close-button">
+
+				<nav>
+					<button class="window-button" id="settings-save">Save</button>
+					<button class="window-button" id="settings-reset">Reset</button>
+				</nav>
+
+			</form>
+
+		</div>
+	</section>
+
+
+	<section class="window" id="about">
+		<div class="window-container">
+			<button title="Close" type="button" class="close-button">
 				<img class="close-image-button" src="ui/new/plus.svg" alt="close" />
 			</button>
 
-            <img src="logo2.svg" />
-            <h2>LiLiBuild</h2>
-            <p>A Lite Line Builder for the Web</p>
-            <pre>V.1.1.41</pre>
+			<img src="logo2.svg" />
+			<h2>LiLiBuild</h2>
+			<p>A Lite Line Builder for the Web</p>
+			<pre>V.1.1.5</pre>
 
-            <section id="changelog-box">
-                <hr/>
-                <ul id="changelog">
-                    <li>[1.1.41] Little changes on default file</li>
-                    <li>[1.1.4] Fixed a dumb pdf/print issue</li>
-                    <li>[1.1.3] Fixed names' newline import</li>
-                    <li>[1.1.3] Fixed 3b/7bis save issue</li>
-                    <li>[1.1.3] Added complete line 12 as default </li>
-                    <li>[1.1.3] Fixed another export issue </li>
-                    <li>[1.1.3] Fixed dashed toggling feature </li>
-                    <li>[1.1.3] Removed the o-o-b click for lines </li>
-                    <li>[1.1.2] Better line's name selection </li>
-                    <li>[1.1.2] Added repo's link </li>
-                    <li>[1.1.2] Added this changelog </li>
-                    <li>[1.1.1] Fixed image exporting issue </li>
-                    <li>[1.1.0] Fixed weird JSON bug </li>
-                    <li>[1.1.0] Added T14 and transilien V lines (old code :/) </li>
-                    <li>[1.1.0] New line selection popup </li>
-                    <li>[1.0.1] Removed links </li>
-                    <li>[1.0.0] First upload </li>
-                </ul>
-            </section>
+			<section id="changelog-box">
+				<hr/>
+				<ul id="changelog">
+					<li>[1.1.5] Various style changes, including separator between connections type and fonts</li>
+					<li>[1.1.5] Added the Parisine font</li>
+					<li>[1.1.5] Added a transparent gradient when the line's ends without a station - cool feature</li>
+					<li>[1.1.41] Little changes on default file</li>
+					<li>[1.1.4] Fixed a dumb pdf/print issue</li>
+					<li>[1.1.3] Fixed names' newline import</li>
+					<li>[1.1.3] Fixed 3b/7bis save issue</li>
+					<li>[1.1.3] Added complete line 12 as default </li>
+					<li>[1.1.3] Fixed another export issue </li>
+					<li>[1.1.3] Fixed dashed toggling feature </li>
+					<li>[1.1.3] Removed the o-o-b click for lines </li>
+					<li>[1.1.2] Better line's name selection </li>
+					<li>[1.1.2] Added repo's link </li>
+					<li>[1.1.2] Added this changelog </li>
+					<li>[1.1.1] Fixed image exporting issue </li>
+					<li>[1.1.0] Fixed weird JSON bug </li>
+					<li>[1.1.0] Added T14 and transilien V lines (old code :/) </li>
+					<li>[1.1.0] New line selection popup </li>
+					<li>[1.0.1] Removed links </li>
+					<li>[1.0.0] First upload </li>
+				</ul>
+			</section>
+			<p id="rights">All rights reserved &copy; Paul T_ 2025<br>
+				Parisine&copy; font is a RATP&copy;'s registered asset.<br>
+				If you wanna help/donate, just listen music on <a href="https://youtube.com/@manerr">youtube.com/@manerr</a>
+			</p>
+		</div>
+	</section>
 
-        </div>
-    </section>
-
-    <section class="window" id="export-format">
-        <div class="window-container">
-            <button title="Close" type="button" class="close-button">
+	<section class="window" id="export-format">
+		<div class="window-container">
+			<button title="Close" type="button" class="close-button">
 				<img class="close-image-button" src="ui/new/plus.svg" alt="close" />
 			</button>
 
-            <h2>Select export filetype</h2>
-            <p>Select the most suited picture file.</p>
+			<h2>Select export filetype</h2>
+			<p>Select the most suited picture file.</p>
 
-            <div class="format-options">
-                <button class="format-option" data-format="0">
+			<div class="format-options">
+				<button class="format-option" data-format="0">
 					<div class="format-icon">🖼️</div>
 					<div class="format-info">
 						<div class="format-name">PNG</div>
@@ -219,7 +223,7 @@
 					</div>
 				</button>
 
-                <button class="format-option" data-format="1">
+				<button class="format-option" data-format="1">
 					<div class="format-icon">📐</div>
 					<div class="format-info">
 						<div class="format-name">SVG</div>
@@ -227,100 +231,113 @@
 					</div>
 				</button>
 
-                <button class="format-option" data-format="2">
+				<button class="format-option" data-format="2">
 					<div class="format-icon">📷</div>
 					<div class="format-info">
 						<div class="format-name">JPEG</div>
 						<div class="format-desc">Compressed and lightweight, made for sharing</div>
 					</div>
 				</button>
-            </div>
-        </div>
-    </section>
+			</div>
+		</div>
+	</section>
 
 
-    <section class="window" id="custom-prompt-window" style="display: none;">
-        <div class="window-container">
-            <button title="Close" type="button" class="close-button">
-                <img class="close-image-button" src="ui/new/plus.svg" alt="close" />
-            </button>
-            <form class="window-form" id="customPromptForm" autocomplete="off" onsubmit="return false;">
-                <h2 id="customPromptTitle">Select a new line</h2>
-                <div id="customPromptChoices" class="window-choice-grid display-all">
-                    <button type="button" class="window-choice-btn" data-value="1"><span class="connectionpoint metro line1" value="1" truename="1"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="2"><span class="connectionpoint metro line2" value="2" truename="2"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="3"><span class="connectionpoint metro line3" value="3" truename="3"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="3B"><span value="3B" truename="3 &hairsp;&hairsp;&hairsp;" class="connectionpoint metro line3B" bis="bis"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="4"><span class="connectionpoint metro line4" value="4" truename="4"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="5"><span class="connectionpoint metro line5" value="5" truename="5"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="6"><span class="connectionpoint metro line6" value="6" truename="6"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="7"><span class="connectionpoint metro line7" value="7" truename="7"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="7B"><span value="7B" truename="7 &hairsp;&hairsp;&hairsp;" class="connectionpoint metro line7B" bis="bis"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="8"><span class="connectionpoint metro line8" value="8" truename="8"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="9"><span class="connectionpoint metro line9" value="9" truename="9"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="10"><span class="connectionpoint metro line10" value="10" truename="10"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="11"><span class="connectionpoint metro line11" value="11" truename="11"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="12"><span class="connectionpoint metro line12" value="12" truename="12"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="13"><span class="connectionpoint metro line13" value="13" truename="13"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="14"><span class="connectionpoint metro line14" value="14" truename="14"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="15"><span class="connectionpoint metro line15" value="15" truename="15"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="16"><span class="connectionpoint metro line16" value="16" truename="16"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="17"><span class="connectionpoint metro line17" value="17" truename="17"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="18"><span class="connectionpoint metro line18" value="18" truename="18"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="19"><span class="connectionpoint metro line19" value="19" truename="19"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="A"><span class="connectionpoint RER lineA" value="A" truename="A"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="B"><span class="connectionpoint RER lineB" value="B" truename="B"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="C"><span class="connectionpoint RER lineC" value="C" truename="C"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="D"><span class="connectionpoint RER lineD" value="D" truename="D"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="E"><span class="connectionpoint RER lineE" value="E" truename="E"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="H"><span class="connectionpoint Train lineH" value="H" truename="H"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="J"><span class="connectionpoint Train lineJ" value="J" truename="J"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="K"><span class="connectionpoint Train lineK" value="K" truename="K"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="L"><span class="connectionpoint Train lineL" value="L" truename="L"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="N"><span class="connectionpoint Train lineN" value="N" truename="N"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="P"><span class="connectionpoint Train lineP" value="P" truename="P"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="R"><span class="connectionpoint Train lineR" value="R" truename="R"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="U"><span class="connectionpoint Train lineU" value="U" truename="U"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="V"><span class="connectionpoint Train lineV" value="V" truename="V"></span></button>
-                    <button type="button" class="window-choice-btn" data-value="T1"><img src="blocks/connections/trams/t1.svg" alt="T1"></button>
-                    <button type="button" class="window-choice-btn" data-value="T2"><img src="blocks/connections/trams/t2.svg" alt="T2"></button>
-                    <button type="button" class="window-choice-btn" data-value="T3A"><img src="blocks/connections/trams/t3A.svg" alt="T3A"></button>
-                    <button type="button" class="window-choice-btn" data-value="T3B"><img src="blocks/connections/trams/t3B.svg" alt="T3B"></button>
-                    <button type="button" class="window-choice-btn" data-value="T4"><img src="blocks/connections/trams/t4.svg" alt="T4"></button>
-                    <button type="button" class="window-choice-btn" data-value="T5"><img src="blocks/connections/trams/t5.svg" alt="T5"></button>
-                    <button type="button" class="window-choice-btn" data-value="T6"><img src="blocks/connections/trams/t6.svg" alt="T6"></button>
-                    <button type="button" class="window-choice-btn" data-value="T7"><img src="blocks/connections/trams/t7.svg" alt="T7"></button>
-                    <button type="button" class="window-choice-btn" data-value="T8"><img src="blocks/connections/trams/t8.svg" alt="T8"></button>
-                    <button type="button" class="window-choice-btn" data-value="T9"><img src="blocks/connections/trams/t9.svg" alt="T9"></button>
-                    <button type="button" class="window-choice-btn" data-value="T10"><img src="blocks/connections/trams/t10.svg" alt="T10"></button>
-                    <button type="button" class="window-choice-btn" data-value="T11"><img src="blocks/connections/trams/t11.svg" alt="T11"></button>
-                    <button type="button" class="window-choice-btn" data-value="T12"><img src="blocks/connections/trams/t12.svg" alt="T12"></button>
-                    <button type="button" class="window-choice-btn" data-value="T13"><img src="blocks/connections/trams/t13.svg" alt="T13"></button>
-                    <button type="button" class="window-choice-btn" data-value="T14"><img src="blocks/connections/trams/t14.svg" alt="T14"></button>
-                </div>
-            </form>
-        </div>
-    </section>
+	<section class="window" id="custom-prompt-window" style="display: none;">
+		<div class="window-container">
+			<button title="Close" type="button" class="close-button">
+				<img class="close-image-button" src="ui/new/plus.svg" alt="close" />
+			</button>
+			<form class="window-form" id="customPromptForm" autocomplete="off" onsubmit="return false;">
+				<h2 id="customPromptTitle">Select a new line</h2>
+				<div id="customPromptChoices" class="window-choice-grid display-all">
+					<button type="button" class="window-choice-btn" data-value="1"><span class="connectionpoint metro line1" value="1" truename="1"></span></button>
+					<button type="button" class="window-choice-btn" data-value="2"><span class="connectionpoint metro line2" value="2" truename="2"></span></button>
+					<button type="button" class="window-choice-btn" data-value="3"><span class="connectionpoint metro line3" value="3" truename="3"></span></button>
+					<button type="button" class="window-choice-btn" data-value="3B"><span value="3B" truename="3 &hairsp;&hairsp;&hairsp;" class="connectionpoint metro line3B" bis="bis"></span></button>
+					<button type="button" class="window-choice-btn" data-value="4"><span class="connectionpoint metro line4" value="4" truename="4"></span></button>
+					<button type="button" class="window-choice-btn" data-value="5"><span class="connectionpoint metro line5" value="5" truename="5"></span></button>
+					<button type="button" class="window-choice-btn" data-value="6"><span class="connectionpoint metro line6" value="6" truename="6"></span></button>
+					<button type="button" class="window-choice-btn" data-value="7"><span class="connectionpoint metro line7" value="7" truename="7"></span></button>
+					<button type="button" class="window-choice-btn" data-value="7B"><span value="7B" truename="7 &hairsp;&hairsp;&hairsp;" class="connectionpoint metro line7B" bis="bis"></span></button>
+					<button type="button" class="window-choice-btn" data-value="8"><span class="connectionpoint metro line8" value="8" truename="8"></span></button>
+					<button type="button" class="window-choice-btn" data-value="9"><span class="connectionpoint metro line9" value="9" truename="9"></span></button>
+					<button type="button" class="window-choice-btn" data-value="10"><span class="connectionpoint metro line10" value="10" truename="10"></span></button>
+					<button type="button" class="window-choice-btn" data-value="11"><span class="connectionpoint metro line11" value="11" truename="11"></span></button>
+					<button type="button" class="window-choice-btn" data-value="12"><span class="connectionpoint metro line12" value="12" truename="12"></span></button>
+					<button type="button" class="window-choice-btn" data-value="13"><span class="connectionpoint metro line13" value="13" truename="13"></span></button>
+					<button type="button" class="window-choice-btn" data-value="14"><span class="connectionpoint metro line14" value="14" truename="14"></span></button>
+					<button type="button" class="window-choice-btn" data-value="15"><span class="connectionpoint metro line15" value="15" truename="15"></span></button>
+					<button type="button" class="window-choice-btn" data-value="16"><span class="connectionpoint metro line16" value="16" truename="16"></span></button>
+					<button type="button" class="window-choice-btn" data-value="17"><span class="connectionpoint metro line17" value="17" truename="17"></span></button>
+					<button type="button" class="window-choice-btn" data-value="18"><span class="connectionpoint metro line18" value="18" truename="18"></span></button>
+					<button type="button" class="window-choice-btn" data-value="19"><span class="connectionpoint metro line19" value="19" truename="19"></span></button>
+					<button type="button" class="window-choice-btn" data-value="A"><span class="connectionpoint RER lineA" value="A" truename="A"></span></button>
+					<button type="button" class="window-choice-btn" data-value="B"><span class="connectionpoint RER lineB" value="B" truename="B"></span></button>
+					<button type="button" class="window-choice-btn" data-value="C"><span class="connectionpoint RER lineC" value="C" truename="C"></span></button>
+					<button type="button" class="window-choice-btn" data-value="D"><span class="connectionpoint RER lineD" value="D" truename="D"></span></button>
+					<button type="button" class="window-choice-btn" data-value="E"><span class="connectionpoint RER lineE" value="E" truename="E"></span></button>
+					<button type="button" class="window-choice-btn" data-value="H"><span class="connectionpoint Train lineH" value="H" truename="H"></span></button>
+					<button type="button" class="window-choice-btn" data-value="J"><span class="connectionpoint Train lineJ" value="J" truename="J"></span></button>
+					<button type="button" class="window-choice-btn" data-value="K"><span class="connectionpoint Train lineK" value="K" truename="K"></span></button>
+					<button type="button" class="window-choice-btn" data-value="L"><span class="connectionpoint Train lineL" value="L" truename="L"></span></button>
+					<button type="button" class="window-choice-btn" data-value="N"><span class="connectionpoint Train lineN" value="N" truename="N"></span></button>
+					<button type="button" class="window-choice-btn" data-value="P"><span class="connectionpoint Train lineP" value="P" truename="P"></span></button>
+					<button type="button" class="window-choice-btn" data-value="R"><span class="connectionpoint Train lineR" value="R" truename="R"></span></button>
+					<button type="button" class="window-choice-btn" data-value="U"><span class="connectionpoint Train lineU" value="U" truename="U"></span></button>
+					<button type="button" class="window-choice-btn" data-value="V"><span class="connectionpoint Train lineV" value="V" truename="V"></span></button>
+					<button type="button" class="window-choice-btn" data-value="T1"><img src="blocks/connections/trams/t1.svg" alt="T1"></button>
+					<button type="button" class="window-choice-btn" data-value="T2"><img src="blocks/connections/trams/t2.svg" alt="T2"></button>
+					<button type="button" class="window-choice-btn" data-value="T3A"><img src="blocks/connections/trams/t3A.svg" alt="T3A"></button>
+					<button type="button" class="window-choice-btn" data-value="T3B"><img src="blocks/connections/trams/t3B.svg" alt="T3B"></button>
+					<button type="button" class="window-choice-btn" data-value="T4"><img src="blocks/connections/trams/t4.svg" alt="T4"></button>
+					<button type="button" class="window-choice-btn" data-value="T5"><img src="blocks/connections/trams/t5.svg" alt="T5"></button>
+					<button type="button" class="window-choice-btn" data-value="T6"><img src="blocks/connections/trams/t6.svg" alt="T6"></button>
+					<button type="button" class="window-choice-btn" data-value="T7"><img src="blocks/connections/trams/t7.svg" alt="T7"></button>
+					<button type="button" class="window-choice-btn" data-value="T8"><img src="blocks/connections/trams/t8.svg" alt="T8"></button>
+					<button type="button" class="window-choice-btn" data-value="T9"><img src="blocks/connections/trams/t9.svg" alt="T9"></button>
+					<button type="button" class="window-choice-btn" data-value="T10"><img src="blocks/connections/trams/t10.svg" alt="T10"></button>
+					<button type="button" class="window-choice-btn" data-value="T11"><img src="blocks/connections/trams/t11.svg" alt="T11"></button>
+					<button type="button" class="window-choice-btn" data-value="T12"><img src="blocks/connections/trams/t12.svg" alt="T12"></button>
+					<button type="button" class="window-choice-btn" data-value="T13"><img src="blocks/connections/trams/t13.svg" alt="T13"></button>
+					<button type="button" class="window-choice-btn" data-value="T14"><img src="blocks/connections/trams/t14.svg" alt="T14"></button>
+				</div>
+
+				<div id="custom-line-fields">
+				<h2 class="customPromptTitle">Custom line</h2>
+				<div id="custom-line">
+					<div class="custom-switch-group">
+						<button type="button" class="custom-switch selected" data-type="metro">Métro</button>
+						<button type="button" class="custom-switch" data-type="RER">RER</button>
+						<button type="button" class="custom-switch" data-type="Train">Train</button>
+					</div>
+					<input type="text" id="custom-line-input" placeholder="Numéro ou lettre" maxlength="4" />
+					<button type="button" id="validate-custom-btn">Valider</button>
+				</div>
+				</div>
+			</form>
+		</div>
+	</section>
 
 
 
 
-    <img src="" alt="temp hidden picture for printing pdf" id="printmodeonlyImg" />
+	<img src="" alt="temp hidden picture for printing pdf" id="printmodeonlyImg" />
 
 
-    <script type="text/javascript" defer src="svgdata.js">
-    </script>
-    <script type="text/javascript" defer src="./js/html-to-image.min.js">
-    </script>
-    <script type="text/javascript" defer src="./js/domtoJSON.js">
-    </script>
-    <script type="text/javascript" defer src="./js/eventManager.js">
-    </script>
-    <script type="text/javascript" defer src="./js/main.js">
-    </script>
-    <script type="text/javascript" defer src="windows.js">
-    </script>
-    <script type="text/javascript" defer src="./js/smalltools.js"></script>
+	<script type="text/javascript" defer src="svgdata.js">
+	</script>
+	<script type="text/javascript" defer src="./js/html-to-image.min.js">
+	</script>
+	<script type="text/javascript" defer src="./js/domtoJSON.js">
+	</script>
+	<script type="text/javascript" defer src="./js/eventManager.js">
+	</script>
+	<script type="text/javascript" defer src="./js/main.js">
+	</script>
+	<script type="text/javascript" defer src="windows.js">
+	</script>
+	<script type="text/javascript" defer src="./js/smalltools.js"></script>
 
 
 

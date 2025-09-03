@@ -17,12 +17,10 @@ class Exporter {
 
 
         let lineColor = getComputedStyle(lineNumber).color;
-
-
-        // console.log(lineColor);
-        // if it's actually not the tram-color tricks -> I use color when using trams
-        if (lineColor == "transparent" || lineColor == "rgb(35, 31, 32)" || lineColor == "rgb(255, 255, 255)") { lineColor = getComputedStyle(lineNumber).backgroundColor; }
-
+        if (lineColor == "transparent" || lineColor == "rgb(35, 31, 32)"){ lineColor = getComputedStyle(lineNumber).backgroundColor; }
+        // else if ( lineColor == "rgb(255, 255, 255)"){
+            lineColor = this.parent.line.color;
+        // }
 
         lineNumber = lineNumber.getAttribute("value");
 
@@ -124,12 +122,14 @@ class Exporter {
             lineNumberBox.className = object.line[0] + " connectionpoint line" + lineNumber.toUpperCase();
         }
 
-
-
+        // console.log(lineColor);
 
         // Set the full line's color 
-        GLOBALColor = lineColor;
-        this.parent.ChangeSVGColors(GLOBALColor);
+        this.parent.line.color = lineColor;
+        this.parent.ChangeSVGColors(this.parent.line.color);
+
+        //fixed a bug when importing metro/train on an existing tram line
+        lineNumberBox.style.backgroundImage = "none";
 
         // Set the line type's icon
         switch (lineType) {
@@ -160,7 +160,9 @@ class Exporter {
 
         // Now it get back all the parts (here the blocks)
 
-        for (var i = 0; i < object.parts.length; i++) {
+        let len = object.parts.length;
+
+        for (var i = 0; i < len; i++) {
             let DOMpart = object.parts[i];
             let toAdd;
 
@@ -175,10 +177,12 @@ class Exporter {
                 this.parent.output.insertBefore(toAdd, this.parent.lastZone);
                 toAdd.className = "blockcontainer line";
                 toAdd.draggable = "true";
-                if (DOMpart === "block-dashed") {
-                    toAdd.classList.add("dashed");
-                }
-                toAdd.innerHTML = pathHTML.replace(this.parent.DEFAULT_COLOR, GLOBALColor);
+                if (DOMpart === "block-dashed") toAdd.classList.add("dashed");
+                //Gradient for start
+                if(i == 0) toAdd.classList.add("startgradient");
+                else if(i == len - 1) toAdd.classList.add("endgradient");
+
+                toAdd.innerHTML = pathHTML.replace(this.parent.DEFAULT_COLOR, this.parent.line.color);
                 toAdd = null;
 
 
@@ -198,7 +202,7 @@ class Exporter {
 
                 toAdd.className = "blockcontainer point";
                 toAdd.draggable = "true";
-                toAdd.innerHTML = pointHTML.replace(this.parent.DEFAULT_COLOR, GLOBALColor);
+                toAdd.innerHTML = pointHTML.replace(this.parent.DEFAULT_COLOR, this.parent.line.color);
                 toAdd.children[1].innerText = DOMpart.name;
 
                 let newPointImg = toAdd.children[0];
@@ -210,15 +214,15 @@ class Exporter {
 
                 if (pointType == "pointterminus") {
                     newPointName.className = "name terminus";
-                    newPointImg.innerHTML = pointTerminus.replace(this.parent.DEFAULT_COLOR, GLOBALColor)
+                    newPointImg.innerHTML = pointTerminus.replace(this.parent.DEFAULT_COLOR, this.parent.line.color)
                 }
                 if (pointType == "pointempty") {
                     newPointName.className = "name";
-                    newPointImg.innerHTML = pointEmpty.replace(this.parent.DEFAULT_COLOR, GLOBALColor)
+                    newPointImg.innerHTML = pointEmpty.replace(this.parent.DEFAULT_COLOR, this.parent.line.color)
                 }
                 if (pointType == "pointcorr") {
                     newPointName.className = "name";
-                    newPointImg.innerHTML = pointCorr.replace(this.parent.DEFAULT_COLOR, GLOBALColor)
+                    newPointImg.innerHTML = pointCorr.replace(this.parent.DEFAULT_COLOR, this.parent.line.color)
                 }
 
 

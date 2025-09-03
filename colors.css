@@ -1,224 +1,167 @@
-
-
-
-
-
-
-
-
-
-
-
-
-.line1{
+.line1 {
 	background-color: #FFCE00;
-	color: #231F20;	
-}
-
-
-.line2{
-	background-color: #196ABD;	
-}
-
-
-.line3{
-	background-color: #8F9828;	
-}
-.line3B{
-	background-color: #8FDADE;
-	color: #231F20;
-	
-}
-.line4{
-	background-color: #BB2E9E;	
-}
-.line5{
-	background-color: #F57F3A;	
 	color: #231F20;
 }
-.line6{
-	background-color: #75CD89;	
-	color: #231F20;
+.line2 {
+	background-color: #196ABD;
 }
-.line7{
-	background-color: #F688B5;	
-	color: #231F20;
-}
-.line7B{
-	background-color: #75CD89;	
-	color: #231F20;
-}
-.line8{
-	background-color: #C797D2;	
-	color: #231F20;
-}
-.line9{
-	background-color: #C4CC15;	
-	color: #231F20;
-}
-.line10{
-	background-color: #DBAC27;	
-	color: #231F20;
-}
-.line11{
-	background-color: #845D2E;	
-}
-.line12{
-	background-color: #0D8C5D;	
-}
-.line13{
-	background-color: #8FDADE;	
-	color: #231F20;
-}
-.line14{
-	background-color: #5E2590;	
-}
-.line15{
-	background-color: #B90C47;	
-}
-.line16{
-	background-color: #F59EB3;
-	color: #231F20;
-}
-.line17{
-	background-color: #CDC92A;
-	color: #231F20;
-}
-.line18{
-	background-color: #0EB397;
-}
-
-
-
-
-
-
-
-.lineA{
-	background-color: #ED1A2A;
-}
-
-.lineB{
-	background-color: #588ED2;
-}
-
-.lineC{
-	background-color: #FCC907;
-	color: #231F20;
-}
-
-.lineD{
-	background-color: #0D8C5D;
-}
-
-.lineE{
-	background-color: #BB2E9E;
-}
-
-
-
-.lineH{
-	background-color: #845D2E;
-}
-
-.lineJ{
-	background-color: #C4CC15;
-	color: #231F20;
-}
-
-.lineK{
+.line3 {
 	background-color: #8F9828;
 }
-
-.lineL{
-	background-color: #C797D2;
+.line3B {
+	background-color: #8FDADE;
 	color: #231F20;
 }
-
-.lineN{
-	background-color: #2EB793;
+.line4 {
+	background-color: #BB2E9E;
 }
-
-.lineP{
+.line5 {
 	background-color: #F57F3A;
 	color: #231F20;
 }
-
-.lineR{
+.line6 {
+	background-color: #75CD89;
+	color: #231F20;
+}
+.line7 {
 	background-color: #F688B5;
 	color: #231F20;
 }
-
-.lineU{
-	background-color: #B90C47;	
+.line7B {
+	background-color: #75CD89;
+	color: #231F20;
 }
-
-.lineV{
+.line8 {
+	background-color: #C797D2;
+	color: #231F20;
+}
+.line9 {
+	background-color: #C4CC15;
+	color: #231F20;
+}
+.line10 {
+	background-color: #DBAC27;
+	color: #231F20;
+}
+.line11 {
+	background-color: #845D2E;
+}
+.line12 {
+	background-color: #0D8C5D;
+}
+.line13 {
+	background-color: #8FDADE;
+	color: #231F20;
+}
+.line14 {
+	background-color: #5E2590;
+}
+.line15 {
+	background-color: #B90C47;
+}
+.line16 {
+	background-color: #F59EB3;
+	color: #231F20;
+}
+.line17 {
+	background-color: #CDC92A;
+	color: #231F20;
+}
+.line18 {
+	background-color: #0EB397;
+}
+.lineA {
+	background-color: #ED1A2A;
+}
+.lineB {
+	background-color: #588ED2;
+}
+.lineC {
+	background-color: #FCC907;
+	color: #231F20;
+}
+.lineD {
+	background-color: #0D8C5D;
+}
+.lineE {
+	background-color: #BB2E9E;
+}
+.lineH {
+	background-color: #845D2E;
+}
+.lineJ {
+	background-color: #C4CC15;
+	color: #231F20;
+}
+.lineK {
+	background-color: #8F9828;
+}
+.lineL {
+	background-color: #C797D2;
+	color: #231F20;
+}
+.lineN {
+	background-color: #2EB793;
+}
+.lineP {
+	background-color: #F57F3A;
+	color: #231F20;
+}
+.lineR {
+	background-color: #F688B5;
+	color: #231F20;
+}
+.lineU {
+	background-color: #B90C47;
+}
+.lineV {
 	background-color: #9F9825;
 }
 
-
-
-
-
 /* I use color instead of background-color because the svg has transparent part.... try to delete it n' you'll have weird issue */
 
-.lineT1{
-	color: #196ABD !important;	
+.lineT1 {
+	color: #196ABD !important;
 }
-
-.lineT2{
-	color: #BB2E9E !important;	
+.lineT2 {
+	color: #BB2E9E !important;
 }
-
-.lineT3A{
-	color: #F57F3A !important;	
+.lineT3A {
+	color: #F57F3A !important;
 }
-
-.lineT3B{
-	color: #0D8C5D !important;	
+.lineT3B {
+	color: #0D8C5D !important;
 }
-
-.lineT4{
-	color: #DBAC27 !important;	
+.lineT4 {
+	color: #DBAC27 !important;
 }
-
-.lineT5{
-	color: #5E2590 !important;	
+.lineT5 {
+	color: #5E2590 !important;
 }
-
-.lineT6{
-	color: #ED1A2A !important;	
+.lineT6 {
+	color: #ED1A2A !important;
 }
-
-.lineT7{
-	color: #845D2E !important;	
+.lineT7 {
+	color: #845D2E !important;
 }
-
-.lineT8{
-	color: #8F9828 !important;	
+.lineT8 {
+	color: #8F9828 !important;
 }
-
-.lineT9{
-	color: #588ED2 !important;	
+.lineT9 {
+	color: #588ED2 !important;
 }
-
-.lineT10{
-	color: #8F9828 !important;	
+.lineT10 {
+	color: #8F9828 !important;
 }
-
-.lineT11{
-	color: #F57F3A !important;	
+.lineT11 {
+	color: #F57F3A !important;
 }
-
-.lineT12{
-	color: #B90C47 !important;	
+.lineT12 {
+	color: #B90C47 !important;
 }
-
-.lineT13{
-	color: #845D2E !important;	
+.lineT13 {
+	color: #845D2E !important;
 }
-
-.lineT14{
-	color: #00A88F !important;	
+.lineT14 {
+	color: #00A88F !important;
 }
