@@ -156,7 +156,8 @@ div.terminus {
 	margin-right: auto !important;
 }
 
-.deleting .img:hover {
+.deleting .blockcontainer.line:hover,
+.deleting .point .img:hover {
 	box-shadow: 0px 0px .2rem #777;
 	outline: .3rem solid #222;
 	border-radius: .3rem;
