@@ -297,6 +297,7 @@ button.connectionpoint::before{
 }
 
 .connectionpoint::after {
+	font-weight: 100;
 	font-family: "parisine", sans-serif;
 	height: 100%;
 	width: 100%;
