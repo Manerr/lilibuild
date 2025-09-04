@@ -312,6 +312,7 @@ class EventManager {
 						} else {
 							// Some choices (e.g., Tram icons) may not have a span with classes
 							if ((line + "").toUpperCase().startsWith("T")) transportType = "Tram";
+							if(!this.output.classList.contains("tramstyle")) this.output.classList.add("tramstyle");
 						}
 					}
 					if (!transportType) {
@@ -321,6 +322,9 @@ class EventManager {
 						else if (upper.length === 1 && trainLines.includes(upper)) transportType = "Train";
 						else if (upper.startsWith("T")) transportType = "Tram";
 						else transportType = "metro";
+						
+
+
 					}
 
 					const lineTypeBox = lineNameContainer.children[0];
@@ -339,6 +343,8 @@ class EventManager {
 							lineTypeBox.src = "blocks/connections/pointTram.svg";
 							break;
 					}
+
+					if(transportType != "Tram" && this.output.classList.contains("tramstyle")) this.output.classList.remove("tramstyle");
 
 					if (line && lineNameContainer.querySelector(".line" + line) == null) {
 						let newConnection = document.createElement("span");

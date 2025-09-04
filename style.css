@@ -507,8 +507,10 @@ body .InsertBeforeit {
 	mask-image: linear-gradient(-90deg, white 25%, #00000000 96%);
 }
 
-
-
+.tramstyle .line .img{
+	mask-image: linear-gradient(white 38%, #aaaaaa 38%, #aaaaaa 62%, white 62%);
+    mask-mode: luminance;
+}
 
 body .img svg g.endpoint :first-child {
 	stroke: black !important;
