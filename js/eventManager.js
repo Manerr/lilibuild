@@ -12,14 +12,12 @@ class EventManager {
 		this.bindButtonEvents();
 		this.bindWindowEvents();
 		this.bindFileEvents();
-		this.bindExportEvents();
 		this.bindConnectionsEvents();
 		this.bindCustomLineEvents();
 	}
 
 	// Bind custom line UI events - soon
 	bindCustomLineEvents() {
-
 
 	}
 
@@ -171,32 +169,6 @@ class EventManager {
 			}
 		};
 	}
-
-	// Clean up all event listeners
-	// cleanup(){
-	//     // Remove all event listeners
-	//     this.app.outputdragzone.onclick = null;
-	//     this.app.outputdragzone.ondragend = null;
-	//     this.app.output.ondragend = null;
-	//     this.app.output.onmouseleave = null;
-	//     this.app.output.onmousemove = null;
-
-	//     this.app.asideContainer.onclick = null;
-	//     this.app.resetButton.onclick = null;
-	//     this.app.saveButton.onclick = null;
-	//     this.app.openButton.onclick = null;
-	//     this.app.exportButton.onclick = null;
-	//     this.app.infoButton.onclick = null;
-	//     this.app.printButton.onclick = null;
-
-	//     window.onload = null;
-	//     window.onbeforeunload = null;
-
-	//     this.app.fileInput.oninput = null;
-
-	//     // Clear bound methods cache
-	//     this.boundMethods.clear();
-	// }
 
 	manageClick(event) {
 

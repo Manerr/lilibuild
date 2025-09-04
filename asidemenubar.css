@@ -1,24 +1,15 @@
-#asidecontainer{
+#asidecontainer {
 	display: flex;
 	flex-direction: column;
-	
 	background-color: #0d0e18;
-/*	width: 4rem;*/
-	/* border-top-right-radius: .5rem; */
-	/* border-bottom-right-radius: .5rem; */
 	overflow-x: hidden;
-	/*will-change: width;
-	align-items: flex-start;
-	transition: .5s width;*/
 }
 
-
-.mtop{
+.mtop {
 	margin-top: auto !important;
 }
 
-
-.modern{
+.modern {
 	position: relative;
 	cursor: pointer;
 	appearance: none;
@@ -29,7 +20,7 @@
 	width: 2.5rem;
 	height: 2.5rem;
 	margin: .3rem .4rem;
-	font-family: "dmsans";
+	font-family: "parisine";
 	border-radius: .26rem;
 	padding: 0px;
 	display: flex;
@@ -42,46 +33,41 @@
 	user-select: none;
 }
 
-.modern img{
+.modern img {
 	pointer-events: none;
 	width: 1.3rem;
-	margin:auto;
+	margin: auto;
 }
 
-/*a.modern{
-	padding: 0;
-}*/
-
-
-.modern:hover{
+.modern:hover {
 	transition: .3s transform;
 	transform: scale(1.1);
 	border-color: #aaa;
 }
 
-.modern:active{
+.modern:active {
 	border-width: 2px;
 }
 
 
 
-.selected{
+.selected {
 	background-color: white;
 }
 
-.selected img{
+.selected img {
 	filter: invert(100%);
 }
 
 
-.space{
+.space {
 	height: 2rem;
 }
 
-#bDelete.selected{
+#bDelete.selected {
 	background-color: #ff2323;
 }
 
-#bDelete img{
+#bDelete img {
 	filter: none !important;
 }

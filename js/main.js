@@ -47,9 +47,7 @@ class App {
 
 		this.dragIndicator = document.getElementById("indicator");
 
-		// line
 		this.typeToInsert = 0;
-
 
 		this.firstZone = document.querySelector(".emptyfordraggingstart");
 
@@ -61,15 +59,9 @@ class App {
 
 
 		// new buttons
-
 		this.asideContainer = document.getElementById("asidecontainer");
 
-		let pointerButton = document.getElementById("bPointer");
-		let editPathButton = document.getElementById("bEdit");
-		let editPointButton = document.getElementById("bEditPath");
-		let deleteButton = document.getElementById("bDelete");
 
-		// let importButton = document.getElementById("bImport");
 		this.exportButton = document.getElementById("bExport");
 		this.printButton = document.getElementById("bPrint");
 
@@ -87,66 +79,23 @@ class App {
 		this.custompromptWindow = document.getElementById('custom-prompt-window');
 
 		// custom line div
-
 		this.customColorInput = document.getElementById("custom-color");
 
 		// hidden zone for printing a clean thing
-
 		this.hiddenPrintZone = document.getElementById("printmodeonlyImg");
 
 		// hidden input for files
-
 		this.fileInput = document.createElement('input');
 
-		// element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-
 		this.fileInput.setAttribute('type', 'file');
-
 		this.fileInput.style.display = 'none';
-
 		this.fileInput.setAttribute('accept', '.json');
 
 		document.body.appendChild(this.fileInput);
 
+
 		this.eventManager = new EventManager(this);
-		this.eventManager.onCustomLineSelected = function(data) {
-			// Ajout effectif de la ligne custom dans la grille
-			const { type, value } = data;
-			// Vérification simple
-			if (!type || !value) return;
 
-			// Cherche le container des connexions
-			let lineNameZone = document.querySelector('.linename');
-			if (!lineNameZone) return;
-
-			// Crée le container de la nouvelle ligne
-			let connectionLine = document.createElement('div');
-			connectionLine.className = 'connectionline';
-			connectionLine.setAttribute('type', type);
-
-			// Ajoute l'icône selon le type
-			let icon = document.createElement('img');
-			if (type === 'metro') icon.src = 'blocks/connections/pointM.svg';
-			else if (type === 'RER') icon.src = 'blocks/connections/pointRER.svg';
-			else if (type === 'Train') icon.src = 'blocks/connections/pointTrain.svg';
-			icon.className = 'connectionType';
-			connectionLine.appendChild(icon);
-
-			// Ajoute le span de la ligne
-			let span = document.createElement('span');
-			span.className = type + ' connectionpoint line' + value;
-			span.setAttribute('value', value);
-			span.setAttribute('truename', value);
-			connectionLine.appendChild(span);
-
-			// Ajoute le bouton addConnection
-			let addBtn = document.createElement('button');
-			addBtn.className = 'addConnection';
-			connectionLine.appendChild(addBtn);
-
-			// Ajoute la nouvelle ligne dans la grille
-			lineNameZone.appendChild(connectionLine);
-		};
 		this.eventManager.initializeEvents();
 
 		this.saveLocalStorage = this.saveLocalStorage.bind(this);
@@ -183,101 +132,9 @@ class App {
 	}
 
 
-
-
-
-
-
-	addDraggingEvent(event) {
-
-
-		this.outputdragzone.ondragend = whenDeDragging;
-
-		let elements = this.outputdragzone.querySelectorAll(".block img");
-		for (let i = elements.length - 1; i >= 0; i--) {
-			let element = elements[i];
-			element.draggable = false;
-
-		}
-	}
-
-
-
 	whenDeDragging(event) {
-		// console.log(event.srcElement,event.target)
-		// dragPathBool = false;
-		// dragPointBool = false;
+		return ;
 	}
-
-	whenDragging(event) {
-
-		// console.log(deleting == CURRENTLY_DOING);
-		if (CURRENTLY_DOING == 0) { return false; }
-		// changecolors();
-
-		let isemptyzone = false;
-
-		// let target = event.fromElement;
-		let element = event.srcElement;
-
-
-		let target = event.toElement;
-		let name = target.className;
-
-
-		if (name == "name" || name == "img") {
-			target = target.parentElement;
-		}
-
-
-		if (target.className.indexOf("block") == -1 && !isemptyzone) {
-			return
-		}
-
-
-		// console.log(target);
-
-		let cursorX = event.clientX;
-
-		let subWidth = target.clientWidth / 2;
-
-		let objectX = target.getBoundingClientRect().left;
-
-
-		if (cursorX > (objectX + subWidth)) {
-			insertingBefore = false;
-			console.log("On right!");
-		} else {
-			insertingBefore = true;
-			console.log("On left!");
-		}
-
-
-
-		if (name == "emptyfordraggingstart") {
-			insertingBefore = false;
-		} else if (name == "emptyfordraggingend") {
-			insertingBefore = true;
-		}
-
-
-	}
-
-
-	//Has to be completely rewritten (like the full app lol)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	removeIndicator(event = null) {
 		// return
@@ -285,19 +142,6 @@ class App {
 			this.output.removeChild(this.trueIndicator);
 		}
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	// basically a drawing function
 	outputOnmousemove(event) {
@@ -362,15 +206,12 @@ class App {
 
 		}
 
-		// console.log("dragged");
-
 
 	}
 
 
 
 	outputOnclick(event) {
-		// console.log("ok!");
 		if (CURRENTLY_DOING == deleting || CURRENTLY_DOING == pointing) {
 			return;
 		}
@@ -417,7 +258,6 @@ class App {
 			const part = elementstoScan[i];
 			
 			if(part.classList[0] == "blockcontainer" && part.classList[1] == "line") {
-			// console.log(part,i,len);
 				if(i == 1) part.classList.add("startgradient");
             	else if(i == len - 2)part.classList.add("endgradient");
 				else{
@@ -550,9 +390,7 @@ class App {
 		try {
 			let fileBlob;
 
-			// Si c'est un data URL (commence par "data:"), on le traite différemment
 			if (content.startsWith('data:')) {
-				// Pour les data URLs, on peut les utiliser directement
 				let tempLink = document.createElement("a");
 				tempLink.download = filename;
 				tempLink.href = content;
@@ -560,7 +398,6 @@ class App {
 				return;
 			}
 
-			// Pour les autres types de contenu
 			fileBlob = new Blob([content], { type: type });
 
 			let tempLink = document.createElement("a");
@@ -572,7 +409,7 @@ class App {
 
 
 			URL.revokeObjectURL(tempLink.href);
-			// document.removeChild(tempLink);
+			document.removeChild(tempLink);
 		} catch (error) {
 			console.error("Error downloading file:", error);
 		}
@@ -609,13 +446,12 @@ class App {
 	// Output drag end handler
 	outputOndragend(event) {
 		let element = event.srcElement;
-		let deltaX = (event.pageX - LAST_X);
+		// let deltaX = (event.pageX - LAST_X);
 		let nodes = this.output.children;
 		let currentX = event.offsetX;
 		let beforeElement = null;
 		let afterElement = null;
 
-		// element.offsetLeft - this.output.offsetLeft
 		currentX = event.clientX;
 
 		for (let i = nodes.length - 1; i >= 0; i--) {
@@ -677,8 +513,6 @@ class App {
 			choicesGrid.onclick = function(event) {
 				let origine = event.target;
 				let value = origine.dataset.value;
-
-
 
 
 				if (value) {
