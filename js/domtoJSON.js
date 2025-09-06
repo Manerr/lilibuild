@@ -11,20 +11,17 @@ class Exporter {
 
 	// Should work, designed only for the line's container
 	exportJSON() {
-		let lineNameContainer = this.parent.outputdragzone.querySelector(".linename .connectionline");
-
-		let lineNumber = lineNameContainer.children[1];
-
-
-		let lineColor = getComputedStyle(lineNumber).color;
-		if (lineColor == "transparent" || lineColor == "rgb(35, 31, 32)"){ lineColor = getComputedStyle(lineNumber).backgroundColor; }
+		// let lineNameContainer = this.parent.outputdragzone.querySelector(".linename .connectionline");
+		// let lineNumber = lineNameContainer.children[1];
+		// let lineColor = getComputedStyle(lineNumber).color;
+		// if (lineColor == "transparent" || lineColor == "rgb(35, 31, 32)"){ lineColor = getComputedStyle(lineNumber).backgroundColor; }
 		// else if ( lineColor == "rgb(255, 255, 255)"){
-			lineColor = this.parent.line.color;
 		// }
 
-		lineNumber = lineNumber.getAttribute("value");
-
-		let lineType = lineNameContainer.getAttribute("type")
+		let lineColor = this.parent.line.color;
+		let lineNumber = this.parent.line.name;
+		let lineType = this.parent.line.type;
+		let custom = this.parent.line.custom;
 
 
 		let parts = []
@@ -78,7 +75,7 @@ class Exporter {
 		}
 
 		// return JSON.stringify(
-		return { "line": [lineType, lineNumber, lineColor], "parts": parts }
+		return { "line": [lineType, lineNumber, lineColor,custom], "parts": parts }
 
 
 		// );
@@ -100,10 +97,14 @@ class Exporter {
 		let lineNumber = object.line[1];
 		// console.log(lineNumber);
 		let lineColor = object.line[2];
+		let lineIsCustom = object.line[3];
 		// console.log(lineColor);
 
+		
 
 		lineNumberBox.setAttribute("value", lineNumber);
+
+		this.parent.line.name = lineNumber;
 
 
 		// Line number
@@ -122,10 +123,15 @@ class Exporter {
 			lineNumberBox.className = object.line[0] + " connectionpoint line" + lineNumber.toUpperCase();
 		}
 
-		// console.log(lineColor);
 
-		// Set the full line's color 
+
+		if(lineIsCustom){
+			lineNumberBox.style.backgroundColor = lineColor;
+		}
+
 		this.parent.line.color = lineColor;
+		this.parent.line.type = lineType;
+		this.parent.line.custom = lineIsCustom;
 		this.parent.ChangeSVGColors(this.parent.line.color);
 
 		//fixed a bug when importing metro/train on an existing tram line

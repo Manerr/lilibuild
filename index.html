@@ -171,11 +171,12 @@
 			<img src="logo2.svg" />
 			<h2>LiLiBuild</h2>
 			<p>A Lite Line Builder for the Web</p>
-			<pre>V.1.1.63</pre>
+			<pre>V.1.2.0</pre>
 
 			<section id="changelog-box">
 				<hr/>
 				<ul id="changelog">
+					<li>[1.2.0] Added a way to create custom lines (not trams for now :/)</li>
 					<li>[1.1.63] Fixed the hovering "contour" when deleting on trams drawing</li>
 					<li>[1.1.62] Fixed the fading for trams too :D</li>
 					<li>[1.1.61] Fixed font-weigth wtfff</li>
@@ -311,13 +312,14 @@
 				<div id="custom-line-fields">
 				<h2 class="customPromptTitle">Custom line</h2>
 				<div id="custom-line">
-					<div class="custom-switch-group">
-						<button type="button" class="custom-switch selected" data-type="metro">Métro</button>
-						<button type="button" class="custom-switch" data-type="RER">RER</button>
-						<button type="button" class="custom-switch" data-type="Train">Train</button>
+					<div id="custom-switch-group">
+						<button type="button" class="window-choice-btn custom-switch selected" data-type="metro" id="metro-custom-line-toggle"></button>
+						<button type="button" class="window-choice-btn custom-switch" data-type="RER" id="rer-custom-line-toggle"></button>
+						<button type="button" class="window-choice-btn custom-switch" data-type="Train" id="train-custom-line-toggle"></button>
 					</div>
-					<input type="text" id="custom-line-input" placeholder="Numéro ou lettre" maxlength="4" />
-					<button type="button" id="validate-custom-btn">Valider</button>
+					<input type="text" id="custom-line-input" class="window-choice-btn" placeholder="Numéro ou lettre" maxlength="4" />
+					<div id="custom-color-container" class="window-choice-btn"><input type="color" id="custom-color"/></div>
+					<button type="button" id="custom-line-validate" class="window-choice-btn custom-switch"></button>
 				</div>
 				</div>
 			</form>

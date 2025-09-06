@@ -348,8 +348,13 @@
 }
 
 #custom-line-fields {
-	display: none;
+	display: none
 }
+
+.showcustomfield #custom-line-fields {
+	display: block;
+}
+
 
 /* Custom line selector UI */
 #custom-line {
@@ -358,10 +363,10 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	gap: 1.2rem;
+	gap: .5rem;
 }
 
-.custom-switch-group {
+#custom-switch-group {
 	display: flex;
 	flex-direction: row;
 	gap: 0.5rem;
@@ -369,44 +374,45 @@
 }
 
 .custom-switch {
-	border-radius: 1rem/50%;
-	padding: 0.3rem 1.2rem;
-	font-size: 1.1rem;
-	border: 2px solid #444;
-	background-color: #222;
-	color: #fafafa;
 	cursor: pointer;
-	box-shadow: 0 0 .2rem #252525;
-	transition: border-color 0.2s, background 0.2s;
+	background-image: url("./blocks/connections/pointM.svg");
+	background-size: 2rem 2rem;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
-.custom-switch.selected,
-.custom-switch:focus,
-.custom-switch:hover {
-	border-color: #fcc907;
-	background-color: #fcc90722;
-	color: #222;
+#rer-custom-line-toggle{
+	background-image: url("./blocks/connections/pointRER.svg");
+}
+
+#train-custom-line-toggle{
+	background-image: url("./blocks/connections/pointTrain.svg");
+}
+
+#custom-color-container{
+	overflow: hidden;
+}
+
+/* Small trick to remove the contour :p */
+#custom-color{
+	transform: scale(4);
+	pointer-events: all;
+}
+
+#custom-line *{
+	pointer-events: all !important;
+    box-sizing: border-box;
 }
 
 #custom-line input[type="text"] {
 	font-size: 1.1rem;
 	padding: .4rem;
-	border-radius: .3rem;
-	border: 1px solid #444;
 	background: #222;
+	text-align: center;
 	color: #fafafa;
-	width: 7rem;
 	box-sizing: border-box;
 }
 
-#validate-custom-btn {
-	margin-left: 1rem;
-	border-radius: 1rem/50%;
-	padding: .3rem 1rem;
-	font-size: 1.1rem;
-	border: none;
-	background-color: #444;
-	color: white;
-	cursor: pointer;
-	box-shadow: 0 0 .2rem #252525;
+#custom-line-validate{
+	background-image: url("./ui/right.svg");
 }

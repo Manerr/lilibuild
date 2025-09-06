@@ -26,7 +26,9 @@ class App {
 		this.line = new Object();
 
 		this.line.color = "rgb(13, 140, 93)";
-
+		this.line.name = "12";
+		this.line.type = "metro";
+		this.line.custom = false;
 
 		this.exporter = new Exporter(this);
 
@@ -61,7 +63,6 @@ class App {
 		// new buttons
 		this.asideContainer = document.getElementById("asidecontainer");
 
-
 		this.exportButton = document.getElementById("bExport");
 		this.printButton = document.getElementById("bPrint");
 
@@ -78,8 +79,15 @@ class App {
 		this.choicesGrid = document.getElementById("customPromptChoices");
 		this.custompromptWindow = document.getElementById('custom-prompt-window');
 
+
 		// custom line div
 		this.customColorInput = document.getElementById("custom-color");
+		this.customLineText = document.getElementById("custom-line-input");
+
+		this.customLineTypeGroup = document.getElementById("custom-switch-group");
+
+		this.customLineValidate = document.getElementById("custom-line-validate");
+
 
 		// hidden zone for printing a clean thing
 		this.hiddenPrintZone = document.getElementById("printmodeonlyImg");
@@ -114,6 +122,7 @@ class App {
 	}
 
 	ChangeSVGColors(value = null) {
+		
 		if (!value) { this.line.color = "#0f0"; } else { this.line.color = value; }
 
 		let svgs = document.querySelectorAll(".img svg path");
@@ -125,9 +134,8 @@ class App {
 		for (let i = svgs.length - 1; i >= 0; i--) {
 			svgs[i].style.fill = this.line.color;
 		}
-		// console.log(line.color);
 		if (this.customColorInput) {
-			this.customColorInput.value = rgbStringToHex(this.line.color);
+			this.customColorInput.value = this.line.color[0] == "#" ? this.line.color : rgbStringToHex(this.line.color);
 		}
 	}
 
@@ -167,7 +175,6 @@ class App {
 		if (className == "allsvgcontainer" || nodeName == "SPAN" || nodeName == "img") {
 			return
 		}
-		// console.log(target);
 
 		let bbox = target.getBoundingClientRect();
 
@@ -503,7 +510,17 @@ class App {
 
 	showCustomPrompt = function({ title = "Select a line", type = "metro" } = {}) {
 
+
 		return new Promise((resolve) => {
+
+			
+
+			if(arguments[0].showCustomLine){
+				
+				document.body.classList.add("showcustomfield");
+			}
+			else if(document.body.classList.contains("showcustomfield")) document.body.classList.remove("showcustomfield");
+			
 
 			const promptWindow = document.getElementById("custom-prompt-window");
 			const titleElem = document.getElementById("customPromptTitle");
@@ -524,6 +541,8 @@ class App {
 
 			}
 
+			
+
 
 			promptWindow.style.display = "flex";
 
@@ -540,8 +559,19 @@ class App {
 				promptWindow.style.display = "none";
 				resolve(null);
 			};
+
+			this.customLineValidate.onclick = function(){
+				this.line.color = this.customColorInput.value;
+				this.line.name = this.customLineText.value;
+				this.line.type = this.customLineTypeGroup.querySelector(".selected").getAttribute("data-type");
+				this.ChangeSVGColors(this.line.color);
+				promptWindow.style.display = "none";		
+				resolve("custom");
+			}.bind(this);
+
+
 		});
-	};
+	}.bind(this);
 
 
 }

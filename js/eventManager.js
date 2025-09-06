@@ -19,6 +19,8 @@ class EventManager {
 	// Bind custom line UI events - soon
 	bindCustomLineEvents() {
 
+		this.app.customLineTypeGroup.onclick = this.manageCustomLineGroupEvent.bind(this.app);
+
 	}
 
 	// Bind output/drag zone events
@@ -100,16 +102,16 @@ class EventManager {
 		window.onload = this.onloadEvent.bind(this);
 
 		// Auto-save interval wtf is this not always working 
-		setInterval(function() {
+		setInterval(function () {
 			this.app.saveLocalStorage();
 		}.bind(this), 1000 * SAVE_INTERVAL)
 
-		document.onbeforeunload = function() {
+		document.onbeforeunload = function () {
 			// console.log(this.app);
 			this.app.saveLocalStorage();
 		}.bind(this);
 
-		window.onpagehide = function(e) {
+		window.onpagehide = function (e) {
 			// console.log(this.app);
 			this.app.saveLocalStorage();
 
@@ -125,10 +127,10 @@ class EventManager {
 	}
 
 	bindFileEvents() {
-		this.app.fileInput.oninput = function() {
+		this.app.fileInput.oninput = function () {
 			let file = this.app.fileInput.files[0];
-			if(!file) return;
-			file.text().then(function(result) {
+			if (!file) return;
+			file.text().then(function (result) {
 				this.app.exporter.importJSON(JSON.parse(result));
 			}.bind(this));
 		}.bind(this);
@@ -217,8 +219,8 @@ class EventManager {
 			}
 
 
-			if (trueCurrentElement.className != "blockcontainer line this.insertbeforeit") { 
-				this.output.removeChild(trueCurrentElement); 
+			if (trueCurrentElement.className != "blockcontainer line this.insertbeforeit") {
+				this.output.removeChild(trueCurrentElement);
 				this.manageGradients();
 			}
 			if (this.output.childElementCount == 1) {
@@ -230,7 +232,7 @@ class EventManager {
 
 		if (SWITCHING_CONNECTION && currentType && currentType.indexOf("point") != -1 && currentElement.type != "submit") {
 
-			console.log(currentType);
+			// console.log(currentType);
 
 			if (trueCurrentElement.className == "blockcontainer point") {
 				trueCurrentElement.className = "blockcontainer point connected";
@@ -270,10 +272,16 @@ class EventManager {
 					currentElement.parentElement.setAttribute("type", "metro");
 					currentElement.src = "blocks/connections/pointM.svg";
 				}
+
+			//linename editing
 			} else if (currentElement.className == "addConnection" || (currentElement.className.indexOf("connectionpoint") != -1 && currentElement.className.indexOf("addConnection") == -1 && currentElement.parentElement.parentElement.className == "linename")) {
+				console.log("linename only")
 				const lineNameContainer = currentElement.parentElement; // .connectionline in .linename
-				this.showCustomPrompt({ type: "connection" }).then((line) => {
+				this.showCustomPrompt({ type: "connection", showCustomLine: true }).then((line) => {
+
 					if (!line) return;
+
+					// console.log(this.line);
 
 					let transportType;
 					let clickedButton = this.choicesGrid.querySelector(`[data-value="${line}"]`);
@@ -284,9 +292,12 @@ class EventManager {
 						} else {
 							// Some choices (e.g., Tram icons) may not have a span with classes
 							if ((line + "").toUpperCase().startsWith("T")) transportType = "Tram";
-							if(!this.output.classList.contains("tramstyle")) this.output.classList.add("tramstyle");
+							if (!this.output.classList.contains("tramstyle")) this.output.classList.add("tramstyle");
 						}
 					}
+
+
+
 					if (!transportType) {
 						const upper = (line + "").toUpperCase();
 						const trainLines = ["H", "J", "K", "L", "N", "P", "R", "U", "V"];
@@ -294,10 +305,21 @@ class EventManager {
 						else if (upper.length === 1 && trainLines.includes(upper)) transportType = "Train";
 						else if (upper.startsWith("T")) transportType = "Tram";
 						else transportType = "metro";
-						
+
 
 
 					}
+
+					let customLine = false;
+					this.line.custom = false;
+
+					if (line == "custom") {
+						transportType = this.line.type;
+						line = this.line.name;
+						customLine = true;
+						this.line.custom = true;
+					}
+
 
 					const lineTypeBox = lineNameContainer.children[0];
 					lineNameContainer.setAttribute("type", transportType);
@@ -316,57 +338,73 @@ class EventManager {
 							break;
 					}
 
-					if(transportType != "Tram" && this.output.classList.contains("tramstyle")) this.output.classList.remove("tramstyle");
+					if (transportType != "Tram" && this.output.classList.contains("tramstyle")) this.output.classList.remove("tramstyle");
 
-					if (line && lineNameContainer.querySelector(".line" + line) == null) {
+					//Temporary edits for custom lines
+					if (line) { //&& lineNameContainer.querySelector(".line" + line) == null) {
+
+
 						let newConnection = document.createElement("span");
 						newConnection.setAttribute("bis", "");
-						newConnection.className = transportType + " connectionpoint line" + line;
+						
+						if(!customLine) newConnection.className = transportType + " connectionpoint line" + line;
+						else newConnection.className = transportType + " connectionpoint";
+
 						newConnection.setAttribute("value", line);
 						newConnection.setAttribute("truename", line);
 						let numericOrder;
 						// Case metro
 						if (transportType == "metro") {
 							let numericOrder = parseInt(line);
-							if (numericOrder == null || !numericOrder || numericOrder < 1 || numericOrder > 19) {
-								return;
-							}
-							if (line == "3B" || numericOrder > 3) {
-								numericOrder += 1;
+
+							//Temporary edits for custom lines
+							// if(!customLine){
+								// if (numericOrder == null || !numericOrder || numericOrder < 1 || numericOrder > 19) {
+									// return;
+								// }
+							// }	
+							// if (line == "3B" || numericOrder > 3) {
+								// numericOrder += 1;
 								if (line == "3B") {
 									newConnection.setAttribute("bis", "bis");
 									newConnection.setAttribute("truename", "3    ");
 								}
-							}
-							if (line == "7B" || numericOrder > 8) {
-								numericOrder += 1;
+							// }
+							// if (line == "7B" || numericOrder > 8) {
+							// 	// numericOrder += 1;
 								if (line == "7B") {
 									newConnection.setAttribute("bis", "bis");
 									newConnection.setAttribute("truename", "7   ");
 								}
-							}
-							newConnection.style.order = numericOrder;
+							// }
+							// if(numericOrder>0) newConnection.style.order = numericOrder;
 						}
 						// Case RER
 						else if (transportType == "RER") {
-							if (line.length != 1 || line.charCodeAt(0) < 65 || line.charCodeAt(0) > 69) { return; }
-							numericOrder = line.charCodeAt(0);
-							newConnection.style.order = numericOrder - 65;
+							//Temporary edits for custom lines
+							if(!customLine) if (line.length != 1 || line.charCodeAt(0) < 65 || line.charCodeAt(0) > 69) { return; }
+							// numericOrder = line.charCodeAt(0);
+							// newConnection.style.order = numericOrder - 65;
 						}
 						// Case Train 
 						else if (transportType == "Train") {
 							let lines = ["H", "J", "K", "L", "N", "P", "R", "U", "V"];
-							if (line.length != 1 || lines.indexOf(line) == -1) { return; }
-							numericOrder = lines.indexOf(line)
-							newConnection.style.order = numericOrder;
+							//Temporary edits for custom lines
+							if(!customLine){
+								if (line.length != 1 || lines.indexOf(line) == -1) { return; }
+								// numericOrder = lines.indexOf(line)
+								// newConnection.style.order = numericOrder;
+							}
+
 						} else if (transportType == "Tram") {
 							let tramNum = line.replace(/^[Tt]/, "");
-							let numericOrder = parseInt(tramNum);
-							if (!numericOrder || numericOrder < 1 || numericOrder > 14) { return; }
-							if (tramNum == "3B" || tramNum > 3) {
-								numericOrder++;
-							}
-							newConnection.style.order = numericOrder;
+							// let numericOrder = parseInt(tramNum);
+							// if (!numericOrder || numericOrder < 1 || numericOrder > 14) { return; }
+							// if (tramNum == "3B" || tramNum > 3) {
+							// 	numericOrder++;
+							// }
+							
+							// newConnection.style.order = numericOrder;
 							// Normalize tram value to lowercase (tX)
 							newConnection.setAttribute("value", line.toLowerCase());
 							newConnection.setAttribute("truename", line.toLowerCase());
@@ -383,28 +421,43 @@ class EventManager {
 						}
 						lineNameContainer.insertBefore(newConnection, currentElement);
 						let newColor = getComputedStyle(newConnection).color;
-						if (newColor == "transparent" || newColor == "rgb(35, 31, 32)" || newColor == "rgb(255, 255, 255)") {
-							newColor = getComputedStyle(newConnection).backgroundColor;
+						if (!customLine) {
+
+							if (newColor == "transparent" || newColor == "rgb(35, 31, 32)" || newColor == "rgb(255, 255, 255)") {
+								newColor = getComputedStyle(newConnection).backgroundColor;
+							}
+							if (lineNameContainer.parentElement.className == "linename" && currentElement.className.indexOf("addConnection") != -1) {
+								this.ChangeSVGColors(newColor);
+							}
+							if (currentElement.className.indexOf("connectionpoint") != -1 && currentElement.className.indexOf("addConnection") == -1) {
+								this.ChangeSVGColors(newColor);
+							}
+						
 						}
-						if (lineNameContainer.parentElement.className == "linename" && currentElement.className.indexOf("addConnection") != -1) {
-							this.ChangeSVGColors(newColor);
+						else {
+							newConnection.style.backgroundColor = this.line.color;
 						}
-						if (currentElement.className.indexOf("connectionpoint") != -1 && currentElement.className.indexOf("addConnection") == -1) {
-							this.ChangeSVGColors(newColor);
-							currentElement.parentElement.removeChild(currentElement);
-						}
+
+						currentElement.parentElement.removeChild(currentElement);
+
+						this.line.type = transportType;
+						this.line.name = line;
+
+
 					}
+
+
 				});
 			}
 			// Adding new connection line or managing connections
 			else if (currentElement.className == "connectionpoint addConnectionLine") {
-
+				
 				// if(currentElement.parentElement.childElementCount > 4 ) return;
 
 				// Show custom prompt to choose transport type and line directly
 				this.showCustomPrompt({
 					type: "connection"
-				}).then(function(line) {
+				}).then(function (line) {
 					if (!line) return;
 
 
@@ -413,8 +466,6 @@ class EventManager {
 					if (!clickedButton) return;
 
 					let spanElement = clickedButton.querySelector('span');
-
-					// console.log(clickedButton);
 
 
 					// Extract transport type from class (e.g., "connectionpoint metro line1" -> "metro")
@@ -456,7 +507,7 @@ class EventManager {
 						newConnectionLine.setAttribute("type", transportType);
 
 
-						//Small piece of code that adds some padding on the bottom to be sure there's no y overflow (css has to bee fixedddddd)
+						//Small piece of code that adds some padding on the bottom to be sure there's no y overflow (css should bee fixedddddd)
 						let maxConnectionLines = currentElement.parentElement.childElementCount
 
 						switch (maxConnectionLines) {
@@ -554,7 +605,7 @@ class EventManager {
 	bindConnectionsEvents() {
 
 
-		this.app.choicesGrid.onclick = function(event) {
+		this.app.choicesGrid.onclick = function (event) {
 			let origine = event.target;
 			let value = origine.dataset.value;
 
@@ -592,14 +643,17 @@ class EventManager {
 					numericOrder += 1;
 					if (line == "3B") {
 						newConnection.setAttribute("bis", "bis");
-						newConnection.setAttribute("truename", "3   ");
+						// Utilise la même chaîne que domtoJSON pour l'affichage bis
+						newConnection.setAttribute("truename", "3    "); // 3 + U+2007 U+200A U+200A U+200A
+						newConnection.innerHTML = "3    ";
 					}
 				}
 				if (line == "7B" || numericOrder > 8) {
 					numericOrder += 1;
 					if (line == "7B") {
 						newConnection.setAttribute("bis", "bis");
-						newConnection.setAttribute("truename", "7   ");
+						newConnection.setAttribute("truename", "7   "); // 7 + U+2007 U+200A U+200A
+						newConnection.innerHTML = "7   ";
 					}
 				}
 				newConnection.style.order = numericOrder;
@@ -650,6 +704,28 @@ class EventManager {
 			}
 		}
 	}
+
+	manageCustomLineGroupEvent(event) {
+
+		let clickedOne = event.target;
+
+		if (clickedOne.type == "button") {
+			if (!clickedOne.classList.contains("selected")) {
+
+
+				for (let i = 0; i < this.customLineTypeGroup.children.length; i++) {
+
+					let switch_button = this.customLineTypeGroup.children[i];
+
+					if (switch_button.classList.contains("selected")) switch_button.classList.remove("selected");
+				}
+
+				clickedOne.classList.add("selected");
+
+			}
+		}
+	}
+
 
 
 }

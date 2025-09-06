@@ -113,19 +113,19 @@ header {
 }
 
 .pad2 {
-	padding-bottom: 1rem;
+	padding-bottom: 1.9rem;
 }
 
 .pad3 {
-	padding-bottom: 3rem;
+	padding-bottom: 3.9rem;
 }
 
 .pad4 {
-	padding-bottom: 6rem;
+	padding-bottom: 6.9rem;
 }
 
 .pad5 {
-	padding-bottom: 8.8rem;
+	padding-bottom: 10rem;
 }
 
 #dragtarget {
@@ -269,7 +269,7 @@ button.connectionpoint::before {
 	width: 1.9rem;
 	height: 1.9rem;
 	border-radius: 50%;
-	background-color: #f59fb3;
+	background-color: #000000;
 	display: flex;
 	justify-content: center;
 	align-items: center;
