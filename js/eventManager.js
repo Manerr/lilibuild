@@ -643,9 +643,7 @@ class EventManager {
 					numericOrder += 1;
 					if (line == "3B") {
 						newConnection.setAttribute("bis", "bis");
-						// Utilise la même chaîne que domtoJSON pour l'affichage bis
 						newConnection.setAttribute("truename", "3    "); // 3 + U+2007 U+200A U+200A U+200A
-						newConnection.innerHTML = "3    ";
 					}
 				}
 				if (line == "7B" || numericOrder > 8) {
@@ -653,7 +651,6 @@ class EventManager {
 					if (line == "7B") {
 						newConnection.setAttribute("bis", "bis");
 						newConnection.setAttribute("truename", "7   "); // 7 + U+2007 U+200A U+200A
-						newConnection.innerHTML = "7   ";
 					}
 				}
 				newConnection.style.order = numericOrder;
