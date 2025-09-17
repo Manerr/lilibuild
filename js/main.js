@@ -283,6 +283,81 @@ class App {
 	}
 
 
+	//For all connectionline at once -> gonna check if there's need to remove too, at the end;
+	manageAutoConnectionLines_Margin(connectionLines){
+
+		
+
+		let firstLine;
+
+		if(connectionLines.length) firstLine = connectionLines[0]
+		else firstLine = connectionLines;
+
+		//Next .line element		
+		let nextPart = firstLine.parentElement.parentElement.nextElementSibling;
+		let max = 0;
+
+
+		if(!nextPart.classList.contains("line")) return;
+
+
+		for (let index = 0; index < connectionLines.length; index++) {
+			const connectionLine = connectionLines[index];
+			
+
+
+			let countConnections = connectionLine.childElementCount;
+			
+			if(max < countConnections) max = countConnections; 
+			if(countConnections < 4 ) continue
+			
+		}
+
+
+		console.log(max);
+
+		if(max > 3){
+
+			nextPart.classList.add("bigger")
+
+			if(max == 4){
+				nextPart.classList.add("bigger1");
+				nextPart.classList.remove("bigger2");
+				nextPart.classList.remove("bigger3");
+				nextPart.classList.remove("bigger4");
+			}
+			else if(max == 5){
+				nextPart.classList.add("bigger2");
+				nextPart.classList.remove("bigger3");
+				nextPart.classList.remove("bigger4");
+			}
+			else if(max == 6){
+				nextPart.classList.add("bigger3");
+				nextPart.classList.remove("bigger4");
+			}
+			else nextPart.classList.add("bigger4");		
+
+		}
+		
+		else nextPart.classList.remove("bigger");
+
+
+	}
+
+
+	manageAllConnectionsMargins(){
+
+		let connections = this.output.querySelectorAll(".allsvgcontainer .connection");
+
+		for (let index = 0; index < connections.length; index++) {
+			const connectionLines = connections[index].children;
+
+			this.manageAutoConnectionLines_Margin(connectionLines);
+
+		}
+
+	}
+
 	saveLocalStorage() {
 		this.removeIndicator();
 		window.localStorage.lilibuild = JSON.stringify(this.exporter.exportJSON());

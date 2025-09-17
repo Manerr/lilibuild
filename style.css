@@ -258,8 +258,34 @@ button.connectionpoint::before {
 	flex-direction: row;
 	align-items: center;
 	gap: .3rem;
-	max-width: 14.1rem;
 }
+
+.connection .connectionline{
+	flex-wrap: wrap;
+	width: 17.1rem;
+}
+
+
+.line.bigger.bigger1{
+	width: 10.2rem;
+	transform: scaleX(1.5);
+}
+
+.line.bigger.bigger2{
+	width: 12.5rem;
+	transform: scaleX(1.7);
+}
+
+.line.bigger.bigger3{
+	width: 14.5rem;
+	transform: scaleX(1.9);
+}
+
+.line.bigger.bigger4{
+	width: 16.1rem;
+	transform: scaleX(2.1);
+}
+
 
 .connectionpoint {
 	display: inline-block;
@@ -488,7 +514,7 @@ body .InsertBeforeit {
 }
 
 .line.dashed .img svg path {
-	stroke-dasharray: 24px, 10px !important;
+	stroke-dasharray: 29px, 10px !important;
 }
 
 .img g .endpoint :last-child {

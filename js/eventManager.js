@@ -209,12 +209,20 @@ class EventManager {
 
 			// Deleting a single connection
 			if (currentElement.className.search("connectionpoint") != -1 && currentElement.className.search("addConnection") == -1) {
+
+				let cur = currentElement.parentElement.parentElement.children;
+
 				currentElement.remove();
+				this.manageAutoConnectionLines_Margin(cur);
+				
 				return;
 			}
 			// Deleting connection type
-			if (currentElement.className == "connectionType") {
-				currentElement.parentElement.remove();
+			if (currentElement.className == "connectionline") {
+
+				this.manageAutoConnectionLines_Margin(currentElement.parentElement.children);
+				currentElement.remove();
+								
 				return;
 			}
 
@@ -275,7 +283,7 @@ class EventManager {
 
 			//linename editing
 			} else if (currentElement.className == "addConnection" || (currentElement.className.indexOf("connectionpoint") != -1 && currentElement.className.indexOf("addConnection") == -1 && currentElement.parentElement.parentElement.className == "linename")) {
-				console.log("linename only")
+				// console.log("linename only")
 				const lineNameContainer = currentElement.parentElement; // .connectionline in .linename
 				this.showCustomPrompt({ type: "connection", showCustomLine: true }).then((line) => {
 
@@ -625,6 +633,7 @@ class EventManager {
 
 	// Helper method to add a connection to a specific line
 	addConnectionToLine(connectionLine, line, transportType) {
+
 		if (line && connectionLine.querySelector(".line" + line) == null) {
 			let newConnection = document.createElement("span");
 			newConnection.setAttribute("bis", "");
@@ -699,8 +708,17 @@ class EventManager {
 			if (connectionLine.parentElement.className == "linename") {
 				this.ChangeSVGColors(newColor);
 			}
+		
+		
+
+
+		this.app.manageAutoConnectionLines_Margin(connectionLine.parentElement.children);
+		
 		}
 	}
+
+	
+	
 
 	manageCustomLineGroupEvent(event) {
 

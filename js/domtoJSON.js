@@ -252,6 +252,7 @@ class Exporter {
 
 						let trueNumber = localConnection.split(" ")[2].split("line")[1];
 
+						
 
 						// Add connection rows
 						if (localType == "RER" && !addedRER) {
@@ -425,9 +426,9 @@ class Exporter {
 
 				toAdd = null;
 
+				
 
 			}
-
 
 
 			toAdd = null;
@@ -435,6 +436,8 @@ class Exporter {
 			DOMpart = null;
 
 		}
+
+		this.parent.manageAllConnectionsMargins();
 
 		this.parent.outputdragzone.style.visibility = "visible";
 
