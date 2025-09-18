@@ -206,6 +206,12 @@ class EventManager {
 
 		if (CURRENTLY_DOING == deleting) {
 
+			//Has to be cleant
+
+			if(!trueCurrentElement.classList) return;
+			else if(trueCurrentElement.className == "result" || trueCurrentElement.id == "dragtarget" || trueCurrentElement.parentElement.id == "dragtarget") return;
+			else if(trueCurrentElement.parentElement.className == "linename" || trueCurrentElement.parentElement.parentElement.className == "linename") return;
+
 
 			// Deleting a single connection
 			if (currentElement.className.search("connectionpoint") != -1 && currentElement.className.search("addConnection") == -1) {
@@ -225,6 +231,7 @@ class EventManager {
 								
 				return;
 			}
+
 
 
 			if (trueCurrentElement.className != "blockcontainer line this.insertbeforeit") {

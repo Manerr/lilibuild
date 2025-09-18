@@ -314,8 +314,6 @@ class App {
 		}
 
 
-		console.log(max);
-
 		if(max > 3){
 
 			nextPart.classList.add("bigger")
@@ -580,6 +578,9 @@ class App {
 
 		this.output.insertBefore(element, beforeElement);
 		this.manageGradients();
+
+		this.manageAllConnectionsMargins();
+
 		return;
 	}
 
