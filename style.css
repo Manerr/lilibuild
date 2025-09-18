@@ -70,8 +70,8 @@ header {
 	flex: 1;
 	display: -ms-flex;
 	display: flex;
-	-ms-flex-direction: row;
-	flex-direction: row;
+	-ms-flex-direction: column;
+	flex-direction: column;
 	background-color: #ebebeb;
 }
 
@@ -83,9 +83,9 @@ header {
 	width: 100%;
 }
 
-.result {
+#result {
 	position: relative;
-	max-width: 85%;
+	max-width: 95%;
 	display: flex;
 	margin: auto;
 	overflow-x: auto;
@@ -95,7 +95,7 @@ header {
 	box-shadow: 0 0 .4rem #aaa, 0 0 .2rem #999;
 }
 
-.result::before {
+#result::before {
 	content: "Loading... This should not take a while.";
 	position: absolute;
 	top: 50%;
@@ -253,7 +253,7 @@ button.connectionpoint::before {
 	margin: .4rem 0;
 	margin-bottom: .6rem;
 	position: relative;
-	right: .95rem;
+	right: .9rem;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -467,6 +467,7 @@ button.connectionpoint:hover {
 	content: "";
 	width: 2rem;
 	height: 2rem;
+	margin-left: -.0505rem;
 	background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2aWV3Qm94PSIwIDAgMjgzLjQ2IDI4My40NiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNMTQxLjczIDBDNjMuNDUgMCAwIDYzLjQ2IDAgMTQxLjczczYzLjQ1IDE0MS43MyAxNDEuNzMgMTQxLjczUzI4My40NiAyMjAgMjgzLjQ2IDE0MS43MyAyMjAuMDEgMCAxNDEuNzMgMG0wIDI2NS4wNGMtNjguMSAwLTEyMy4zMS01NS4yMS0xMjMuMzEtMTIzLjMxczU1LjIxLTEyMy4zIDEyMy4zMS0xMjMuMyAxMjMuMyA1NS4yIDEyMy4zIDEyMy4zLTU1LjIgMTIzLjMxLTEyMy4zIDEyMy4zMW03MC41MS01OS44OWMwIDYuNzQtNS4zMiAxMC42My0xMS42OSAxMC42My01LjY4IDAtMTIuMDUtMy44OS0xMi4wNS0xMC42M3YtOTIuMTJoLS4zNWwtMzUuMDggNzEuNTdjLTIuNDggNC45Ni01LjY2IDcuNzktMTEuMzQgNy43OXMtOC44Ni0yLjg0LTExLjM0LTcuNzlsLTM1LjA4LTcxLjU3aC0uMzV2OTIuMTNjMCA2Ljc0LTYuMzggMTAuNjMtMTIuMDUgMTAuNjMtNi4zOCAwLTExLjY5LTMuODktMTEuNjktMTAuNjNWODEuNWMwLTcuMDkgMy45LTE0LjUzIDE1LjU5LTE0LjUzIDguODYgMCAxMi40IDMuOSAxNi4zIDExLjY5bDM4LjYyIDc5LjcyaC4zNWwzOC4yNy03OS43MmMzLjg5LTcuNzkgNy40NC0xMS42OSAxNi4yOS0xMS42OSAxMS42OSAwIDE1LjU5IDcuNDQgMTUuNTkgMTQuNTN2MTIzLjY2IiBzdHlsZT0iZmlsbDogcmdiKDMxLCA2MCwgMTQ0KTsiLz4KPC9zdmc+);
 	background-size: cover;
 }
@@ -673,7 +674,7 @@ html body .img svg g.corrpoint path {
 }
 
 @media all and (min-width: 960px) {
-	.result {
+	#result {
 		min-width: 900px !important;
 	}
 }

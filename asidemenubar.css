@@ -1,9 +1,23 @@
 #asidecontainer {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	background-color: #0d0e18;
-	overflow-x: hidden;
+	overflow: hidden;
+	position: relative;
 }
+
+#center-aside{
+	display: flex;
+	justify-content: center;
+	margin: auto;
+	align-items: center;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+}
+
 
 .mtop {
 	margin-top: auto !important;
@@ -39,6 +53,12 @@
 	margin: auto;
 }
 
+#logo-header{
+	width: 2rem;
+	margin: auto 0;
+	margin-left: 1rem;
+}
+
 .modern:hover {
 	transition: .3s transform;
 	transform: scale(1.1);
@@ -61,7 +81,7 @@
 
 
 .space {
-	height: 2rem;
+	width: 2rem;
 }
 
 #bDelete.selected {
@@ -70,4 +90,8 @@
 
 #bDelete img {
 	filter: none !important;
+}
+
+#bInfo{
+	margin-left: auto;
 }

@@ -23,49 +23,43 @@
 
 		<div id="asidecontainer">
 
-			<div class="space"></div>
+			<img src="./logo2.svg" id="logo-header"/>
 
-			<button class="modern switch selected" type="button" title="Manage existing blocks" value="1" id="bPointer" name="editButtonsValue">
-				<img src="ui/new/pointer.svg"/>
-			</button>
-			<button class="modern switch" type="button" title="Add path" value="2" id="bEdit" name="editButtonsValue">
-				<img src="ui/new/edit.svg"/>
-			</button>
-			<button class="modern switch" type="button" title="Add point" value="3" id="bEditPoint" name="editButtonsValue">
-				<img src="ui/new/editpoint.svg"/>
-			</button>
+			<div id="center-aside">
 
-			<button class="modern switch" type="button" title="Delete blocks" value="0" id="bDelete" name="editButtonsValue">
-				<img src="ui/new/delete.svg"/>
-			</button>
+				<button class="modern switch selected" type="button" title="Manage existing blocks" value="1" id="bPointer" name="editButtonsValue">
+					<img src="ui/new/pointer.svg"/>
+				</button>
+				<button class="modern switch" type="button" title="Add path" value="2" id="bEdit" name="editButtonsValue">
+					<img src="ui/new/edit.svg"/>
+				</button>
+				<button class="modern switch" type="button" title="Add point" value="3" id="bEditPoint" name="editButtonsValue">
+					<img src="ui/new/editpoint.svg"/>
+				</button>
 
-			<div class="space"></div>
+				<button class="modern switch" type="button" title="Delete blocks" value="0" id="bDelete" name="editButtonsValue">
+					<img src="ui/new/delete.svg"/>
+				</button>
 
-			<!--  			<button class="modern" type="button" title="Settings">
-				<img src="ui/new/settings.svg"/>
-			</button>
- -->
-			<div class="space"></div>
+				<button class="modern" type="button" title="Open JSON" id="bOpen">
+					<img src="ui/new/open.svg"/>
+				</button>
+				<button class="modern" type="button" title="Save JSON" id="bSave">
+					<img src="ui/new/download.svg"/>
+				</button>
+				<button class="modern" type="button" title="Export to picture" id="bExport">
+					<img src="ui/new/picture.svg"/>
+				</button>
 
-			<button class="modern" type="button" title="Open JSON" id="bOpen">
-				<img src="ui/new/open.svg"/>
-			</button>
-			<button class="modern" type="button" title="Save JSON" id="bSave">
-				<img src="ui/new/download.svg"/>
-			</button>
-			<button class="modern" type="button" title="Export to picture" id="bExport">
-				<img src="ui/new/picture.svg"/>
-			</button>
+				<button class="modern" type="button" title="Print" id="bPrint">
+					<img src="ui/new/print.svg"/>
+				</button>
 
-			<button class="modern" type="button" title="Print" id="bPrint">
-				<img src="ui/new/print.svg"/>
-			</button>
+				<button class="modern" type="button" title="Reset" id="bReset">
+					<img src="ui/new/reset.svg"/>
+				</button>
 
-			<button class="modern" type="button" title="Reset" id="bReset">
-				<img src="ui/new/reset.svg"/>
-			</button>
-
-			<div class="space"></div>
+			</div>
 
 			<button class="modern" type="button" title="About" id="bInfo">
 				<img src="ui/new/info.svg"/>
@@ -77,32 +71,8 @@
 
 		</div>
 
-		<div class="result">
+		<div id="result">
 
-			<!-- Coming soon -->
-			<!-- 
-			<section id="options-popup" class="ui">
-				<div id="path-options">
-					<div id="style" class="flex-line">
-						<img src="ui/new/edit.svg" class="options-icon"/>
-						<button class="window-choice-btn indicator line">
-								<div class="img" name="path">
-									<svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg>
-							</div>
-						</button>
-						<button class="window-choice-btn indicator line dashed">
-								<div class="img" name="path">
-									<svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg>
-							</div>
-						</button>
-					</div>
-				</div>
-				<div id="point-options">
-					
-		
-				</div>
-			</section>
- -->
 			<div id="dragtarget">
 
 				<div class="linename">
@@ -172,11 +142,12 @@
 			<img src="logo2.svg" />
 			<h2>LiLiBuild</h2>
 			<p>A Lite Line Builder for the Web</p>
-			<pre>V.1.2.1</pre>
+			<pre>V.1.3.0</pre>
 
 			<section id="changelog-box">
 				<hr/>
 				<ul id="changelog">
+					<li>[1.3.0] New menubar UI</li>
 					<li>[1.2.1] Added auto padding on connections - thx @Adri</li>
 					<li>[1.2.1] Fixed a lot of huge issues when deleting - obsolete code parts</li>
 					<li>[1.2.1] Darkreader firefox extension fix - thx @Afyu</li>

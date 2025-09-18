@@ -40,9 +40,9 @@ class App {
 
 		this.output = document.querySelector(".allsvgcontainer");
 
-		this.outputdragzone = document.querySelector("#dragtarget");
+		this.outputdragzone = document.getElementById("dragtarget");
 
-		this.outputContainer = document.querySelector(".result");
+		this.outputContainer = document.getElementById("result");
 
 
 		this.insertbeforeit = document.getElementById("insertbeforeit")

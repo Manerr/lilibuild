@@ -209,7 +209,7 @@ class EventManager {
 			//Has to be cleant
 
 			if(!trueCurrentElement.classList) return;
-			else if(trueCurrentElement.className == "result" || trueCurrentElement.id == "dragtarget" || trueCurrentElement.parentElement.id == "dragtarget") return;
+			else if(trueCurrentElement.id == "result" || trueCurrentElement.id == "dragtarget" || trueCurrentElement.parentElement.id == "dragtarget") return;
 			else if(trueCurrentElement.parentElement.className == "linename" || trueCurrentElement.parentElement.parentElement.className == "linename") return;
 
 
