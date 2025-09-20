@@ -594,6 +594,9 @@ class App {
 			if(arguments[0].showCustomLine){
 				
 				document.body.classList.add("showcustomfield");
+			
+				this.customLineText.value = this.line.name;
+			
 			}
 			else if(document.body.classList.contains("showcustomfield")) document.body.classList.remove("showcustomfield");
 			
@@ -637,8 +640,11 @@ class App {
 			};
 
 			this.customLineValidate.onclick = function(){
+				let name = this.customLineText.value;
+
+				if(!name) return;
 				this.line.color = this.customColorInput.value;
-				this.line.name = this.customLineText.value;
+				this.line.name = name;
 				this.line.type = this.customLineTypeGroup.querySelector(".selected").getAttribute("data-type");
 				this.ChangeSVGColors(this.line.color);
 				promptWindow.style.display = "none";		
@@ -649,6 +655,14 @@ class App {
 		});
 	}.bind(this);
 
+
+	manageKeyboard(event){
+
+		let key = event.key;
+
+		if(key == "Escape" && this.custompromptWindow.style.display && this.custompromptWindow.style.display != "none" ) this.custompromptWindow.style.display = "none";
+
+	}
 
 }
 

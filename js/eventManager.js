@@ -14,12 +14,19 @@ class EventManager {
 		this.bindFileEvents();
 		this.bindConnectionsEvents();
 		this.bindCustomLineEvents();
+		this.bindKeyboardEvents();
 	}
 
-	// Bind custom line UI events - soon
+	bindKeyboardEvents(){
+		window.addEventListener("keyup",this.app.manageKeyboard.bind(this.app));
+	}
+
 	bindCustomLineEvents() {
 
 		this.app.customLineTypeGroup.onclick = this.manageCustomLineGroupEvent.bind(this.app);
+		this.app.customLineText.onkeypress = function(event){
+			if(event.key == "Enter") this.app.customLineValidate.onclick();
+		}.bind(this);
 
 	}
 
