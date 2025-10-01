@@ -169,7 +169,7 @@ class Exporter {
 					toAdd = document.createElement("div");
 					this.parent.output.insertBefore(toAdd, this.parent.lastZone);
 					toAdd.className = "blockcontainer line";
-					toAdd.draggable = "true";
+					// toAdd.draggable = "true";
 					if (DOMpart === "block-dashed") toAdd.classList.add("dashed");
 
 					toAdd.innerHTML = pathHTML.replace(this.parent.DEFAULT_COLOR, this.parent.line.color);
@@ -181,7 +181,7 @@ class Exporter {
 					
 					toAdd = document.createElement("div");
 					toAdd.className = "blockcontainer branch";
-					toAdd.draggable = "true";
+					// toAdd.draggable = "true";
 					if(reversed) toAdd.classList.add("branchreverse");
 
 					if (DOMpart === "block-dashed") toAdd.classList.add("dashed");
@@ -201,9 +201,9 @@ class Exporter {
 					smartPartContainerBottom.className = "allsvgcontainer branchbottom";
 
 					// ONLY for debugging - development
-					smartPartContainerTop.innerHTML = `<div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div>`;
+					smartPartContainerTop.innerHTML = `<div class="blockcontainer line" draggable="false"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div>`;
 
-					smartPartContainerBottom.innerHTML = `<div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div>`;
+					smartPartContainerBottom.innerHTML = `<div class="blockcontainer line" draggable="false"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div>`;
 
 					smartPartContainer.appendChild(smartPartContainerTop);
 					smartPartContainer.appendChild(smartPartContainerBottom);
@@ -242,7 +242,7 @@ class Exporter {
 				this.parent.output.insertBefore(toAdd, this.parent.lastZone);
 
 				toAdd.className = "blockcontainer point";
-				toAdd.draggable = "true";
+				// toAdd.draggable = "true";
 				toAdd.innerHTML = pointHTML.replace(this.parent.DEFAULT_COLOR, this.parent.line.color);
 				toAdd.children[1].innerText = DOMpart.name;
 

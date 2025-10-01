@@ -46,12 +46,12 @@ class EventManager {
 	bindOutputEvents() {
 		// Output drag zone events
 		this.app.outputdragzone.onclick = this.manageClick.bind(this.app);
-		this.app.outputdragzone.ondragend = this.app.whenDeDragging.bind(this.app);
+		// this.app.outputdragzone.ondragend = this.app.whenDeDragging.bind(this.app);
 
 		// Output container events
-		this.app.output.ondragend = this.app.outputOndragend.bind(this.app);
-		this.app.output.onmouseleave = this.app.removeIndicator.bind(this.app);
-		this.app.output.onmousemove = this.app.outputOnmousemove.bind(this.app);
+		// this.app.output.ondragend = this.app.outputOndragend.bind(this.app);
+		// this.app.output.onmouseleave = this.app.removeIndicator.bind(this.app);
+		// this.app.output.onmousemove = this.app.outputOnmousemove.bind(this.app);
 
 
 	}
@@ -141,6 +141,8 @@ class EventManager {
 
 	onloadEvent() {
 		this.app.loadLocalStorage();
+		this.app.initSortableJS();
+
 	}
 
 	bindFileEvents() {

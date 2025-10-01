@@ -16,7 +16,7 @@ let SWITCHING_CONNECTION = false;
 let LAST_X = null;
 
 
-ligne12JSON = DEBUG_LINE;
+// ligne12JSON = DEBUG_LINE;
 
 class App {
 
@@ -31,6 +31,9 @@ class App {
 		this.line.name = "12";
 		this.line.type = "metro";
 		this.line.custom = false;
+
+		this.forghostimg = new Image();
+		this.forghostimg.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAJUlEQVR4AeyTsQ0AAAyCSP8/uvEGN4MHOBA4ynkAMpBBMhrw4AEAAP//uBwiawAAAAZJREFUAwBJIAAhJFoqZwAAAABJRU5ErkJggg==";
 
 		this.exporter = new Exporter(this);
 
@@ -111,6 +114,9 @@ class App {
 
 		this.saveLocalStorage = this.saveLocalStorage.bind(this);
 		this.loadLocalStorage = this.loadLocalStorage.bind(this);
+
+
+
 	}
 
 	// Download method for saving files
@@ -727,6 +733,45 @@ class App {
 
 		}
 		
+
+	}
+
+	hideDragGhost(data){
+		
+		data.setDragImage(this.forghostimg,0,0);
+	}
+
+	initSortableJS(){
+
+		Sortable.create(this.output, {
+		animation: 150, 
+		handle: '.blockcontainer',
+		group: 'metro', 
+		draggable: '.blockcontainer',
+		filter: '.emptyfordraggingstart, .emptyfordraggingend', 
+		preventOnFilter: true,
+				swapThreshold: .1,
+		ghostClass: "ghost",
+		setData: this.hideDragGhost.bind(this),
+		onEnd: (evt) => {
+		},
+		});
+
+		document.querySelectorAll('.innercontainer .allsvgcontainer').forEach(branchContainer => {
+			Sortable.create(branchContainer, {
+				animation: 150,
+				handle: '.blockcontainer',
+				group: 'metro',
+				ghostClass: "ghost",
+				draggable: '.blockcontainer',
+				swapThreshold: .1,
+				preventOnFilter: true,
+				setData: this.hideDragGhost.bind(this),
+
+				onEnd: (evt) => {
+				},
+			});
+		});
 
 	}
 

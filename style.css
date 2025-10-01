@@ -615,7 +615,7 @@ html body .img svg g.corrpoint path {
 }
 
 .line {
-	width: 7rem;
+	width: 6.8rem;
 }
 
 
@@ -623,7 +623,7 @@ html body .img svg g.corrpoint path {
 
 body .branch{
 	/* height: 18rem !important; */
-	width: 17.12rem !important;
+	width: 16.12rem !important;
 }
 
 
@@ -746,3 +746,6 @@ body .branch{
 
 
 
+.ghost {
+	opacity: 1;
+}
