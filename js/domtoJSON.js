@@ -11,12 +11,6 @@ class Exporter {
 
 	// Should work, designed only for the line's container
 	exportJSON() {
-		// let lineNameContainer = this.parent.outputdragzone.querySelector(".linename .connectionline");
-		// let lineNumber = lineNameContainer.children[1];
-		// let lineColor = getComputedStyle(lineNumber).color;
-		// if (lineColor == "transparent" || lineColor == "rgb(35, 31, 32)"){ lineColor = getComputedStyle(lineNumber).backgroundColor; }
-		// else if ( lineColor == "rgb(255, 255, 255)"){
-		// }
 
 		let lineColor = this.parent.line.color;
 		let lineNumber = this.parent.line.name;
@@ -49,11 +43,8 @@ class Exporter {
 
 				let stationConnections = [];
 
-				// console.log(DOMconnections);
-
 				for (var j = 0; j < DOMconnections.length; j++) {
 					let DOMconnection = DOMconnections[j];
-					// console.error(DOMconnection);
 					if (DOMconnection.className.search("line") != -1) {
 						stationConnections.push(DOMconnection.className);
 					}
@@ -93,14 +84,9 @@ class Exporter {
 		let lineNumberBox = lineNameContainer.children[1];
 
 		let lineType = object.line[0];
-		// console.log(lineType);
 		let lineNumber = object.line[1];
-		// console.log(lineNumber);
 		let lineColor = object.line[2];
 		let lineIsCustom = object.line[3];
-		// console.log(lineColor);
-
-		
 
 		lineNumberBox.setAttribute("value", lineNumber);
 
@@ -267,7 +253,7 @@ class Exporter {
 
 							newConnectionLine.className = "connectionline";
 							newConnectionLine.setAttribute("type", "RER");
-							// newConnectionLine.innerHTML='<button class="connectionpoint addConnection"></button>';						
+
 							addedRER = true;
 
 						}
@@ -282,7 +268,7 @@ class Exporter {
 
 							newConnectionLine.className = "connectionline";
 							newConnectionLine.setAttribute("type", "metro");
-							// newConnectionLine.innerHTML='<button class="connectionpoint addConnection"></button>';						
+
 							addedMetro = true;
 						}
 						if (localType == "Train" && !addedTrain) {
@@ -295,7 +281,6 @@ class Exporter {
 
 							newConnectionLine.className = "connectionline";
 							newConnectionLine.setAttribute("type", "Train");
-							// newConnectionLine.innerHTML='<button class="connectionpoint addConnection"></button>';						
 							addedTrain = true;
 
 						}
@@ -304,7 +289,6 @@ class Exporter {
 							newPointConnection.insertBefore(newConnectionLine, newPointConnection.lastElementChild);
 							newConnectionLine.className = "connectionline";
 							newConnectionLine.setAttribute("type", "Tram");
-							// newConnectionLine.innerHTML='<button class="connectionpoint addConnection"></button>';						
 							addedTram = true;
 						}
 

@@ -78,6 +78,7 @@ class App {
 		this.aboutWindow = document.getElementById('about');
 		this.choicesGrid = document.getElementById("customPromptChoices");
 		this.custompromptWindow = document.getElementById('custom-prompt-window');
+		this.exportPopup = document.getElementById('export-format');
 
 
 		// custom line div
@@ -195,7 +196,6 @@ class App {
 
 
 		if (target == this.trueIndicator) { return }
-		// console.log(target);
 
 		try {
 
@@ -389,13 +389,12 @@ class App {
 	}
 
 	showExportFormatPopup() {
-		const exportPopup = document.getElementById('export-format');
-		const formatOptions = exportPopup.querySelectorAll('.format-option');
+		const formatOptions = this.exportPopup.querySelectorAll('.format-option');
 
 		formatOptions.forEach(option => option.classList.remove('selected'));
-		exportPopup.style.display = 'flex';
+		this.exportPopup.style.display = 'flex';
 
-		this.eventManager.bindExportFormatPopupEvents(exportPopup, formatOptions);
+		this.eventManager.bindExportFormatPopupEvents(this.exportPopup, formatOptions);
 	}
 
 	hideforExport() {
@@ -660,7 +659,14 @@ class App {
 
 		let key = event.key;
 
-		if(key == "Escape" && this.custompromptWindow.style.display && this.custompromptWindow.style.display != "none" ) this.custompromptWindow.style.display = "none";
+		if(key == "Escape"){
+			
+			if(this.custompromptWindow.style.display && this.custompromptWindow.style.display != "none" ) this.custompromptWindow.style.display = "none";
+			else if( this.aboutWindow.style.display != "none" ) this.aboutWindow.style.display = "none";
+			else if( this.exportPopup.style.display != "none" ) this.exportPopup.style.display = "none";
+
+		}
+		
 
 	}
 

@@ -11,6 +11,7 @@ class EventManager {
 		this.bindOutputEvents();
 		this.bindButtonEvents();
 		this.bindWindowEvents();
+		this.initWindowsEvents();
 		this.bindFileEvents();
 		this.bindConnectionsEvents();
 		this.bindCustomLineEvents();
@@ -29,6 +30,17 @@ class EventManager {
 		}.bind(this);
 
 	}
+
+	initWindowsEvents(){
+		document.querySelectorAll(".window").forEach(
+			(e)=>{e.onclick = (event) =>{
+				let target = event.target;
+				if(target.className == "window") target.style.display = "";
+			}}
+		);
+	}
+
+
 
 	// Bind output/drag zone events
 	bindOutputEvents() {
@@ -114,12 +126,10 @@ class EventManager {
 		}.bind(this), 1000 * SAVE_INTERVAL)
 
 		document.onbeforeunload = function () {
-			// console.log(this.app);
 			this.app.saveLocalStorage();
 		}.bind(this);
 
 		window.onpagehide = function (e) {
-			// console.log(this.app);
 			this.app.saveLocalStorage();
 
 			e.preventDefault();
@@ -179,6 +189,7 @@ class EventManager {
 		};
 	}
 
+	// Not window clicks btw
 	manageClick(event) {
 
 		let currentElement = event.target;
@@ -254,8 +265,6 @@ class EventManager {
 
 		if (SWITCHING_CONNECTION && currentType && currentType.indexOf("point") != -1 && currentElement.type != "submit") {
 
-			// console.log(currentType);
-
 			if (trueCurrentElement.className == "blockcontainer point") {
 				trueCurrentElement.className = "blockcontainer point connected";
 				if (currentType != "pointterminus") {
@@ -263,9 +272,7 @@ class EventManager {
 
 					currentElement.innerHTML = pointCorr.replace("rgb(13, 140, 93)", this.line.color);
 					currentElement.setAttribute("name", "pointcorr");
-					// currentElement.setname = "pointcorr";
 				}
-				// }
 
 			} else {
 				trueCurrentElement.className = "blockcontainer point";
@@ -277,9 +284,7 @@ class EventManager {
 		//then you're not deleting but interacting
 		else if (!DELETING_POINTS) {
 
-			// console.log(currentElement.children);
-
-			// Managaing connection type
+			// Managing connection type
 			if (currentElement.className == "connectionType") {
 				if (currentElement.parentElement.getAttribute("type") == "metro") {
 					currentElement.parentElement.setAttribute("type", "RER");
@@ -297,13 +302,10 @@ class EventManager {
 
 			//linename editing
 			} else if (currentElement.className == "addConnection" || (currentElement.className.indexOf("connectionpoint") != -1 && currentElement.className.indexOf("addConnection") == -1 && currentElement.parentElement.parentElement.className == "linename")) {
-				// console.log("linename only")
 				const lineNameContainer = currentElement.parentElement; // .connectionline in .linename
 				this.showCustomPrompt({ type: "connection", showCustomLine: true }).then((line) => {
 
 					if (!line) return;
-
-					// console.log(this.line);
 
 					let transportType;
 					let clickedButton = this.choicesGrid.querySelector(`[data-value="${line}"]`);
@@ -564,9 +566,6 @@ class EventManager {
 
 			//type is a station point
 			else if (currentType && currentType.indexOf("point") != -1) {
-
-				// console.log(currentType);
-
 
 				switch (currentType) {
 
