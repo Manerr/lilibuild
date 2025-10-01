@@ -18,7 +18,7 @@ class Exporter {
 		let custom = this.parent.line.custom;
 
 
-		let parts = []
+		let parts = [];
 		let partsDOM = this.parent.output.children;
 
 		// Skipping dragzones 
@@ -165,17 +165,59 @@ class Exporter {
 			if (typeof DOMpart == "string") {
 
 
-				toAdd = document.createElement("div");
-				this.parent.output.insertBefore(toAdd, this.parent.lastZone);
-				toAdd.className = "blockcontainer line";
-				toAdd.draggable = "true";
-				if (DOMpart === "block-dashed") toAdd.classList.add("dashed");
-				//Gradient for start
-				if(i == 0) toAdd.classList.add("startgradient");
-				else if(i == len - 1) toAdd.classList.add("endgradient");
+				if(DOMpart == "block"){
+					toAdd = document.createElement("div");
+					this.parent.output.insertBefore(toAdd, this.parent.lastZone);
+					toAdd.className = "blockcontainer line";
+					toAdd.draggable = "true";
+					if (DOMpart === "block-dashed") toAdd.classList.add("dashed");
+					//Gradient for start
+					if(i == 0) toAdd.classList.add("startgradient");
+					else if(i == len - 1) toAdd.classList.add("endgradient");
 
-				toAdd.innerHTML = pathHTML.replace(this.parent.DEFAULT_COLOR, this.parent.line.color);
-				toAdd = null;
+					toAdd.innerHTML = pathHTML.replace(this.parent.DEFAULT_COLOR, this.parent.line.color);
+					toAdd = null;
+				}
+				else if(DOMpart.slice(0,6) == "branch"){
+
+					
+					toAdd = document.createElement("div");
+					toAdd.className = "blockcontainer branch";
+					toAdd.draggable = "true";
+					if(DOMpart.slice(6) == "reverse") toAdd.classList.add("branchreverse");
+
+					if (DOMpart === "block-dashed") toAdd.classList.add("dashed");
+					//Gradient for start
+					if(i == 0) toAdd.classList.add("startgradient");
+					else if(i == len - 1) toAdd.classList.add("endgradient");
+
+					toAdd.innerHTML = pathBranchHTML.replace(this.parent.DEFAULT_COLOR, this.parent.line.color);
+
+					// Very "smart" yeah.. 
+					// Contains the parts -> like a "column" 
+					let smartPartContainer = document.createElement("div");
+
+					let smartPartContainerTop = document.createElement("div");
+					let smartPartContainerBottom = document.createElement("div");
+
+					smartPartContainer.classList.add("innercontainer");
+
+					smartPartContainerTop.className = "allsvgcontainer branchtop";
+					smartPartContainerBottom.className = "allsvgcontainer branchtop";
+
+					smartPartContainer.appendChild(smartPartContainerTop);
+					smartPartContainer.appendChild(smartPartContainerBottom);
+					
+					this.parent.output.insertBefore(smartPartContainer, this.parent.lastZone);
+					this.parent.output.insertBefore(toAdd, this.parent.lastZone);
+
+					toAdd = null;
+
+
+
+				}
+
+
 
 
 

@@ -211,7 +211,7 @@ class EventManager {
 
 
 
-		if (CURRENTLY_DOING == drawingpath || CURRENTLY_DOING == drawingpoint) {
+		if (CURRENTLY_DOING == drawingpath || CURRENTLY_DOING == drawingpoint || CURRENTLY_DOING == drawingbranch) {
 			this.outputOnclick(event);
 			return;
 		}

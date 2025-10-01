@@ -2,6 +2,7 @@ const deleting = 0;
 const pointing = 1;
 const drawingpath = 2;
 const drawingpoint = 3;
+const drawingbranch = 4;
 // Saving each thirty secs
 let SAVE_INTERVAL = 15;
 
@@ -192,7 +193,10 @@ class App {
 			this.trueIndicator.innerHTML = editedpointHTML.replace(this.DEFAULT_COLOR, this.line.color);
 			this.trueIndicator.className = "indicator point";
 		}
-
+		if (CURRENTLY_DOING == drawingbranch && this.trueIndicator.className != "indicator line branch") {
+			this.trueIndicator.innerHTML = pathBranchHTML.replaceAll(this.DEFAULT_COLOR, this.line.color);
+			this.trueIndicator.className = "indicator line branch";
+		}
 
 
 		if (target == this.trueIndicator) { return }
@@ -219,6 +223,10 @@ class App {
 
 
 	outputOnclick(event) {
+
+			console.log(CURRENTLY_DOING);
+
+
 		if (CURRENTLY_DOING == deleting || CURRENTLY_DOING == pointing) {
 			return;
 		}
@@ -233,6 +241,17 @@ class App {
 			toAdd.draggable = "true";
 
 			toAdd.innerHTML = pathHTML.replace(this.DEFAULT_COLOR, this.line.color);
+		}
+		else if (CURRENTLY_DOING == drawingbranch) {
+
+			
+			toAdd = document.createElement("div");
+
+			toAdd.className = "blockcontainer branch";
+
+			toAdd.draggable = "true";
+
+			toAdd.innerHTML = pathBranchHTML.replace(this.DEFAULT_COLOR, this.line.color);
 
 
 		} else if (CURRENTLY_DOING == drawingpoint) {
@@ -357,12 +376,17 @@ class App {
 	}
 
 	saveLocalStorage() {
+
+		return;
+
 		this.removeIndicator();
 		window.localStorage.lilibuild = JSON.stringify(this.exporter.exportJSON());
 	}
 
 
 	loadLocalStorage() {
+
+		// return;
 
 		if (window.localStorage.lilibuild == undefined) {
 			window.localStorage.lilibuild = ligne12JSON;

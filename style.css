@@ -590,7 +590,7 @@ html body .img svg g.corrpoint path {
 	align-items: center;
 }
 
-.line {
+.line,.branch {
 	width: 5rem;
 	height: unset !important;
 	display: flex;
@@ -611,6 +611,28 @@ html body .img svg g.corrpoint path {
 .line {
 	width: 7rem;
 }
+
+body .branch{
+	height: 18rem !important;
+	width: 18.3rem !important;
+}
+
+
+.branch .img{
+	position: relative;
+	left: .1rem;
+	/* height: 1.9rem; */
+	/* width: 125%; */
+	/* transform: scaleY(.8); */
+    height: 13.1rem;
+	/* left: -.1rem; */
+}
+
+.branchreverse{
+	transform: scaleX(-1);
+}
+
+
 
 #dragtarget {
 	background-color: white;
