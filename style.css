@@ -532,8 +532,14 @@ body .InsertBeforeit {
 	transition: .3s stroke, .3s fill;
 }
 
-.line.dashed .img svg path {
+.dashed .img svg path {
 	stroke-dasharray: 29px, 10px !important;
+}
+
+.branch.dashed .img svg path {
+	stroke-dashoffset: -2%;
+	stroke-dasharray: 19px, 5px !important;
+
 }
 
 .img g .endpoint :last-child {
@@ -612,25 +618,62 @@ html body .img svg g.corrpoint path {
 	width: 7rem;
 }
 
+
+/*** BRANCHES ***/
+
 body .branch{
-	height: 18rem !important;
-	width: 18.3rem !important;
+	/* height: 18rem !important; */
+	width: 17.12rem !important;
 }
 
 
 .branch .img{
-	position: relative;
-	left: .1rem;
+	/* position: relative; */
+	/* left: .1rem; */
 	/* height: 1.9rem; */
 	/* width: 125%; */
-	/* transform: scaleY(.8); */
-    height: 13.1rem;
+	transform: scaleY(1.01255);
+    height: 14rem;
 	/* left: -.1rem; */
+	z-index: 0;
+	/* filter: hue-rotate(90deg); */
 }
 
 .branchreverse{
 	transform: scaleX(-1);
 }
+
+
+
+
+
+.innercontainer{
+	display: flex;
+	flex-direction: column;
+	/* justify-content: space-between; */
+	min-width: 3rem;
+	height: -webkit-fill-available;
+	min-height: 100%;
+	z-index: 1;
+	/* position: relative; */
+}
+
+.innercontainer .allsvgcontainer{
+	height: 50%;
+	min-width: 100%;
+	position: relative;
+
+}
+
+.innercontainer .branchtop{
+	top: -3.02rem;
+}
+
+.innercontainer .branchbottom{
+	top: 3.05rem;
+}
+
+
 
 
 
@@ -700,3 +743,6 @@ body .branch{
 		min-width: 900px !important;
 	}
 }
+
+
+

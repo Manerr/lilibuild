@@ -195,11 +195,12 @@ class EventManager {
 		let currentElement = event.target;
 		let currentType = currentElement.name;
 
+
 		if (!currentType) {
 			currentType = currentElement.getAttribute("name");
 		}
 
-		if (CURRENTLY_DOING == pointing && currentType == "path") {
+		if (CURRENTLY_DOING == pointing && (currentType == "path" || currentType == "branch") ) {
 
 			if (currentElement.parentElement.classList.contains("dashed")) currentElement.parentElement.classList.remove("dashed");
 			else currentElement.parentElement.classList.add("dashed");
@@ -253,7 +254,8 @@ class EventManager {
 
 
 			if (trueCurrentElement.className != "blockcontainer line this.insertbeforeit") {
-				this.output.removeChild(trueCurrentElement);
+				if(trueCurrentElement.parentElement.parentElement.classList.contains("innercontainer")) trueCurrentElement.remove();
+				else this.output.removeChild(trueCurrentElement);
 				this.manageGradients();
 			}
 			if (this.output.childElementCount == 1) {

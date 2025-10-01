@@ -171,25 +171,20 @@ class Exporter {
 					toAdd.className = "blockcontainer line";
 					toAdd.draggable = "true";
 					if (DOMpart === "block-dashed") toAdd.classList.add("dashed");
-					//Gradient for start
-					if(i == 0) toAdd.classList.add("startgradient");
-					else if(i == len - 1) toAdd.classList.add("endgradient");
 
 					toAdd.innerHTML = pathHTML.replace(this.parent.DEFAULT_COLOR, this.parent.line.color);
 					toAdd = null;
 				}
 				else if(DOMpart.slice(0,6) == "branch"){
 
+					let reversed = DOMpart.slice(6) == "reverse";
 					
 					toAdd = document.createElement("div");
 					toAdd.className = "blockcontainer branch";
 					toAdd.draggable = "true";
-					if(DOMpart.slice(6) == "reverse") toAdd.classList.add("branchreverse");
+					if(reversed) toAdd.classList.add("branchreverse");
 
 					if (DOMpart === "block-dashed") toAdd.classList.add("dashed");
-					//Gradient for start
-					if(i == 0) toAdd.classList.add("startgradient");
-					else if(i == len - 1) toAdd.classList.add("endgradient");
 
 					toAdd.innerHTML = pathBranchHTML.replace(this.parent.DEFAULT_COLOR, this.parent.line.color);
 
@@ -203,13 +198,25 @@ class Exporter {
 					smartPartContainer.classList.add("innercontainer");
 
 					smartPartContainerTop.className = "allsvgcontainer branchtop";
-					smartPartContainerBottom.className = "allsvgcontainer branchtop";
+					smartPartContainerBottom.className = "allsvgcontainer branchbottom";
+
+					// ONLY for debugging - development
+					smartPartContainerTop.innerHTML = `<div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div>`;
+
+					smartPartContainerBottom.innerHTML = `<div class="blockcontainer line" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div>`;
 
 					smartPartContainer.appendChild(smartPartContainerTop);
 					smartPartContainer.appendChild(smartPartContainerBottom);
 					
-					this.parent.output.insertBefore(smartPartContainer, this.parent.lastZone);
-					this.parent.output.insertBefore(toAdd, this.parent.lastZone);
+					if(reversed){
+						this.parent.output.insertBefore(toAdd, this.parent.lastZone);
+						this.parent.output.insertBefore(smartPartContainer, this.parent.lastZone);
+					}
+					else{
+						this.parent.output.insertBefore(smartPartContainer, this.parent.lastZone);
+						this.parent.output.insertBefore(toAdd, this.parent.lastZone);
+					}
+
 
 					toAdd = null;
 
@@ -464,7 +471,7 @@ class Exporter {
 		}
 
 		this.parent.manageAllConnectionsMargins();
-
+		this.parent.manageGradients();
 		this.parent.outputdragzone.style.visibility = "visible";
 
 

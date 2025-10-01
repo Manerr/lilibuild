@@ -16,6 +16,7 @@ let SWITCHING_CONNECTION = false;
 let LAST_X = null;
 
 
+ligne12JSON = DEBUG_LINE;
 
 class App {
 
@@ -162,15 +163,19 @@ class App {
 		}
 
 		let mouseX = event.clientX;
+		let mouseY = event.clientY;
 
 		let target = event.target;
 		let className = target.className;
+
 
 		// trying to get the parentelement if it's one of the children : if it's the container -> return
 
 		if (className == "name" || className == "img" || className == "name terminus" || className == "connection") {
 			target = target.parentElement;
 		}
+
+		
 
 		let nodeName = target.nodeName;
 
@@ -184,6 +189,9 @@ class App {
 		let targetRight = bbox.x + bbox.width;
 
 		let targetMid = (targetLeft + targetRight) / 2;
+
+		let targetMidY = (bbox.y + bbox.height / 2) 
+
 
 
 		if (CURRENTLY_DOING == drawingpath && this.trueIndicator.className != "indicator line") {
@@ -201,10 +209,32 @@ class App {
 
 		if (target == this.trueIndicator) { return }
 
+		// BRANCH LOGIC - wip
+
+		if(target.classList.contains("branch")){
+
+			let rigthBranchTop = target.nextElementSibling.firstChild;
+			let rigthBranchBottom = target.nextElementSibling.lastChild;
+
+			// console.log(rigthBranchBottom,rigthBranchTop)
+
+			if(mouseX > targetMid){								
+				
+				if(mouseY < targetMidY) rigthBranchTop.insertBefore(this.trueIndicator, rigthBranchTop.firstChild);
+				else rigthBranchBottom.insertBefore(this.trueIndicator, rigthBranchBottom.firstChild);
+			
+			}
+
+		}
+
+
+
 		try {
 
 			if (mouseX > targetMid) {
 				if (target.nextElementSibling && target.nextElementSibling != this.trueIndicator) {
+					
+					
 					this.output.insertBefore(this.trueIndicator, target.nextElementSibling);
 				}
 			} else {
@@ -220,12 +250,7 @@ class App {
 
 	}
 
-
-
 	outputOnclick(event) {
-
-			console.log(CURRENTLY_DOING);
-
 
 		if (CURRENTLY_DOING == deleting || CURRENTLY_DOING == pointing) {
 			return;
@@ -268,7 +293,8 @@ class App {
 
 
 		if (toAdd) { 
-			this.output.insertBefore(toAdd, this.trueIndicator); 
+			this.output.insertBefore(toAdd, this.trueIndicator);
+			this.removeIndicator(); 
 			this.manageGradients();
 		}
 
@@ -280,27 +306,37 @@ class App {
 		
 		let elementstoScan = this.output.children;
 		let len = elementstoScan.length - 1;
-		for (let i = 1; i < len - 1; i++) {
+		for (let i = 1; i < len; i++) {
 			const part = elementstoScan[i];
 			
-			if(part.classList[0] == "blockcontainer" && part.classList[1] == "line") {
-				if(i == 1) part.classList.add("startgradient");
-            	else if(i == len - 2)part.classList.add("endgradient");
-				else{
-					if(part.classList.contains("endgradient") || part.classList.remove("startgradient")){
-						part.classList.remove("endgradient");
-						part.classList.remove("startgradient");
-					}
-				}
+
+			if(part.classList.contains("blockcontainer") && part.classList.contains("line")) {
+				this._managegradientPartBased(part,i,len);
+			}
+			else if(part.classList.contains("innercontainer")){
+				this._managegradientPartBased(part.childNodes[0].firstChild,i,len);
+				this._managegradientPartBased(part.childNodes[1].firstChild,i,len);
 
 			}
-			
-			
+
+				
 		}
 
 
 	}
 
+	_managegradientPartBased(part,i,len){
+
+
+		if(i == 1) part.classList.add("startgradient");
+        else if(i == len - 1)part.classList.add("endgradient");
+		else{
+			if(part.classList.contains("endgradient") || part.classList.remove("startgradient")){
+				part.classList.remove("endgradient");
+				part.classList.remove("startgradient");
+			}
+		}
+	}
 
 	//For all connectionline at once -> gonna check if there's need to remove too, at the end;
 	manageAutoConnectionLines_Margin(connectionLines){
