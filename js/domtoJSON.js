@@ -158,9 +158,6 @@ class Exporter {
 			let DOMpart = object.parts[i];
 			let toAdd;
 
-			// console.log(DOMpart);			
-
-
 			// If block
 			if (typeof DOMpart == "string") {
 

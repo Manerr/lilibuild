@@ -659,18 +659,18 @@ body .branch{
 }
 
 .innercontainer .allsvgcontainer{
-	height: 50%;
+	min-height: 10rem;
 	min-width: 100%;
 	position: relative;
 
 }
 
 .innercontainer .branchtop{
-	top: -3.02rem;
+	top: -1.52rem;
 }
 
 .innercontainer .branchbottom{
-	top: 3.05rem;
+	top: 1.55rem;
 }
 
 

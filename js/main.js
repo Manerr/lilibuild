@@ -320,9 +320,11 @@ class App {
 				this._managegradientPartBased(part,i,len);
 			}
 			else if(part.classList.contains("innercontainer")){
+				this._clearInnerGradients(part.childNodes[0].childNodes);
+				this._clearInnerGradients(part.childNodes[1].childNodes);
+
 				this._managegradientPartBased(part.childNodes[0].firstChild,i,len);
 				this._managegradientPartBased(part.childNodes[1].firstChild,i,len);
-
 			}
 
 				
@@ -331,8 +333,20 @@ class App {
 
 	}
 
+	_clearInnerGradients(nodes){
+		nodes.forEach((part)=>{
+			if(part.classList.contains("endgradient") || part.classList.remove("startgradient")){
+				part.classList.remove("endgradient");
+				part.classList.remove("startgradient");
+			}
+		});
+	}
+
 	_managegradientPartBased(part,i,len){
 
+		// console.log(part,i);
+
+		if(!part) return;
 
 		if(i == 1) part.classList.add("startgradient");
         else if(i == len - 1)part.classList.add("endgradient");
@@ -741,6 +755,28 @@ class App {
 		data.setDragImage(this.forghostimg,0,0);
 	}
 
+
+	onSortableJSChoosing(e){
+		console.log(e);
+
+		let currentlyDraggingElement = e.dragged;
+
+		let toDragging = e.to;
+
+		if(currentlyDraggingElement.classList.contains("branch")){
+			if(toDragging.classList.contains("branchtop") || toDragging.classList.contains("branchbottom")) return false;
+		} 
+
+	}
+
+
+
+	onSortableJSEnd(e){
+		this.manageGradients();
+	}
+
+
+
 	initSortableJS(){
 
 		Sortable.create(this.output, {
@@ -750,11 +786,12 @@ class App {
 		draggable: '.blockcontainer',
 		filter: '.emptyfordraggingstart, .emptyfordraggingend', 
 		preventOnFilter: true,
-				swapThreshold: .1,
+		swapThreshold: 1,
 		ghostClass: "ghost",
 		setData: this.hideDragGhost.bind(this),
-		onEnd: (evt) => {
-		},
+		onEnd: this.onSortableJSEnd.bind(this),
+		onMove: this.onSortableJSChoosing.bind(this)
+
 		});
 
 		document.querySelectorAll('.innercontainer .allsvgcontainer').forEach(branchContainer => {
@@ -764,12 +801,12 @@ class App {
 				group: 'metro',
 				ghostClass: "ghost",
 				draggable: '.blockcontainer',
-				swapThreshold: .1,
+				swapThreshold: 1,
 				preventOnFilter: true,
 				setData: this.hideDragGhost.bind(this),
 
-				onEnd: (evt) => {
-				},
+				onEnd: this.onSortableJSEnd.bind(this),
+				onMove: this.onSortableJSChoosing.bind(this)
 			});
 		});
 
