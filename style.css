@@ -734,6 +734,65 @@ body .branch{
 	cursor: pointer;
 }
 
+/* New ''UI'' for drawing */
+
+/* #dragtarget{
+	position: relative;
+} */
+
+#dragelements{
+	position: absolute;
+    bottom: 0;
+    left: 0;
+    /* background: black; */
+	display: flex;
+	gap: .15rem;
+	padding: .5rem;
+	z-index: 44;
+}
+
+#dragelements .indicator{
+	height: 4.5rem !important;
+	width: 4.5rem !important;	
+	flex-direction: column;
+	color: white;
+	font-weight: 400;
+	font-size: .87rem;
+	border-radius: 1rem;
+}
+
+#dragelements .indicator:hover{
+	filter: contrast(120%);
+}
+
+#dragelements .indicator .img{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 2rem;
+	width: 2.7rem;
+	overflow: hidden;
+}
+
+#dragelements .indicator:hover .img svg{
+	filter: none;
+}
+
+#dragelements .indicator .img svg{
+	height: unset;
+	width: unset;
+	min-width: unset;
+}
+
+#draggingpath .img{
+	transform: scaleY(.5);
+}
+
+#draggingbranch .img svg{
+	transform: scaleY(.9);
+
+}
+
 #printmodeonlyImg {
 	display: none;
 }

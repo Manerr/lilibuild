@@ -162,6 +162,8 @@ class App {
 
 	// basically a drawing function
 	outputOnmousemove(event) {
+
+		
 		// Not in drawing mode
 		if (CURRENTLY_DOING == deleting || CURRENTLY_DOING == pointing) {
 			this.removeIndicator();
@@ -181,7 +183,8 @@ class App {
 			target = target.parentElement;
 		}
 
-		
+
+		// console.log(target);
 
 		let nodeName = target.nodeName;
 
@@ -221,13 +224,27 @@ class App {
 
 			let rigthBranchTop = target.nextElementSibling.firstChild;
 			let rigthBranchBottom = target.nextElementSibling.lastChild;
+ 
+				console.log(target);
 
-			// console.log(rigthBranchBottom,rigthBranchTop)
+			let parent = target.parent;
 
-			if(mouseX > targetMid){								
+			// ADDING ON THE LEFT PART OF A BRANCH (one of the two sperated parts) ->
+			// between it or even inside at the right of a innercontainer:  
+
+
+
+
+
+			if(mouseX > targetMid){	
 				
-				if(mouseY < targetMidY) rigthBranchTop.insertBefore(this.trueIndicator, rigthBranchTop.firstChild);
-				else rigthBranchBottom.insertBefore(this.trueIndicator, rigthBranchBottom.firstChild);
+				// this.output.removeChild(this.indicator);
+				
+
+				// if(mouseY < targetMidY){
+				// 	rigthBranchTop.insertBefore(this.trueIndicator, rigthBranchTop.	firstChild);
+				// }
+				// else rigthBranchBottom.insertBefore(this.trueIndicator, rigthBranchBottom.firstChild);
 			
 			}
 
@@ -775,6 +792,10 @@ class App {
 		this.manageGradients();
 	}
 
+	onSortableJSDRAWING(e){
+		console.log(e.to,e.dragged);
+		this.manageGradients();
+	}
 
 
 	initSortableJS(){
@@ -808,6 +829,22 @@ class App {
 				onEnd: this.onSortableJSEnd.bind(this),
 				onMove: this.onSortableJSChoosing.bind(this)
 			});
+		});
+
+		Sortable.create(document.getElementById("dragelements"), {
+		animation: 150, 
+		handle: '.indicator',
+		// group: 'metro', 
+		group: { name: "metro", pull: 'clone'},
+		draggable: '.indicator',
+		// filter: '.emptyfordraggingstart, .emptyfordraggingend', 
+		preventOnFilter: true,
+		swapThreshold: 1,
+		ghostClass: "ghost",
+		setData: this.hideDragGhost.bind(this),
+		onEnd: this.onSortableJSDRAWING.bind(this),
+		onMove: this.onSortableJSChoosing.bind(this)
+
 		});
 
 	}
