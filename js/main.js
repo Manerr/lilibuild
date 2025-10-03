@@ -773,16 +773,38 @@ class App {
 	}
 
 
+	_manageDrawingSortable(){
+		
+		let newElement = document.createElement("div");
+
+		newElement.innerHTML = pathHTML.replace(this.DEFAULT_COLOR, this.line.color);
+		return newElement;
+
+	}
+
+
 	onSortableJSChoosing(e){
-		console.log(e);
+		// console.log(e);
+
 
 		let currentlyDraggingElement = e.dragged;
-
-		let toDragging = e.to;
 
 		if(currentlyDraggingElement.classList.contains("branch")){
 			if(toDragging.classList.contains("branchtop") || toDragging.classList.contains("branchbottom")) return false;
 		} 
+
+		console.log(currentlyDraggingElement);
+
+		if(currentlyDraggingElement.parentElement.id == "dragelements" ){
+			e.clone = this._manageDrawingSortable();
+			e.item = this._manageDrawingSortable();
+			e.dragged = this._manageDrawingSortable();
+			// return true;
+
+			
+		}
+		let toDragging = e.to;
+
 
 	}
 
@@ -793,7 +815,8 @@ class App {
 	}
 
 	onSortableJSDRAWING(e){
-		console.log(e.to,e.dragged);
+		// console.log(e.dragged);
+
 		this.manageGradients();
 	}
 
