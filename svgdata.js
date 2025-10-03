@@ -64,7 +64,6 @@ pathBranchHTML = '\
 
 
 
-
 pointHTML = '<div class="img" name="pointempty">    \
 <svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">         \
 <g id="g1" transform="matrix(-2.840665102005005, 0, 0, 2.9739670753479004, 6673.122120031134, -5188.936562098089)"    \

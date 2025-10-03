@@ -51,7 +51,7 @@ class EventManager {
 		// Output container events
 		// this.app.output.ondragend = this.app.outputOndragend.bind(this.app);
 		// this.app.output.onmouseleave = this.app.removeIndicator.bind(this.app);
-		this.app.output.onmousemove = this.app.outputOnmousemove.bind(this.app);
+		// this.app.output.onmousemove = this.app.outputOnmousemove.bind(this.app);
 
 
 	}

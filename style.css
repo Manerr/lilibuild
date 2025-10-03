@@ -542,6 +542,10 @@ body .InsertBeforeit {
 
 }
 
+
+
+
+
 .img g .endpoint :last-child {
 	stroke: none !important;
 }
@@ -624,10 +628,11 @@ html body .img svg g.corrpoint path {
 body .branch{
 	/* height: 18rem !important; */
 	width: 16.12rem !important;
+	/* width: unset !important; */
 }
 
 
-.branch .img{
+.branch > .img{
 	/* position: relative; */
 	/* left: .1rem; */
 	/* height: 1.9rem; */
@@ -637,6 +642,7 @@ body .branch{
 	/* left: -.1rem; */
 	z-index: 0;
 	/* filter: hue-rotate(90deg); */
+	width: 110%;
 }
 
 .branchreverse{
@@ -645,7 +651,9 @@ body .branch{
 
 
 
-
+.after-branch.innercontainer{
+	align-items: flex-start;
+}
 
 .innercontainer{
 	display: flex;
@@ -655,13 +663,16 @@ body .branch{
 	height: -webkit-fill-available;
 	min-height: 100%;
 	z-index: 1;
+	align-items: flex-end;
 	/* position: relative; */
 }
 
 .innercontainer .allsvgcontainer{
 	min-height: 10rem;
-	min-width: 100%;
+	/* min-width: 100%; */
 	position: relative;
+	/* It helps sortablejs to make dragging new element easier on branches */
+	padding-left: 2rem;
 
 }
 
@@ -751,7 +762,7 @@ body .branch{
 	z-index: 44;
 }
 
-#dragelements .indicator{
+body .indicator{
 	height: 4.5rem !important;
 	width: 4.5rem !important;	
 	flex-direction: column;
@@ -765,12 +776,16 @@ body .branch{
 	filter: contrast(120%);
 }
 
-#dragelements .indicator .img{
+#dragtarget .indicator span{
+	display: none;
+}
+
+body .indicator .img{
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 2rem;
-	width: 2.7rem;
+	height: 2rem !important;
+	width: 2.7rem !important;
 	overflow: hidden;
 }
 
@@ -792,6 +807,17 @@ body .branch{
 	transform: scaleY(.9);
 
 }
+
+#dragtarget{
+	/* pointer-events: none; */
+}
+
+#dragtarget > .allsvgcontainer > *{
+	position: relative;
+
+}
+
+
 
 #printmodeonlyImg {
 	display: none;

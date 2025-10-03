@@ -225,7 +225,7 @@ class App {
 			let rigthBranchTop = target.nextElementSibling.firstChild;
 			let rigthBranchBottom = target.nextElementSibling.lastChild;
  
-				console.log(target);
+				// console.log(target);
 
 			let parent = target.parent;
 
@@ -328,15 +328,17 @@ class App {
 	manageGradients(){
 		
 		let elementstoScan = this.output.children;
+
 		let len = elementstoScan.length - 1;
-		for (let i = 1; i < len; i++) {
+		for (let i = 0; i < len; i++) {
 			const part = elementstoScan[i];
 			
-
 			if(part.classList.contains("blockcontainer") && part.classList.contains("line")) {
 				this._managegradientPartBased(part,i,len);
 			}
 			else if(part.classList.contains("innercontainer")){
+
+
 				this._clearInnerGradients(part.childNodes[0].childNodes);
 				this._clearInnerGradients(part.childNodes[1].childNodes);
 
@@ -458,7 +460,7 @@ class App {
 
 
 	loadLocalStorage() {
-
+		// this.outputdragzone.style.visibility = "visible";
 		// return;
 
 		if (window.localStorage.lilibuild == undefined) {
@@ -773,41 +775,80 @@ class App {
 	}
 
 
-	_manageDrawingSortable(){
-		
-		let newElement = document.createElement("div");
-
-		newElement.innerHTML = pathHTML.replace(this.DEFAULT_COLOR, this.line.color);
-		return newElement;
-
-	}
+	_manageDrawingSortable(type){
 
 
-	onSortableJSChoosing(e){
-		// console.log(e);
+		let toAdd;
 
+		if (type == "drawingpath") {
+			toAdd = document.createElement("div");
 
-		let currentlyDraggingElement = e.dragged;
+			toAdd.className = "blockcontainer line";
 
-		if(currentlyDraggingElement.classList.contains("branch")){
-			if(toDragging.classList.contains("branchtop") || toDragging.classList.contains("branchbottom")) return false;
-		} 
+			toAdd.draggable = "true";
 
-		console.log(currentlyDraggingElement);
-
-		if(currentlyDraggingElement.parentElement.id == "dragelements" ){
-			e.clone = this._manageDrawingSortable();
-			e.item = this._manageDrawingSortable();
-			e.dragged = this._manageDrawingSortable();
-			// return true;
+			toAdd.innerHTML = pathHTML.replace(this.DEFAULT_COLOR, this.line.color);
+		}
+		else if (type == "drawingbranch") {
 
 			
-		}
-		let toDragging = e.to;
+			toAdd = document.createElement("div");
 
+			toAdd.className = "blockcontainer branch";
+
+			toAdd.draggable = "true";
+
+			toAdd.innerHTML = pathBranchHTML.replace(this.DEFAULT_COLOR, this.line.color);
+
+
+		} else if (type == "drawingpoint") {
+			toAdd = document.createElement("div");
+
+			toAdd.className = "blockcontainer point";
+
+			toAdd.draggable = "true";
+
+			toAdd.innerHTML = pointHTML.replace(this.DEFAULT_COLOR, this.line.color);
+
+
+		}
+
+		
+		return toAdd;
 
 	}
 
+	onSortableJSChoosing(e){
+		
+		let currentlyDraggingElement = e.dragged;
+		let currentlyDraggingElementTo = e.to;
+
+		let type = currentlyDraggingElement.getAttribute("type");
+
+		if(type == "drawingbranch"){
+			if(currentlyDraggingElementTo.classList.contains("branchtop") || currentlyDraggingElementTo.classList.contains("branchbottom")) return false;
+		} 
+
+		
+
+	}
+	
+	// OnDragend new "version"
+	onSortableJSUpdate(e){
+
+		let cloning = e.clone;
+		let destination = e.item;
+
+		if(cloning.parentElement && cloning.parentElement.id == "dragelements" ){
+			
+			let type = cloning.getAttribute("type");
+
+			let realElement = this._manageDrawingSortable(type);	
+			if(realElement) destination.replaceWith(realElement);
+		
+		}
+
+	}
 
 
 	onSortableJSEnd(e){
@@ -820,39 +861,45 @@ class App {
 		this.manageGradients();
 	}
 
-
-	initSortableJS(){
-
-		Sortable.create(this.output, {
-		animation: 150, 
-		handle: '.blockcontainer',
-		group: 'metro', 
-		draggable: '.blockcontainer',
-		filter: '.emptyfordraggingstart, .emptyfordraggingend', 
-		preventOnFilter: true,
-		swapThreshold: 1,
-		ghostClass: "ghost",
-		setData: this.hideDragGhost.bind(this),
-		onEnd: this.onSortableJSEnd.bind(this),
-		onMove: this.onSortableJSChoosing.bind(this)
-
-		});
-
+	_initSortableJSBranches(){
 		document.querySelectorAll('.innercontainer .allsvgcontainer').forEach(branchContainer => {
 			Sortable.create(branchContainer, {
 				animation: 150,
-				handle: '.blockcontainer',
+				handle: ['.blockcontainer',".indicator"],
 				group: 'metro',
 				ghostClass: "ghost",
 				draggable: '.blockcontainer',
 				swapThreshold: 1,
 				preventOnFilter: true,
 				setData: this.hideDragGhost.bind(this),
+				onSort: this.onSortableJSUpdate.bind(this),
 
 				onEnd: this.onSortableJSEnd.bind(this),
 				onMove: this.onSortableJSChoosing.bind(this)
 			});
 		});
+
+	}
+
+	initSortableJS(){
+
+		Sortable.create(this.output, {
+		animation: 150, 
+		handle: ['.blockcontainer',".indicator",'.innercontainer'],
+		group: 'metro', 
+		draggable: '.blockcontainer',
+		// filter: '.emptyfordraggingstart, .emptyfordraggingend', 
+		preventOnFilter: true,
+		swapThreshold: 1,
+		ghostClass: "ghost",
+		setData: this.hideDragGhost.bind(this),
+		onEnd: this.onSortableJSEnd.bind(this),
+		onMove: this.onSortableJSChoosing.bind(this),
+		onSort: this.onSortableJSUpdate.bind(this),
+		});
+
+		this._initSortableJSBranches();
+
 
 		Sortable.create(document.getElementById("dragelements"), {
 		animation: 150, 
