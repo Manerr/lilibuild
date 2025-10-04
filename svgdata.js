@@ -24,15 +24,12 @@ pointTerminus = '<svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg"  wi
             </svg>\
           </div>';
 
-
-
 pathHTML = '<div class="img" name="path">     \
   <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">  \
   <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">        \
   <g class="path" transform="translate(-2.502188,0.005053)" id="g1">      \
   <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">    \
   </path>    </g>  </g></svg></div>';
-
 
 // First one that looked too large 
 // pathBranchHTML = '\
@@ -48,7 +45,6 @@ pathHTML = '<div class="img" name="path">     \
 // </div>\
 // ';
 
-
 pathBranchHTML = '\
 <div class="img" name="path">\
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 354 270">\
@@ -59,11 +55,6 @@ pathBranchHTML = '\
 </div>\
 ';
 
-
-
-
-
-
 pointHTML = '<div class="img" name="pointempty">    \
 <svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">         \
 <g id="g1" transform="matrix(-2.840665102005005, 0, 0, 2.9739670753479004, 6673.122120031134, -5188.936562098089)"    \
@@ -72,7 +63,6 @@ style="height: 100%;">    <g class="normalpoint" style="" transform="matrix(0, -
 </g>  </g></svg></div><div class="name" spellcheck="false" contenteditable="">Station</div><div class="connection">    \
      <button class="connectionpoint addConnectionLine"></button></div>';
 
-
 editedpointHTML = '<div class="img" name="pointempty">    \
 <svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">         \
 <g id="g1" transform="matrix(-2.840665102005005, 0, 0, 2.9739670753479004, 6673.122120031134, -5188.936562098089)"    \
@@ -80,8 +70,6 @@ style="height: 100%;">    <g class="normalpoint" style="" transform="matrix(0, -
 <path id="path3799-2" d="m 2338.8375,1750.3323 c 0,-2.4771 2.0101,-4.485 4.4871,-4.485 2.4793,0 4.4893,2.0079 4.4893,4.485 0,2.4792 -2.01,4.485 -4.4893,4.485 -2.477,0 -4.4871,-2.0058 -4.4871,-4.485" style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:rgb(13, 140, 93);stroke-width:2.24465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3.864;stroke-dasharray:none;stroke-opacity:1"></path>    \
 </g>  </g></svg></div>';
 
-
-
-let ligne12JSON = `{"line":["metro","12","rgb(13, 140, 93)"],"parts":["branch","block",{"name":"Mairie\\nd'Aubervilliers","type":"pointterminus","connected":false,"connections":[]},"block",{"name":"Aimé Césaire","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Front Populaire","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Porte de la Chapelle","type":"pointcorr","connected":true,"connections":["Tram connectionpoint lineT3B"]},"block",{"name":"Marx Dormoy","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Marcadet-Poissonniers","type":"pointcorr","connected":true,"connections":["metro connectionpoint line4"]},"block",{"name":"Jules Joffrin","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Abbesses","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Pigalle","type":"pointcorr","connected":true,"connections":["metro connectionpoint line2"]},"block",{"name":"Saint-Georges","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Notre-Dame-de-Lorette","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Trinité-d'Estienne d'Orves","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Saint-Lazare","type":"pointcorr","connected":true,"connections":["metro connectionpoint line13","metro connectionpoint line3","metro connectionpoint line14","RER connectionpoint lineE","Train connectionpoint lineJ","Train connectionpoint lineL"]},"block",{"name":"Madeleine","type":"pointcorr","connected":true,"connections":["metro connectionpoint line8","metro connectionpoint line14"]},"block",{"name":"Concorde","type":"pointcorr","connected":true,"connections":["metro connectionpoint line1","metro connectionpoint line8"]},"block",{"name":"Assemblée Nationale","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Solférino","type":"pointcorr","connected":true,"connections":["RER connectionpoint lineC"]},"block",{"name":"Rue du Bac","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Sèvres-Babylone","type":"pointcorr","connected":true,"connections":["metro connectionpoint line10"]},"block",{"name":"Rennes","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Notre-Dame-des-Champs","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Montparnasse\\nBienvenüe","type":"pointcorr","connected":true,"connections":["metro connectionpoint line13","metro connectionpoint line4","metro connectionpoint line6","Train connectionpoint lineN"]},"block",{"name":"Falguière","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Pasteur","type":"pointcorr","connected":true,"connections":["metro connectionpoint line6"]},"block",{"name":"Volontaires","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Vaugirard","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Convention","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Porte de Versailles","type":"pointcorr","connected":true,"connections":["Tram connectionpoint lineT2","Tram connectionpoint lineT3A"]},"block",{"name":"Corentin Celton","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Mairie d'Issy","type":"pointterminus","connected":false,"connections":[]},"block"]}`;
+let ligne12JSON = `{"line":["metro","12","rgb(13, 140, 93)"],"parts":["innerblocks",["block","block","block"],[{"name":"Station 42","type":"pointempty","connected":false,"connections":[]}],"branch","block",{"name":"Mairie\\nd'Aubervilliers","type":"pointterminus","connected":false,"connections":[]},"block",{"name":"Aimé Césaire","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Front Populaire","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Porte de la Chapelle","type":"pointcorr","connected":true,"connections":["Tram connectionpoint lineT3B"]},"block",{"name":"Marx Dormoy","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Marcadet-Poissonniers","type":"pointcorr","connected":true,"connections":["metro connectionpoint line4"]},"block",{"name":"Jules Joffrin","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Abbesses","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Pigalle","type":"pointcorr","connected":true,"connections":["metro connectionpoint line2"]},"block",{"name":"Saint-Georges","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Notre-Dame-de-Lorette","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Trinité-d'Estienne d'Orves","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Saint-Lazare","type":"pointcorr","connected":true,"connections":["metro connectionpoint line13","metro connectionpoint line3","metro connectionpoint line14","RER connectionpoint lineE","Train connectionpoint lineJ","Train connectionpoint lineL"]},"block",{"name":"Madeleine","type":"pointcorr","connected":true,"connections":["metro connectionpoint line8","metro connectionpoint line14"]},"block",{"name":"Concorde","type":"pointcorr","connected":true,"connections":["metro connectionpoint line1","metro connectionpoint line8"]},"block",{"name":"Assemblée Nationale","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Solférino","type":"pointcorr","connected":true,"connections":["RER connectionpoint lineC"]},"block",{"name":"Rue du Bac","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Sèvres-Babylone","type":"pointcorr","connected":true,"connections":["metro connectionpoint line10"]},"block",{"name":"Rennes","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Notre-Dame-des-Champs","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Montparnasse\\nBienvenüe","type":"pointcorr","connected":true,"connections":["metro connectionpoint line13","metro connectionpoint line4","metro connectionpoint line6","Train connectionpoint lineN"]},"block",{"name":"Falguière","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Pasteur","type":"pointcorr","connected":true,"connections":["metro connectionpoint line6"]},"block",{"name":"Volontaires","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Vaugirard","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Convention","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Porte de Versailles","type":"pointcorr","connected":true,"connections":["Tram connectionpoint lineT2","Tram connectionpoint lineT3A"]},"block",{"name":"Corentin Celton","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Mairie d'Issy","type":"pointterminus","connected":false,"connections":[]},"block"]}`;
 
 let DEBUG_LINE = `{"line":["metro","12","rgb(13, 140, 93)"],"parts":["branch","block",{"name":"Mairie\\nd'Aubervilliers","type":"pointterminus","connected":false,"connections":[]},"block",{"name":"Porte de la Chapelle","type":"pointcorr","connected":true,"connections":["Tram connectionpoint lineT3B"]},"block",{"name":"Marx Dormoy","type":"pointempty","connected":false,"connections":[]},"branchreverse"]}`;

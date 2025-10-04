@@ -329,15 +329,16 @@ class App {
 		
 		let elementstoScan = this.output.children;
 
+		// console.log(elementstoScan);
+
 		let len = elementstoScan.length - 1;
-		for (let i = 0; i < len; i++) {
+		for (let i = 1; i < len; i++) {
 			const part = elementstoScan[i];
 			
 			if(part.classList.contains("blockcontainer") && part.classList.contains("line")) {
 				this._managegradientPartBased(part,i,len);
 			}
 			else if(part.classList.contains("innercontainer")){
-
 
 				this._clearInnerGradients(part.childNodes[0].childNodes);
 				this._clearInnerGradients(part.childNodes[1].childNodes);
@@ -363,7 +364,6 @@ class App {
 
 	_managegradientPartBased(part,i,len){
 
-		// console.log(part,i);
 
 		if(!part) return;
 
@@ -392,7 +392,7 @@ class App {
 		let max = 0;
 
 
-		if(!nextPart.classList.contains("line")) return;
+		if(!nextPart || !nextPart.classList.contains("line")) return;
 
 
 		for (let index = 0; index < connectionLines.length; index++) {
@@ -463,16 +463,16 @@ class App {
 		// this.outputdragzone.style.visibility = "visible";
 		// return;
 
-		if (window.localStorage.lilibuild == undefined) {
+		// if (window.localStorage.lilibuild == undefined) {
 			window.localStorage.lilibuild = ligne12JSON;
 
-		}
+		// }
 
 		try {
 			this.exporter.importJSON(JSON.parse(window.localStorage.lilibuild));
 		} catch (e) {
 			console.warn("Error on loading saved data - happens on first launch or when this error",e);
-			this.saveLocalStorage();
+			// this.saveLocalStorage();
 		}
 
 
@@ -777,7 +777,7 @@ class App {
 
 	_manageDrawingSortable(type){
 
-
+		// console.log(type)
 		let toAdd;
 
 		if (type == "drawingpath") {
@@ -795,6 +795,17 @@ class App {
 			toAdd = document.createElement("div");
 
 			toAdd.className = "blockcontainer branch";
+
+			toAdd.draggable = "true";
+
+			toAdd.innerHTML = pathBranchHTML.replace(this.DEFAULT_COLOR, this.line.color);
+
+
+		} else if (type == "drawingbranchreverse") {
+			
+			toAdd = document.createElement("div");
+
+			toAdd.className = "blockcontainer branch branchreverse";
 
 			toAdd.draggable = "true";
 
@@ -825,11 +836,10 @@ class App {
 
 		let type = currentlyDraggingElement.getAttribute("type");
 
-		if(type == "drawingbranch"){
+		if(type == "drawingbranch" || type == "drawingbranchreverse"){
 			if(currentlyDraggingElementTo.classList.contains("branchtop") || currentlyDraggingElementTo.classList.contains("branchbottom")) return false;
 		} 
 
-		
 
 	}
 	
@@ -845,7 +855,32 @@ class App {
 
 			let realElement = this._manageDrawingSortable(type);	
 			if(realElement) destination.replaceWith(realElement);
-		
+
+			let index = e.newIndex;
+			let elementBefore = this.output.children[index];
+
+			let innerLinescontiguousToBranch = document.createElement("div");
+			innerLinescontiguousToBranch.className = "innercontainer";
+			innerLinescontiguousToBranch.innerHTML = `<div class="allsvgcontainer branchtop"><div class="blockcontainer line startgradient"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div></div><div class="allsvgcontainer branchbottom"><div class="blockcontainer line startgradient" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div></div>`.replaceAll("rgb(13, 140, 93)",this.line.color);
+
+
+			if(type == "drawingbranch") {
+
+				this.output.insertBefore(innerLinescontiguousToBranch,elementBefore);
+				this._initSortableJSBranches();
+
+			}
+			else if(type == "drawingbranchreverse"){
+
+				let next = elementBefore.nextElementSibling;
+				if(!next) this.output.insertBefore(innerLinescontiguousToBranch,lastZone)
+				else this.output.insertBefore(innerLinescontiguousToBranch,next);
+				this._initSortableJSBranches();
+
+
+			}
+			
+
 		}
 
 	}

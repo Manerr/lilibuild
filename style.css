@@ -157,7 +157,8 @@ div.terminus {
 }
 
 .deleting .blockcontainer.line:hover,
-.deleting .point .img:hover {
+.deleting .point .img:hover,
+.deleting .branch:hover {
 	box-shadow: 0px 0px .2rem #777;
 	outline: .3rem solid #222;
 	border-radius: .3rem;
@@ -672,12 +673,12 @@ body .branch{
 	/* min-width: 100%; */
 	position: relative;
 	/* It helps sortablejs to make dragging new element easier on branches */
-	padding-left: 2rem;
+	/* padding-left: 2rem; */
 
 }
 
 .innercontainer .branchtop{
-	top: -1.52rem;
+	top: -1.55rem;
 }
 
 .innercontainer .branchbottom{
@@ -784,7 +785,7 @@ body .indicator .img{
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 2rem !important;
+	/* height: 2rem !important; */
 	width: 2.7rem !important;
 	overflow: hidden;
 }
@@ -799,21 +800,12 @@ body .indicator .img{
 	min-width: unset;
 }
 
-#draggingpath .img{
-	transform: scaleY(.5);
+#dragelements :nth-child(2) .img{
+	transform: scaleY(.2);
 }
 
-#draggingbranch .img svg{
+#dragelements :nth-child(3) .img svg,#dragelements :nth-child(4) .img svg{
 	transform: scaleY(.9);
-
-}
-
-#dragtarget{
-	/* pointer-events: none; */
-}
-
-#dragtarget > .allsvgcontainer > *{
-	position: relative;
 
 }
 
@@ -834,3 +826,4 @@ body .indicator .img{
 .ghost {
 	opacity: 1;
 }
+

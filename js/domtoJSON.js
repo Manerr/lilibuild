@@ -74,97 +74,49 @@ class Exporter {
 
 
 
-
-	importJSON(object = null) {
-
-
-		let lineNameContainer = this.parent.outputdragzone.querySelector(".linename .connectionline");
-
-		let lineTypeBox = lineNameContainer.children[0];
-		let lineNumberBox = lineNameContainer.children[1];
-
-		let lineType = object.line[0];
-		let lineNumber = object.line[1];
-		let lineColor = object.line[2];
-		let lineIsCustom = object.line[3];
-
-		lineNumberBox.setAttribute("value", lineNumber);
-
-		this.parent.line.name = lineNumber;
+	jsonsubArraytoHTML(object,lineType){
 
 
-		// Line number
-		if (lineNumber[1] == "B") {
-			lineNumber = lineNumber[0] + "   ";
-			lineNameContainer.children[1].setAttribute("bis", "bis");
-		}
+		let result = document.createElement("div");
 
-		// Set the line's name/number
-		lineNameContainer.setAttribute("type", lineType);
-		lineNumberBox.setAttribute("truename", lineNumber);
-
-		if (lineNumber.slice(1) == "   ") {
-			lineNumberBox.className = object.line[0] + " connectionpoint line" + lineNumber.slice(0, 1).toUpperCase() + "B";
-		} else {
-			lineNumberBox.className = object.line[0] + " connectionpoint line" + lineNumber.toUpperCase();
-		}
-
-
-
-		if(lineIsCustom){
-			lineNumberBox.style.backgroundColor = lineColor;
-		}
-
-		this.parent.line.color = lineColor;
-		this.parent.line.type = lineType;
-		this.parent.line.custom = lineIsCustom;
-		this.parent.ChangeSVGColors(this.parent.line.color);
-
-		//fixed a bug when importing metro/train on an existing tram line
-		if( !lineNameContainer.children[1].getAttribute("bis") ) lineNumberBox.style.backgroundImage = "none";
-
-		// Set the line type's icon
-		switch (lineType) {
-
-			case "metro":
-				lineTypeBox.src = "blocks/connections/pointM.svg";
-				break;
-			case "RER":
-				lineTypeBox.src = "blocks/connections/pointRER.svg";
-				break;
-			case "Train":
-				lineTypeBox.src = "blocks/connections/pointTrain.svg";
-				break;
-			case "Tram":
-				lineTypeBox.src = "blocks/connections/pointTram.svg";
-				lineNumberBox.style.backgroundImage = "url('blocks/connections/trams/" + lineNumber.substring(0, lineNumber.length - 1) + lineNumber.substring(lineNumber.length - 1).toUpperCase() + ".svg')";
-
-				break;
-
-		}
-
-		// Clear all existing parts 
-
-		for (let i = this.parent.output.children.length - 2; i >= 1; i--) {
-			this.parent.output.removeChild(this.parent.output.children[i]);
-		}
-
-
-		// Now it get back all the parts (here the blocks)
-
-		let len = object.parts.length;
-
+		let len = object.length;
 		for (var i = 0; i < len; i++) {
-			let DOMpart = object.parts[i];
+			let DOMpart = object[i];
 			let toAdd;
+
+			let innerblocks = false;
 
 			// If block
 			if (typeof DOMpart == "string") {
 
+				if(DOMpart == "innerblocks"){
+					innerblocks = true;
+					
+					let toAdd = this.jsonsubArraytoHTML(object[i + 1],lineType);
+					let toAdd2 = this.jsonsubArraytoHTML(object[i + 2],lineType);
+
+					let smartPartContainer = document.createElement("div");
+
+					// let smartPartContainerTop = document.createElement("div");
+					// let smartPartContainerBottom = document.createElement("div");
+
+					smartPartContainer.classList.add("innercontainer");
+
+					toAdd.className = "allsvgcontainer branchtop";
+					toAdd2.className = "allsvgcontainer branchbottom";
+
+					smartPartContainer.appendChild(toAdd);
+					smartPartContainer.appendChild(toAdd2);
+
+					result.appendChild(smartPartContainer);
+
+					i+=2;
+					// DOMPart = ;
+				}
 
 				if(DOMpart == "block"){
 					toAdd = document.createElement("div");
-					this.parent.output.insertBefore(toAdd, this.parent.lastZone);
+					result.appendChild(toAdd);
 					toAdd.className = "blockcontainer line";
 					// toAdd.draggable = "true";
 					if (DOMpart === "block-dashed") toAdd.classList.add("dashed");
@@ -175,6 +127,7 @@ class Exporter {
 				else if(DOMpart.slice(0,6) == "branch"){
 
 					let reversed = DOMpart.slice(6) == "reverse";
+
 					
 					toAdd = document.createElement("div");
 					toAdd.className = "blockcontainer branch";
@@ -187,46 +140,30 @@ class Exporter {
 
 					// Very "smart" yeah.. 
 					// Contains the parts -> like a "column" 
-					let smartPartContainer = document.createElement("div");
 
-					let smartPartContainerTop = document.createElement("div");
-					let smartPartContainerBottom = document.createElement("div");
+					// // ONLY for debugging - development
+					// smartPartContainerTop.innerHTML = `<div class="blockcontainer line" draggable="false"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div>`;
 
-					smartPartContainer.classList.add("innercontainer");
+					// smartPartContainerBottom.innerHTML = `<div class="blockcontainer line" draggable="false"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div>`;
 
-					smartPartContainerTop.className = "allsvgcontainer branchtop";
-					smartPartContainerBottom.className = "allsvgcontainer branchbottom";
-
-					// ONLY for debugging - development
-					smartPartContainerTop.innerHTML = `<div class="blockcontainer line" draggable="false"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div>`;
-
-					smartPartContainerBottom.innerHTML = `<div class="blockcontainer line" draggable="false"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div>`;
-
-					smartPartContainer.appendChild(smartPartContainerTop);
-					smartPartContainer.appendChild(smartPartContainerBottom);
+					// smartPartContainer.appendChild(smartPartContainerTop);
+					// smartPartContainer.appendChild(smartPartContainerBottom);
 					
+
 					if(reversed){
-						this.parent.output.insertBefore(toAdd, this.parent.lastZone);
-						this.parent.output.insertBefore(smartPartContainer, this.parent.lastZone);
+					// console.log(result);
+						result.appendChild(toAdd);
+					// console.log(result);
+						// result.appendChild(smartPartContainer);
 					}
 					else{
-						this.parent.output.insertBefore(smartPartContainer, this.parent.lastZone);
-						this.parent.output.insertBefore(toAdd, this.parent.lastZone);
+						// result.appendChild(smartPartContainer);
+						result.appendChild(toAdd);
 					}
-
 
 					toAdd = null;
 
-
-
 				}
-
-
-
-
-
-
-
 			}
 
 			// If point
@@ -236,7 +173,7 @@ class Exporter {
 				let isConnected = DOMpart.connected;
 
 				toAdd = document.createElement("div");
-				this.parent.output.insertBefore(toAdd, this.parent.lastZone);
+				result.insertBefore(toAdd, result.lastChild);
 
 				toAdd.className = "blockcontainer point";
 				// toAdd.draggable = "true";
@@ -419,17 +356,6 @@ class Exporter {
 
 						}
 
-
-
-
-
-
-
-
-
-
-
-
 					}
 
 
@@ -456,20 +382,113 @@ class Exporter {
 
 				toAdd = null;
 
-				
-
+			
 			}
 
-
 			toAdd = null;
-
 			DOMpart = null;
 
 		}
 
+		return result;
+
+	}
+
+	importJSON(object = null) {
+
+		let lineNameContainer = this.parent.outputdragzone.querySelector(".linename .connectionline");
+
+		let lineTypeBox = lineNameContainer.children[0];
+		let lineNumberBox = lineNameContainer.children[1];
+
+		let lineType = object.line[0];
+		let lineNumber = object.line[1];
+		let lineColor = object.line[2];
+		let lineIsCustom = object.line[3];
+
+		lineNumberBox.setAttribute("value", lineNumber);
+
+		this.parent.line.name = lineNumber;
+
+
+		// Line number
+		if (lineNumber[1] == "B") {
+			lineNumber = lineNumber[0] + "   ";
+			lineNameContainer.children[1].setAttribute("bis", "bis");
+		}
+
+		// Set the line's name/number
+		lineNameContainer.setAttribute("type", lineType);
+		lineNumberBox.setAttribute("truename", lineNumber);
+
+		if (lineNumber.slice(1) == "   ") {
+			lineNumberBox.className = object.line[0] + " connectionpoint line" + lineNumber.slice(0, 1).toUpperCase() + "B";
+		} else {
+			lineNumberBox.className = object.line[0] + " connectionpoint line" + lineNumber.toUpperCase();
+		}
+
+
+
+		if(lineIsCustom){
+			lineNumberBox.style.backgroundColor = lineColor;
+		}
+
+		this.parent.line.color = lineColor;
+		this.parent.line.type = lineType;
+		this.parent.line.custom = lineIsCustom;
+		this.parent.ChangeSVGColors(this.parent.line.color);
+
+		//fixed a bug when importing metro/train on an existing tram line
+		if( !lineNameContainer.children[1].getAttribute("bis") ) lineNumberBox.style.backgroundImage = "none";
+
+		// Set the line type's icon
+		switch (lineType) {
+
+			case "metro":
+				lineTypeBox.src = "blocks/connections/pointM.svg";
+				break;
+			case "RER":
+				lineTypeBox.src = "blocks/connections/pointRER.svg";
+				break;
+			case "Train":
+				lineTypeBox.src = "blocks/connections/pointTrain.svg";
+				break;
+			case "Tram":
+				lineTypeBox.src = "blocks/connections/pointTram.svg";
+				lineNumberBox.style.backgroundImage = "url('blocks/connections/trams/" + lineNumber.substring(0, lineNumber.length - 1) + lineNumber.substring(lineNumber.length - 1).toUpperCase() + ".svg')";
+
+				break;
+
+		}
+
+		// Clear all existing parts 
+
+		for (let i = this.parent.output.children.length - 2; i >= 1; i--) {
+			this.parent.output.removeChild(this.parent.output.children[i]);
+		}
+
+
+		// Now it get back all the parts (here the blocks)
+
+
+		let result = this.jsonsubArraytoHTML(object.parts,lineType);
+		result.className = "allsvgcontainer pad3 pad4 pad2";
+		
+		let dragstart = document.createElement("div");
+		let dragend = document.createElement("div");
+		dragstart.className = "emptyfordraggingstart";
+		dragend.className = "emptyfordraggingend";
+		result.insertBefore(dragstart,result.firstChild);
+		result.appendChild(dragend);
+		
+
+		this.parent.output.replaceWith(result);
+		this.parent.output = document.querySelector("#dragtarget > .allsvgcontainer");
 		this.parent.manageAllConnectionsMargins();
 		this.parent.manageGradients();
 		this.parent.outputdragzone.style.visibility = "visible";
+		return;
+
 
 
 	}
