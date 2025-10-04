@@ -781,7 +781,9 @@ body .indicator{
 	display: none;
 }
 
-body .indicator .img{
+
+
+#dragelements .indicator .img{
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -789,6 +791,22 @@ body .indicator .img{
 	width: 2.7rem !important;
 	overflow: hidden;
 }
+
+.indicator .img{
+	height: 2rem !important;
+}
+
+.allsvgcontainer .indicator[type="drawingpoint"]{
+	width: 2rem !important;
+	
+}
+
+.allsvgcontainer .indicator[type="drawingbranch"] .img,.allsvgcontainer .indicator[type="drawingbranchreverse"] .img {
+	width: unset !important;
+	height: 12rem !important;
+}
+
+
 
 #dragelements .indicator:hover .img svg{
 	filter: none;
