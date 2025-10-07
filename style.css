@@ -564,10 +564,24 @@ body .InsertBeforeit {
 	mask-image: linear-gradient(-90deg, white 25%, #00000000 96%);
 }
 
-.tramstyle .line .img {
+/* .tramstyle .line .img {
 	mask-image: linear-gradient(white 38%, #aaaaaa 38%, #aaaaaa 62%, white 62%);
 	mask-mode: luminance;
+} */
+
+.tramstyle .line svg{
+	filter: saturate(0.42) brightness(1.33) url(#inner-shadow-filter-0) url(#inner-shadow-filter-1);
 }
+
+.tramstyle .branch svg{
+	filter: saturate(0.42) brightness(1.33) url(#inner-shadow-filter-2) url(#inner-shadow-filter-3);
+}
+
+#trams-filter{
+	position: absolute;
+	top: -9999px;
+}
+
 
 
 body .img svg g.endpoint :first-child {
@@ -590,8 +604,8 @@ html body .img svg g.corrpoint path {
 	height: 2rem;
 }
 
-.img:hover svg {
-	filter: invert(15%);
+.img:hover {
+	/* filter: drop-shadow(0 .42rem #333333cc) drop-shadow(0 -.42rem #333333cc); */
 }
 
 .point {

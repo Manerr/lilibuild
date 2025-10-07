@@ -115,7 +115,7 @@ class App {
 		this.saveLocalStorage = this.saveLocalStorage.bind(this);
 		this.loadLocalStorage = this.loadLocalStorage.bind(this);
 
-
+		this.svgFILTER = document.getElementById("trams-filter");
 
 	}
 
@@ -146,6 +146,15 @@ class App {
 		if (this.customColorInput) {
 			this.customColorInput.value = this.line.color[0] == "#" ? this.line.color : rgbStringToHex(this.line.color);
 		}
+
+		main.svgFILTER.querySelectorAll("feFlood").forEach((el)=>{
+			// console.log(el);
+			el.setAttribute("flood-color",main.line.color);
+		})
+
+
+
+
 	}
 
 
