@@ -2,6 +2,7 @@ const deleting = 0;
 const pointing = 1;
 const drawingpath = 2;
 const drawingpoint = 3;
+const drawingbranch = 4;
 // Saving each thirty secs
 let SAVE_INTERVAL = 15;
 
@@ -15,6 +16,7 @@ let SWITCHING_CONNECTION = false;
 let LAST_X = null;
 
 
+// ligne12JSON = DEBUG_LINE;
 
 class App {
 
@@ -29,6 +31,9 @@ class App {
 		this.line.name = "12";
 		this.line.type = "metro";
 		this.line.custom = false;
+
+		this.forghostimg = new Image();
+		this.forghostimg.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAJUlEQVR4AeyTsQ0AAAyCSP8/uvEGN4MHOBA4ynkAMpBBMhrw4AEAAP//uBwiawAAAAZJREFUAwBJIAAhJFoqZwAAAABJRU5ErkJggg==";
 
 		this.exporter = new Exporter(this);
 
@@ -109,6 +114,9 @@ class App {
 
 		this.saveLocalStorage = this.saveLocalStorage.bind(this);
 		this.loadLocalStorage = this.loadLocalStorage.bind(this);
+
+		this.svgFILTER = document.getElementById("trams-filter");
+
 	}
 
 	// Download method for saving files
@@ -138,6 +146,15 @@ class App {
 		if (this.customColorInput) {
 			this.customColorInput.value = this.line.color[0] == "#" ? this.line.color : rgbStringToHex(this.line.color);
 		}
+
+		main.svgFILTER.querySelectorAll("feFlood").forEach((el)=>{
+			// console.log(el);
+			el.setAttribute("flood-color",main.line.color);
+		})
+
+
+
+
 	}
 
 
@@ -154,6 +171,8 @@ class App {
 
 	// basically a drawing function
 	outputOnmousemove(event) {
+
+		
 		// Not in drawing mode
 		if (CURRENTLY_DOING == deleting || CURRENTLY_DOING == pointing) {
 			this.removeIndicator();
@@ -161,15 +180,20 @@ class App {
 		}
 
 		let mouseX = event.clientX;
+		let mouseY = event.clientY;
 
 		let target = event.target;
 		let className = target.className;
+
 
 		// trying to get the parentelement if it's one of the children : if it's the container -> return
 
 		if (className == "name" || className == "img" || className == "name terminus" || className == "connection") {
 			target = target.parentElement;
 		}
+
+
+		// console.log(target);
 
 		let nodeName = target.nodeName;
 
@@ -184,6 +208,9 @@ class App {
 
 		let targetMid = (targetLeft + targetRight) / 2;
 
+		let targetMidY = (bbox.y + bbox.height / 2) 
+
+
 
 		if (CURRENTLY_DOING == drawingpath && this.trueIndicator.className != "indicator line") {
 			this.trueIndicator.innerHTML = pathHTML.replace(this.DEFAULT_COLOR, this.line.color);
@@ -192,15 +219,54 @@ class App {
 			this.trueIndicator.innerHTML = editedpointHTML.replace(this.DEFAULT_COLOR, this.line.color);
 			this.trueIndicator.className = "indicator point";
 		}
-
+		if (CURRENTLY_DOING == drawingbranch && this.trueIndicator.className != "indicator line branch") {
+			this.trueIndicator.innerHTML = pathBranchHTML.replaceAll(this.DEFAULT_COLOR, this.line.color);
+			this.trueIndicator.className = "indicator line branch";
+		}
 
 
 		if (target == this.trueIndicator) { return }
+
+		// BRANCH LOGIC - wip
+
+		if(target.classList.contains("branch")){
+
+			let rigthBranchTop = target.nextElementSibling.firstChild;
+			let rigthBranchBottom = target.nextElementSibling.lastChild;
+ 
+				// console.log(target);
+
+			let parent = target.parent;
+
+			// ADDING ON THE LEFT PART OF A BRANCH (one of the two sperated parts) ->
+			// between it or even inside at the right of a innercontainer:  
+
+
+
+
+
+			if(mouseX > targetMid){	
+				
+				// this.output.removeChild(this.indicator);
+				
+
+				// if(mouseY < targetMidY){
+				// 	rigthBranchTop.insertBefore(this.trueIndicator, rigthBranchTop.	firstChild);
+				// }
+				// else rigthBranchBottom.insertBefore(this.trueIndicator, rigthBranchBottom.firstChild);
+			
+			}
+
+		}
+
+
 
 		try {
 
 			if (mouseX > targetMid) {
 				if (target.nextElementSibling && target.nextElementSibling != this.trueIndicator) {
+					
+					
 					this.output.insertBefore(this.trueIndicator, target.nextElementSibling);
 				}
 			} else {
@@ -216,9 +282,8 @@ class App {
 
 	}
 
-
-
 	outputOnclick(event) {
+
 		if (CURRENTLY_DOING == deleting || CURRENTLY_DOING == pointing) {
 			return;
 		}
@@ -233,6 +298,17 @@ class App {
 			toAdd.draggable = "true";
 
 			toAdd.innerHTML = pathHTML.replace(this.DEFAULT_COLOR, this.line.color);
+		}
+		else if (CURRENTLY_DOING == drawingbranch) {
+
+			
+			toAdd = document.createElement("div");
+
+			toAdd.className = "blockcontainer branch";
+
+			toAdd.draggable = "true";
+
+			toAdd.innerHTML = pathBranchHTML.replace(this.DEFAULT_COLOR, this.line.color);
 
 
 		} else if (CURRENTLY_DOING == drawingpoint) {
@@ -249,7 +325,8 @@ class App {
 
 
 		if (toAdd) { 
-			this.output.insertBefore(toAdd, this.trueIndicator); 
+			this.output.insertBefore(toAdd, this.trueIndicator);
+			this.removeIndicator(); 
 			this.manageGradients();
 		}
 
@@ -260,28 +337,54 @@ class App {
 	manageGradients(){
 		
 		let elementstoScan = this.output.children;
+
+		// console.log(elementstoScan);
+
 		let len = elementstoScan.length - 1;
-		for (let i = 1; i < len - 1; i++) {
+		for (let i = 1; i < len; i++) {
 			const part = elementstoScan[i];
 			
-			if(part.classList[0] == "blockcontainer" && part.classList[1] == "line") {
-				if(i == 1) part.classList.add("startgradient");
-            	else if(i == len - 2)part.classList.add("endgradient");
-				else{
-					if(part.classList.contains("endgradient") || part.classList.remove("startgradient")){
-						part.classList.remove("endgradient");
-						part.classList.remove("startgradient");
-					}
-				}
-
+			if(part.classList.contains("blockcontainer") && part.classList.contains("line")) {
+				this._managegradientPartBased(part,i,len);
 			}
-			
-			
+			else if(part.classList.contains("innercontainer")){
+
+				this._clearInnerGradients(part.childNodes[0].childNodes);
+				this._clearInnerGradients(part.childNodes[1].childNodes);
+
+				this._managegradientPartBased(part.childNodes[0].firstChild,i,len);
+				this._managegradientPartBased(part.childNodes[1].firstChild,i,len);
+			}
+
+				
 		}
 
 
 	}
 
+	_clearInnerGradients(nodes){
+		nodes.forEach((part)=>{
+			if(part.classList.contains("endgradient") || part.classList.remove("startgradient")){
+				part.classList.remove("endgradient");
+				part.classList.remove("startgradient");
+			}
+		});
+	}
+
+	_managegradientPartBased(part,i,len){
+
+
+		if(!part) return;
+
+		if(i == 1) part.classList.add("startgradient");
+        else if(i == len - 1)part.classList.add("endgradient");
+		else{
+			if(part.classList.contains("endgradient") || part.classList.remove("startgradient")){
+				part.classList.remove("endgradient");
+				part.classList.remove("startgradient");
+			}
+		}
+	}
 
 	//For all connectionline at once -> gonna check if there's need to remove too, at the end;
 	manageAutoConnectionLines_Margin(connectionLines){
@@ -298,7 +401,7 @@ class App {
 		let max = 0;
 
 
-		if(!nextPart.classList.contains("line")) return;
+		if(!nextPart || !nextPart.classList.contains("line")) return;
 
 
 		for (let index = 0; index < connectionLines.length; index++) {
@@ -357,14 +460,19 @@ class App {
 	}
 
 	saveLocalStorage() {
-		this.removeIndicator();
-		window.localStorage.lilibuild = JSON.stringify(this.exporter.exportJSON());
+
+		// return;
+
+		// this.removeIndicator();
+		window.localStorage.lilibuild = this.exporter.exportJSON();
 	}
 
 
 	loadLocalStorage() {
+		// this.outputdragzone.style.visibility = "visible";
+		// return;
 
-		if (window.localStorage.lilibuild == undefined) {
+		if (window.localStorage.lilibuild == undefined || window.localStorage.lilibuild == 'undefined') {
 			window.localStorage.lilibuild = ligne12JSON;
 
 		}
@@ -372,9 +480,12 @@ class App {
 		try {
 			this.exporter.importJSON(JSON.parse(window.localStorage.lilibuild));
 		} catch (e) {
-			console.warn("Error on loading saved data - happens on first launch or when this error",e);
+			alert("Error on loading saved data - happens on first launch or when this error: "+e.toString());
 			this.saveLocalStorage();
+			// document.location.reload();
 		}
+
+		this._sanitizeBlocks();
 
 
 
@@ -667,6 +778,281 @@ class App {
 
 		}
 		
+
+	}
+
+	hideDragGhost(data){
+		
+		data.setDragImage(this.forghostimg,0,0);
+	}
+
+
+	// Not the best names chosen - handle missing branches subparts (when you drag branches you dont drag the subcontainer containing elements so you cant anymore draw "on" it)
+	_sanitizeBlocks(){
+
+		let parts = this.output.childNodes;
+		
+		for (let index = 1; index < parts.length - 1; index++) {
+			
+			const element = parts[index];
+			let className = element.className;
+			let classList = element.classList;
+
+			let nextElement = element.nextElementSibling;
+
+			let previousElement = element.previousElementSibling;
+
+			if(className == "innercontainer"){
+
+				// if(element.style.alignItems) element.style.alignItems = "end";
+
+				// Mix together 2 innercontainers - why would you need 2?
+				if(nextElement && nextElement.className == "innercontainer"){
+
+					nextElement.children[0].childNodes.forEach((el)=>{element.children[0].append(el)});
+					nextElement.children[1].childNodes.forEach((el)=>{element.children[1].append(el)});
+					nextElement.remove();
+				}
+				else if(nextElement && nextElement.classList.contains("branch") && !nextElement.classList.contains("branchreverse") ){
+					element.children[0].style.justifyContent = "flex-end";
+					element.children[1].style.justifyContent = "flex-end";
+				}
+				else if(previousElement && previousElement.classList.contains("branchreverse") ){
+					element.children[0].style.justifyContent = "flex-start";
+					element.children[1].style.justifyContent = "flex-start";
+				}
+				if(previousElement && previousElement.classList.contains("branchreverse") && nextElement && nextElement.classList.contains("branch") && !nextElement.classList.contains("branchreverse") ){
+					console.log("Wut");
+					element.children[0].style.justifyContent = "space-around";
+					element.children[1].style.justifyContent = "space-around";
+				}
+				
+
+			}
+			else if(classList.contains("branch")){
+
+				if( classList.contains("branchreverse")){
+
+					// Element is branch to right
+					if( !nextElement ){
+						let innerLinescontiguousToBranch = document.createElement("div");
+						innerLinescontiguousToBranch.className = "innercontainer";
+						innerLinescontiguousToBranch.innerHTML = innerLinesHTML.replaceAll("rgb(13, 140, 93)",this.line.color);
+						this.output.appendChild(innerLinescontiguousToBranch);
+						this._initSortableJSBranches();
+					}
+					else if(nextElement.className != "innercontainer"){
+						let innerLinescontiguousToBranch = document.createElement("div");
+						innerLinescontiguousToBranch.className = "innercontainer";
+						innerLinescontiguousToBranch.innerHTML = innerLinesHTML.replaceAll("rgb(13, 140, 93)",this.line.color);
+
+						this.output.insertBefore(innerLinescontiguousToBranch,nextElement);
+						this._initSortableJSBranches();
+					}
+					
+				}
+				else{
+
+					// Element is branch to left
+					if( !previousElement || (previousElement && previousElement.className != "innercontainer") ){
+						let innerLinescontiguousToBranch = document.createElement("div");
+						innerLinescontiguousToBranch.className = "innercontainer";
+						innerLinescontiguousToBranch.innerHTML = innerLinesHTML.replaceAll("rgb(13, 140, 93)",this.line.color);
+						this.output.insertBefore(innerLinescontiguousToBranch,element);
+						this._initSortableJSBranches();
+
+					}
+				}
+					
+
+
+			}
+			
+
+
+			
+		}
+
+
+		// if(destination){
+
+		// 	let innerLinescontiguousToBranch = document.createElement("div");
+		// 	innerLinescontiguousToBranch.className = "innercontainer";
+		// 	innerLinescontiguousToBranch.innerHTML = innerLinesHTML.replaceAll("rgb(13, 140, 93)",this.line.color);
+
+
+		// 	if(!destination.classList.contains("branchreverse")){
+		// 		this.output.insertBefore(innerLinescontiguousToBranch,destination);
+		// 	}
+		// 	else{
+		// 		let next = destination.nextElementSibling;
+		// 		if(!next) this.output.insertBefore(innerLinescontiguousToBranch,lastZone)
+		// 		else this.output.insertBefore(innerLinescontiguousToBranch,next);
+
+		// 	}
+
+		// }
+	}
+
+	_manageDrawingSortable(type){
+
+		let toAdd;
+
+		if (type == "drawingpath") {
+			toAdd = document.createElement("div");
+
+			toAdd.className = "blockcontainer line";
+
+			toAdd.draggable = "true";
+
+			toAdd.innerHTML = pathHTML.replace(this.DEFAULT_COLOR, this.line.color);
+		}
+		else if (type == "drawingbranch") {
+
+			
+			toAdd = document.createElement("div");
+
+			toAdd.className = "blockcontainer branch";
+
+			toAdd.draggable = "true";
+
+			toAdd.innerHTML = pathBranchHTML.replace(this.DEFAULT_COLOR, this.line.color);
+
+
+		} else if (type == "drawingbranchreverse") {
+			
+			toAdd = document.createElement("div");
+
+			toAdd.className = "blockcontainer branch branchreverse";
+
+			toAdd.draggable = "true";
+
+			toAdd.innerHTML = pathBranchHTML.replace(this.DEFAULT_COLOR, this.line.color);
+
+
+		} else if (type == "drawingpoint") {
+			toAdd = document.createElement("div");
+
+			toAdd.className = "blockcontainer point";
+
+			toAdd.draggable = "true";
+
+			toAdd.innerHTML = pointHTML.replace(this.DEFAULT_COLOR, this.line.color);
+
+
+		}
+
+		
+		return toAdd;
+
+	}
+
+	onSortableJSChoosing(e){
+		
+		
+		let currentlyDraggingElement = e.dragged;
+		let currentlyDraggingElementTo = e.to;
+
+
+		let type = currentlyDraggingElement.getAttribute("type");
+
+		if(!type) type = currentlyDraggingElement.classList[1];
+
+		if(type == "branch" || type == "drawingbranch" || type == "drawingbranchreverse"){
+			if(currentlyDraggingElementTo.classList.contains("branchtop") || currentlyDraggingElementTo.classList.contains("branchbottom")) return false;
+		} 
+
+
+	}
+	
+	// OnDragend new "version"
+	onSortableJSUpdate(e){
+
+		let cloning = e.clone;
+		let destination = e.item;
+
+		
+		if(cloning.parentElement && cloning.parentElement.id == "dragelements" ){
+			
+			let type = cloning.getAttribute("type");
+
+			let realElement = this._manageDrawingSortable(type);	
+			if(realElement) destination.replaceWith(realElement);
+
+		}
+		// //Updating current elements
+		// else if(destination.classList.contains("branch")){
+		// 	this._initSortableJSBranches();
+
+		// }
+		this._sanitizeBlocks();
+
+
+	}
+
+
+	onSortableJSEnd(e){
+		this.manageGradients();
+	}
+
+	onSortableJSDRAWING(e){
+		this.manageGradients();
+	}
+
+	_initSortableJSBranches(){
+		document.querySelectorAll('.innercontainer .allsvgcontainer').forEach(branchContainer => {
+			Sortable.create(branchContainer, {
+				animation: 150,
+				handle: ['.blockcontainer',".indicator"],
+				group: 'metro',
+				ghostClass: "ghost",
+				draggable: '.blockcontainer',
+				swapThreshold: 1,
+				preventOnFilter: true,
+				setData: this.hideDragGhost.bind(this),
+				onSort: this.onSortableJSUpdate.bind(this),
+				onEnd: this.onSortableJSEnd.bind(this),
+				onMove: this.onSortableJSChoosing.bind(this)
+			});
+		});
+
+	}
+
+	initSortableJS(){
+
+		Sortable.create(this.output, {
+		animation: 150, 
+		handle: ['.blockcontainer',".indicator",'.innercontainer','.emptyfordraggingstart, .emptyfordraggingend'],
+		group: 'metro', 
+		draggable: '.blockcontainer',
+		// filter: '.emptyfordraggingstart, .emptyfordraggingend', 
+		preventOnFilter: true,
+		swapThreshold: 1,
+		ghostClass: "ghost",
+		setData: this.hideDragGhost.bind(this),
+		onEnd: this.onSortableJSEnd.bind(this),
+		onMove: this.onSortableJSChoosing.bind(this),
+		onSort: this.onSortableJSUpdate.bind(this),
+		});
+
+		this._initSortableJSBranches();
+
+
+		Sortable.create(document.getElementById("dragelements"), {
+		animation: 150, 
+		handle: ['.indicator','.emptyfordraggingstart, .emptyfordraggingend'],
+		// group: 'metro', 
+		group: { name: "metro", pull: 'clone'},
+		draggable: '.indicator',
+		// filter: '.emptyfordraggingstart, .emptyfordraggingend', 
+		preventOnFilter: true,
+		swapThreshold: 1,
+		ghostClass: "ghost",
+		setData: this.hideDragGhost.bind(this),
+		onEnd: this.onSortableJSDRAWING.bind(this),
+		onMove: this.onSortableJSChoosing.bind(this)
+
+		});
 
 	}
 

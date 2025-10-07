@@ -7,26 +7,18 @@ class Exporter {
 	}
 
 
+	HTMLtoJSON(partsDOM){
 
+		
+		let parts = [];
 
-	// Should work, designed only for the line's container
-	exportJSON() {
-
-		let lineColor = this.parent.line.color;
-		let lineNumber = this.parent.line.name;
-		let lineType = this.parent.line.type;
-		let custom = this.parent.line.custom;
-
-
-		let parts = []
-		let partsDOM = this.parent.output.children;
-
-		// Skipping dragzones 
-		for (var i = 1; i <= partsDOM.length - 2; i++) {
+		for (var i = 0; i <= partsDOM.length - 1; i++) {
 			let DOMpart = partsDOM[i];
 
-			let partType = DOMpart.className.split(" ")[1]
 
+			let partType = DOMpart.className.split(" ")[1];
+
+			if(DOMpart.className == "emptyfordraggingstart" || DOMpart.className == "emptyfordraggingend") continue;
 
 			// If point:
 			if (partType == "point") {
@@ -52,135 +44,148 @@ class Exporter {
 
 
 				parts.push({ "name": stationName, "type": stationType, "connected": stationHasConnection, "connections": stationConnections });
+				continue;
 
 			} else if (partType == "line") {
 
 				let isDashed = DOMpart.classList.contains("dashed");
 				parts.push(isDashed ? "block-dashed" : "block");
+				continue;
+			} else if (partType == "branch"){
 
-
+				let isDashed = DOMpart.classList.contains("dashed");
+				if( DOMpart.classList.contains("branchreverse") )parts.push(isDashed ? "branchreverse-dashed" : "branchreverse");
+				else parts.push(isDashed ? "branch-dashed" : "branch");
 
 			}
+			
 
+
+			if(DOMpart.className == "innercontainer"){
+				parts.push("innerblocks",
+
+					this.HTMLtoJSON(DOMpart.children[0].childNodes),this.HTMLtoJSON(DOMpart.children[1].childNodes)
+
+				);
+			}
+			
 
 		}
+			
+		return parts;
 
-		// return JSON.stringify(
-		return { "line": [lineType, lineNumber, lineColor,custom], "parts": parts }
+
+	}
+
+	// Should work, designed only for the line's container
+	exportJSON() {
+
+		// return;
+
+		let lineColor = this.parent.line.color;
+		let lineNumber = this.parent.line.name;
+		let lineType = this.parent.line.type;
+		let custom = this.parent.line.custom;
 
 
-		// );
+		// let parts = [];
+		let partsDOM = this.parent.output.children;
+
+		// console.log(partsDOM);
+
+		let parts = this.HTMLtoJSON(partsDOM);
+
+		// console.log(parts.length);
+
+		return JSON.stringify({ "line": [lineType, lineNumber, lineColor,custom], "parts": parts })
 	}
 
 
 
-
-	importJSON(object = null) {
-
-
-		let lineNameContainer = this.parent.outputdragzone.querySelector(".linename .connectionline");
-
-		let lineTypeBox = lineNameContainer.children[0];
-		let lineNumberBox = lineNameContainer.children[1];
-
-		let lineType = object.line[0];
-		let lineNumber = object.line[1];
-		let lineColor = object.line[2];
-		let lineIsCustom = object.line[3];
-
-		lineNumberBox.setAttribute("value", lineNumber);
-
-		this.parent.line.name = lineNumber;
+	jsonsubArraytoHTML(object,lineType){
 
 
-		// Line number
-		if (lineNumber[1] == "B") {
-			lineNumber = lineNumber[0] + "   ";
-			lineNameContainer.children[1].setAttribute("bis", "bis");
-		}
+		let result = document.createElement("div");
 
-		// Set the line's name/number
-		lineNameContainer.setAttribute("type", lineType);
-		lineNumberBox.setAttribute("truename", lineNumber);
-
-		if (lineNumber.slice(1) == "   ") {
-			lineNumberBox.className = object.line[0] + " connectionpoint line" + lineNumber.slice(0, 1).toUpperCase() + "B";
-		} else {
-			lineNumberBox.className = object.line[0] + " connectionpoint line" + lineNumber.toUpperCase();
-		}
-
-
-
-		if(lineIsCustom){
-			lineNumberBox.style.backgroundColor = lineColor;
-		}
-
-		this.parent.line.color = lineColor;
-		this.parent.line.type = lineType;
-		this.parent.line.custom = lineIsCustom;
-		this.parent.ChangeSVGColors(this.parent.line.color);
-
-		//fixed a bug when importing metro/train on an existing tram line
-		if( !lineNameContainer.children[1].getAttribute("bis") ) lineNumberBox.style.backgroundImage = "none";
-
-		// Set the line type's icon
-		switch (lineType) {
-
-			case "metro":
-				lineTypeBox.src = "blocks/connections/pointM.svg";
-				break;
-			case "RER":
-				lineTypeBox.src = "blocks/connections/pointRER.svg";
-				break;
-			case "Train":
-				lineTypeBox.src = "blocks/connections/pointTrain.svg";
-				break;
-			case "Tram":
-				lineTypeBox.src = "blocks/connections/pointTram.svg";
-				lineNumberBox.style.backgroundImage = "url('blocks/connections/trams/" + lineNumber.substring(0, lineNumber.length - 1) + lineNumber.substring(lineNumber.length - 1).toUpperCase() + ".svg')";
-
-				break;
-
-		}
-
-		// Clear all existing parts 
-
-		for (let i = this.parent.output.children.length - 2; i >= 1; i--) {
-			this.parent.output.removeChild(this.parent.output.children[i]);
-		}
-
-
-		// Now it get back all the parts (here the blocks)
-
-		let len = object.parts.length;
-
+		let len = object.length;
 		for (var i = 0; i < len; i++) {
-			let DOMpart = object.parts[i];
+			let DOMpart = object[i];
 			let toAdd;
 
-			// console.log(DOMpart);			
+			let innerblocks = false;
+
+			// console.log(DOMpart);
+		// console.log(typeof DOMpart,i);
 
 
 			// If block
 			if (typeof DOMpart == "string") {
 
+				if(DOMpart == "innerblocks"){
+					innerblocks = true;
+					
+					let toAdd = this.jsonsubArraytoHTML(object[i + 1],lineType);
+					let toAdd2 = this.jsonsubArraytoHTML(object[i + 2],lineType);
 
-				toAdd = document.createElement("div");
-				this.parent.output.insertBefore(toAdd, this.parent.lastZone);
-				toAdd.className = "blockcontainer line";
-				toAdd.draggable = "true";
-				if (DOMpart === "block-dashed") toAdd.classList.add("dashed");
-				//Gradient for start
-				if(i == 0) toAdd.classList.add("startgradient");
-				else if(i == len - 1) toAdd.classList.add("endgradient");
+					let smartPartContainer = document.createElement("div");
 
-				toAdd.innerHTML = pathHTML.replace(this.parent.DEFAULT_COLOR, this.parent.line.color);
-				toAdd = null;
+					// let smartPartContainerTop = document.createElement("div");
+					// let smartPartContainerBottom = document.createElement("div");
+
+					smartPartContainer.classList.add("innercontainer");
+
+					toAdd.className = "allsvgcontainer branchtop";
+					toAdd2.className = "allsvgcontainer branchbottom";
+
+					smartPartContainer.appendChild(toAdd);
+					smartPartContainer.appendChild(toAdd2);
+
+					result.appendChild(smartPartContainer);
+
+					i+=2;
+					// DOMPart = ;
+				}
+
+				else if(DOMpart == "block"){
+					toAdd = document.createElement("div");
+
+					toAdd.className = "blockcontainer line";
+					// toAdd.draggable = "true";
+					if (DOMpart === "block-dashed") toAdd.classList.add("dashed");
+
+					toAdd.innerHTML = pathHTML.replace(this.parent.DEFAULT_COLOR, this.parent.line.color);
+					result.appendChild(toAdd);
+
+					toAdd = null;
+				}
+				else if(DOMpart.slice(0,6) == "branch"){
+
+					let reversed = DOMpart.slice(6) == "reverse";
+					let dashed = DOMpart.slice(13) == "dashed";
 
 
+					toAdd = document.createElement("div");
+					toAdd.className = "blockcontainer branch";
+					// toAdd.draggable = "true";
+					if(reversed) toAdd.classList.add("branchreverse");
+					if(dashed) toAdd.classList.add("dashed");
 
+					if (DOMpart === "block-dashed") toAdd.classList.add("dashed");
 
+					toAdd.innerHTML = pathBranchHTML.replace(this.parent.DEFAULT_COLOR, this.parent.line.color);
 
+					
+
+					if(reversed){
+						result.appendChild(toAdd);
+					}
+					else{
+						result.appendChild(toAdd);
+					}
+
+					toAdd = null;
+
+				}
 			}
 
 			// If point
@@ -190,10 +195,10 @@ class Exporter {
 				let isConnected = DOMpart.connected;
 
 				toAdd = document.createElement("div");
-				this.parent.output.insertBefore(toAdd, this.parent.lastZone);
+				result.appendChild(toAdd);
 
 				toAdd.className = "blockcontainer point";
-				toAdd.draggable = "true";
+				// toAdd.draggable = "true";
 				toAdd.innerHTML = pointHTML.replace(this.parent.DEFAULT_COLOR, this.parent.line.color);
 				toAdd.children[1].innerText = DOMpart.name;
 
@@ -373,17 +378,6 @@ class Exporter {
 
 						}
 
-
-
-
-
-
-
-
-
-
-
-
 					}
 
 
@@ -410,20 +404,115 @@ class Exporter {
 
 				toAdd = null;
 
-				
-
+			
 			}
 
-
 			toAdd = null;
-
 			DOMpart = null;
 
 		}
 
-		this.parent.manageAllConnectionsMargins();
+		return result;
 
+	}
+
+	importJSON(object = null) {
+
+		let lineNameContainer = this.parent.outputdragzone.querySelector(".linename .connectionline");
+
+		let lineTypeBox = lineNameContainer.children[0];
+		let lineNumberBox = lineNameContainer.children[1];
+
+		let lineType = object.line[0];
+		let lineNumber = object.line[1];
+		let lineColor = object.line[2];
+		let lineIsCustom = object.line[3];
+
+		lineNumberBox.setAttribute("value", lineNumber);
+
+		this.parent.line.name = lineNumber;
+
+
+		// Line number
+		if (lineNumber[1] == "B") {
+			lineNumber = lineNumber[0] + "   ";
+			lineNameContainer.children[1].setAttribute("bis", "bis");
+		}
+
+		// Set the line's name/number
+		lineNameContainer.setAttribute("type", lineType);
+		lineNumberBox.setAttribute("truename", lineNumber);
+
+		if (lineNumber.slice(1) == "   ") {
+			lineNumberBox.className = object.line[0] + " connectionpoint line" + lineNumber.slice(0, 1).toUpperCase() + "B";
+		} else {
+			lineNumberBox.className = object.line[0] + " connectionpoint line" + lineNumber.toUpperCase();
+		}
+
+
+
+		if(lineIsCustom){
+			lineNumberBox.style.backgroundColor = lineColor;
+		}
+
+		this.parent.line.color = lineColor;
+		this.parent.line.type = lineType;
+		this.parent.line.custom = lineIsCustom;
+		this.parent.ChangeSVGColors(this.parent.line.color);
+
+		//fixed a bug when importing metro/train on an existing tram line
+		if( !lineNameContainer.children[1].getAttribute("bis") ) lineNumberBox.style.backgroundImage = "none";
+
+		// Set the line type's icon
+		switch (lineType) {
+
+			case "metro":
+				lineTypeBox.src = "blocks/connections/pointM.svg";
+				break;
+			case "RER":
+				lineTypeBox.src = "blocks/connections/pointRER.svg";
+				break;
+			case "Train":
+				lineTypeBox.src = "blocks/connections/pointTrain.svg";
+				break;
+			case "Tram":
+				lineTypeBox.src = "blocks/connections/pointTram.svg";
+				lineNumberBox.style.backgroundImage = "url('blocks/connections/trams/" + lineNumber.substring(0, lineNumber.length - 1) + lineNumber.substring(lineNumber.length - 1).toUpperCase() + ".svg')";
+
+				break;
+
+		}
+
+		// Clear all existing parts 
+
+		for (let i = this.parent.output.children.length -1; i >= 0; i--) {
+			this.parent.output.removeChild(this.parent.output.children[i]);
+		}
+
+
+		// Now it get back all the parts (here the blocks)
+
+
+		let result = this.jsonsubArraytoHTML(object.parts,lineType);
+
+
+		result.className = "allsvgcontainer pad3 pad4 pad2";
+		
+		let dragstart = document.createElement("div");
+		let dragend = document.createElement("div");
+		dragstart.className = "emptyfordraggingstart";
+		dragend.className = "emptyfordraggingend";
+		result.insertBefore(dragstart,result.firstChild);
+		result.appendChild(dragend);
+		
+
+		this.parent.output.replaceWith(result);
+		this.parent.output = document.querySelector("#dragtarget > .allsvgcontainer");
+		this.parent.manageAllConnectionsMargins();
+		this.parent.manageGradients();
 		this.parent.outputdragzone.style.visibility = "visible";
+		return;
+
 
 
 	}

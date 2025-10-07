@@ -46,12 +46,12 @@ class EventManager {
 	bindOutputEvents() {
 		// Output drag zone events
 		this.app.outputdragzone.onclick = this.manageClick.bind(this.app);
-		this.app.outputdragzone.ondragend = this.app.whenDeDragging.bind(this.app);
+		// this.app.outputdragzone.ondragend = this.app.whenDeDragging.bind(this.app);
 
 		// Output container events
-		this.app.output.ondragend = this.app.outputOndragend.bind(this.app);
-		this.app.output.onmouseleave = this.app.removeIndicator.bind(this.app);
-		this.app.output.onmousemove = this.app.outputOnmousemove.bind(this.app);
+		// this.app.output.ondragend = this.app.outputOndragend.bind(this.app);
+		// this.app.output.onmouseleave = this.app.removeIndicator.bind(this.app);
+		// this.app.output.onmousemove = this.app.outputOnmousemove.bind(this.app);
 
 
 	}
@@ -93,7 +93,7 @@ class EventManager {
 
 		// Save button
 		this.app.saveButton.onclick = () => {
-			this.app.download(dumbLineName() + ".json", JSON.stringify(this.app.exporter.exportJSON()));
+			this.app.download(dumbLineName() + ".json", this.app.exporter.exportJSON());
 		};
 
 		// Open button
@@ -141,6 +141,8 @@ class EventManager {
 
 	onloadEvent() {
 		this.app.loadLocalStorage();
+		this.app.initSortableJS();
+
 	}
 
 	bindFileEvents() {
@@ -195,11 +197,12 @@ class EventManager {
 		let currentElement = event.target;
 		let currentType = currentElement.name;
 
+
 		if (!currentType) {
 			currentType = currentElement.getAttribute("name");
 		}
 
-		if (CURRENTLY_DOING == pointing && currentType == "path") {
+		if (CURRENTLY_DOING == pointing && (currentType == "path" || currentType == "branch") ) {
 
 			if (currentElement.parentElement.classList.contains("dashed")) currentElement.parentElement.classList.remove("dashed");
 			else currentElement.parentElement.classList.add("dashed");
@@ -211,7 +214,7 @@ class EventManager {
 
 
 
-		if (CURRENTLY_DOING == drawingpath || CURRENTLY_DOING == drawingpoint) {
+		if (CURRENTLY_DOING == drawingpath || CURRENTLY_DOING == drawingpoint || CURRENTLY_DOING == drawingbranch) {
 			this.outputOnclick(event);
 			return;
 		}
@@ -253,7 +256,8 @@ class EventManager {
 
 
 			if (trueCurrentElement.className != "blockcontainer line this.insertbeforeit") {
-				this.output.removeChild(trueCurrentElement);
+				if(trueCurrentElement.parentElement.parentElement.classList.contains("innercontainer")) trueCurrentElement.remove();
+				else this.output.removeChild(trueCurrentElement);
 				this.manageGradients();
 			}
 			if (this.output.childElementCount == 1) {
