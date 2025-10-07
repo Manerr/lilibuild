@@ -227,7 +227,17 @@ class EventManager {
 
 		if (CURRENTLY_DOING == deleting) {
 
-			//Has to be cleant
+
+			//Has to be cleant...
+
+			//Deleting a whole innerblock or a "subline" - will be "blankly recreated"
+			if(currentElement.className == "innercontainer" || currentElement.classList.contains("branchtop") || currentElement.classList.contains("branchbottom")){
+				currentElement.remove();
+				this.manageGradients();
+				this._sanitizeBlocks();
+				return;
+			}
+
 
 			if(!trueCurrentElement.classList) return;
 			else if(trueCurrentElement.id == "result" || trueCurrentElement.id == "dragtarget" || trueCurrentElement.parentElement.id == "dragtarget") return;
@@ -241,6 +251,7 @@ class EventManager {
 
 				currentElement.remove();
 				this.manageAutoConnectionLines_Margin(cur);
+				this._sanitizeBlocks();
 				
 				return;
 			}
@@ -249,6 +260,8 @@ class EventManager {
 
 				this.manageAutoConnectionLines_Margin(currentElement.parentElement.children);
 				currentElement.remove();
+
+				this._sanitizeBlocks();
 								
 				return;
 			}
@@ -259,9 +272,13 @@ class EventManager {
 				if(trueCurrentElement.parentElement.parentElement.classList.contains("innercontainer")) trueCurrentElement.remove();
 				else this.output.removeChild(trueCurrentElement);
 				this.manageGradients();
+				this._sanitizeBlocks();
+
 			}
 			if (this.output.childElementCount == 1) {
 				this.insertbeforeit.style.display = "block";
+				this._sanitizeBlocks();
+
 			}
 			return;
 

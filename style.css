@@ -158,15 +158,19 @@ div.terminus {
 
 .deleting .blockcontainer.line:hover,
 .deleting .point .img:hover,
-.deleting .branch:hover {
+.deleting .branch:hover,
+.deleting .innercontainer:hover,.deleting .innercontainer .allsvgcontainer:hover{
 	box-shadow: 0px 0px .2rem #777;
 	outline: .3rem solid #222;
 	border-radius: .3rem;
+	cursor: pointer;
 }
 
 .deleting .point .img:hover {
 	border-radius: 50%;
 }
+
+
 
 .deleting .connectionpoint:hover {
 	box-shadow: 0px 0px .2rem #777;

@@ -341,7 +341,7 @@ class App {
 		// console.log(elementstoScan);
 
 		let len = elementstoScan.length - 1;
-		for (let i = 1; i < len; i++) {
+		for (let i = 1; i < len ; i++) {
 			const part = elementstoScan[i];
 			
 			if(part.classList.contains("blockcontainer") && part.classList.contains("line")) {
@@ -352,8 +352,15 @@ class App {
 				this._clearInnerGradients(part.childNodes[0].childNodes);
 				this._clearInnerGradients(part.childNodes[1].childNodes);
 
-				this._managegradientPartBased(part.childNodes[0].firstChild,i,len);
-				this._managegradientPartBased(part.childNodes[1].firstChild,i,len);
+				if(i != len - 1){
+					this._managegradientPartBased(part.childNodes[0].firstChild,i,len);
+					this._managegradientPartBased(part.childNodes[1].firstChild,i,len);
+				}
+				else{
+					this._managegradientPartBased(part.childNodes[0].lastChild,i,len);
+					this._managegradientPartBased(part.childNodes[1].lastChild,i,len);
+
+				}
 			}
 
 				
@@ -372,7 +379,6 @@ class App {
 	}
 
 	_managegradientPartBased(part,i,len){
-
 
 		if(!part) return;
 
@@ -787,7 +793,7 @@ class App {
 	}
 
 
-	// Not the best names chosen - handle missing branches subparts (when you drag branches you dont drag the subcontainer containing elements so you cant anymore draw "on" it)
+	// Not the best names chosen - handle missing subparts (for ex when you drag branches you dont drag the subcontainer containing elements so you cant anymore draw "on" it)
 	_sanitizeBlocks(){
 
 		let parts = this.output.childNodes;
