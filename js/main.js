@@ -775,9 +775,30 @@ class App {
 	}
 
 
+	// Not the best names chosen - handle missing branches subparts (when you drag branches you dont drag the subcontainer containing elements so you cant anymore draw "on" it)
+	_fixBranchesIssues(destination){
+		if(destination){
+
+			let innerLinescontiguousToBranch = document.createElement("div");
+			innerLinescontiguousToBranch.className = "innercontainer";
+			innerLinescontiguousToBranch.innerHTML = innerLinesHTML.replaceAll("rgb(13, 140, 93)",this.line.color);
+
+
+			if(!destination.classList.contains("branchreverse")){
+				this.output.insertBefore(innerLinescontiguousToBranch,destination);
+			}
+			else{
+				let next = destination.nextElementSibling;
+				if(!next) this.output.insertBefore(innerLinescontiguousToBranch,lastZone)
+				else this.output.insertBefore(innerLinescontiguousToBranch,next);
+
+			}
+
+		}
+	}
+
 	_manageDrawingSortable(type){
 
-		// console.log(type)
 		let toAdd;
 
 		if (type == "drawingpath") {
@@ -831,12 +852,16 @@ class App {
 
 	onSortableJSChoosing(e){
 		
+		
 		let currentlyDraggingElement = e.dragged;
 		let currentlyDraggingElementTo = e.to;
 
+
 		let type = currentlyDraggingElement.getAttribute("type");
 
-		if(type == "drawingbranch" || type == "drawingbranchreverse"){
+		if(!type) type = currentlyDraggingElement.classList[1];
+
+		if(type == "branch" || type == "drawingbranch" || type == "drawingbranchreverse"){
 			if(currentlyDraggingElementTo.classList.contains("branchtop") || currentlyDraggingElementTo.classList.contains("branchbottom")) return false;
 		} 
 
@@ -846,8 +871,11 @@ class App {
 	// OnDragend new "version"
 	onSortableJSUpdate(e){
 
+
 		let cloning = e.clone;
 		let destination = e.item;
+
+		
 
 		if(cloning.parentElement && cloning.parentElement.id == "dragelements" ){
 			
@@ -861,12 +889,16 @@ class App {
 
 			let innerLinescontiguousToBranch = document.createElement("div");
 			innerLinescontiguousToBranch.className = "innercontainer";
-			innerLinescontiguousToBranch.innerHTML = `<div class="allsvgcontainer branchtop"><div class="blockcontainer line startgradient"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div></div><div class="allsvgcontainer branchbottom"><div class="blockcontainer line startgradient" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div></div>`.replaceAll("rgb(13, 140, 93)",this.line.color);
+			innerLinescontiguousToBranch.innerHTML = innerLinesHTML.replaceAll("rgb(13, 140, 93)",this.line.color);
 
+
+			
 
 			if(type == "drawingbranch") {
 
+				
 				this.output.insertBefore(innerLinescontiguousToBranch,elementBefore);
+				this._fixBranchesIssues();
 				this._initSortableJSBranches();
 
 			}
@@ -875,11 +907,17 @@ class App {
 				let next = elementBefore.nextElementSibling;
 				if(!next) this.output.insertBefore(innerLinescontiguousToBranch,lastZone)
 				else this.output.insertBefore(innerLinescontiguousToBranch,next);
+				this._fixBranchesIssues();
 				this._initSortableJSBranches();
-
 
 			}
 			
+
+		}
+		//Updating current elements
+		else if(destination.classList.contains("branch")){
+			this._fixBranchesIssues(destination);
+			this._initSortableJSBranches();
 
 		}
 
@@ -891,8 +929,6 @@ class App {
 	}
 
 	onSortableJSDRAWING(e){
-		// console.log(e.dragged);
-
 		this.manageGradients();
 	}
 
@@ -908,7 +944,6 @@ class App {
 				preventOnFilter: true,
 				setData: this.hideDragGhost.bind(this),
 				onSort: this.onSortableJSUpdate.bind(this),
-
 				onEnd: this.onSortableJSEnd.bind(this),
 				onMove: this.onSortableJSChoosing.bind(this)
 			});

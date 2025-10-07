@@ -305,6 +305,9 @@ button.connectionpoint::before {
 	clip-path: polygon(-9% -100%, 100% -100%, 109% 200%, -9% 200%);
 }
 
+.line.small{
+	width: 3rem;
+}
 
 .connectionpoint {
 	display: inline-block;
