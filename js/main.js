@@ -461,10 +461,10 @@ class App {
 
 	saveLocalStorage() {
 
-		return;
+		// return;
 
-		this.removeIndicator();
-		window.localStorage.lilibuild = JSON.stringify(this.exporter.exportJSON());
+		// this.removeIndicator();
+		window.localStorage.lilibuild = this.exporter.exportJSON();
 	}
 
 
@@ -472,17 +472,20 @@ class App {
 		// this.outputdragzone.style.visibility = "visible";
 		// return;
 
-		// if (window.localStorage.lilibuild == undefined) {
+		if (window.localStorage.lilibuild == undefined || window.localStorage.lilibuild == 'undefined') {
 			window.localStorage.lilibuild = ligne12JSON;
 
-		// }
+		}
 
 		try {
 			this.exporter.importJSON(JSON.parse(window.localStorage.lilibuild));
 		} catch (e) {
-			console.warn("Error on loading saved data - happens on first launch or when this error",e);
-			// this.saveLocalStorage();
+			alert("Error on loading saved data - happens on first launch or when this error: "+e.toString());
+			this.saveLocalStorage();
+			// document.location.reload();
 		}
+
+		this._sanitizeBlocks();
 
 
 
@@ -785,25 +788,110 @@ class App {
 
 
 	// Not the best names chosen - handle missing branches subparts (when you drag branches you dont drag the subcontainer containing elements so you cant anymore draw "on" it)
-	_fixBranchesIssues(destination){
-		if(destination){
+	_sanitizeBlocks(){
 
-			let innerLinescontiguousToBranch = document.createElement("div");
-			innerLinescontiguousToBranch.className = "innercontainer";
-			innerLinescontiguousToBranch.innerHTML = innerLinesHTML.replaceAll("rgb(13, 140, 93)",this.line.color);
+		let parts = this.output.childNodes;
+		
+		for (let index = 1; index < parts.length - 1; index++) {
+			
+			const element = parts[index];
+			let className = element.className;
+			let classList = element.classList;
 
+			let nextElement = element.nextElementSibling;
 
-			if(!destination.classList.contains("branchreverse")){
-				this.output.insertBefore(innerLinescontiguousToBranch,destination);
+			let previousElement = element.previousElementSibling;
+
+			if(className == "innercontainer"){
+
+				// if(element.style.alignItems) element.style.alignItems = "end";
+
+				// Mix together 2 innercontainers - why would you need 2?
+				if(nextElement && nextElement.className == "innercontainer"){
+
+					nextElement.children[0].childNodes.forEach((el)=>{element.children[0].append(el)});
+					nextElement.children[1].childNodes.forEach((el)=>{element.children[1].append(el)});
+					nextElement.remove();
+				}
+				else if(nextElement && nextElement.classList.contains("branch") && !nextElement.classList.contains("branchreverse") ){
+					element.children[0].style.justifyContent = "flex-end";
+					element.children[1].style.justifyContent = "flex-end";
+				}
+				else if(previousElement && previousElement.classList.contains("branchreverse") ){
+					element.children[0].style.justifyContent = "flex-start";
+					element.children[1].style.justifyContent = "flex-start";
+				}
+				if(previousElement && previousElement.classList.contains("branchreverse") && nextElement && nextElement.classList.contains("branch") && !nextElement.classList.contains("branchreverse") ){
+					console.log("Wut");
+					element.children[0].style.justifyContent = "space-around";
+					element.children[1].style.justifyContent = "space-around";
+				}
+				
+
 			}
-			else{
-				let next = destination.nextElementSibling;
-				if(!next) this.output.insertBefore(innerLinescontiguousToBranch,lastZone)
-				else this.output.insertBefore(innerLinescontiguousToBranch,next);
+			else if(classList.contains("branch")){
+
+				if( classList.contains("branchreverse")){
+
+					// Element is branch to right
+					if( !nextElement ){
+						let innerLinescontiguousToBranch = document.createElement("div");
+						innerLinescontiguousToBranch.className = "innercontainer";
+						innerLinescontiguousToBranch.innerHTML = innerLinesHTML.replaceAll("rgb(13, 140, 93)",this.line.color);
+						this.output.appendChild(innerLinescontiguousToBranch);
+						this._initSortableJSBranches();
+					}
+					else if(nextElement.className != "innercontainer"){
+						let innerLinescontiguousToBranch = document.createElement("div");
+						innerLinescontiguousToBranch.className = "innercontainer";
+						innerLinescontiguousToBranch.innerHTML = innerLinesHTML.replaceAll("rgb(13, 140, 93)",this.line.color);
+
+						this.output.insertBefore(innerLinescontiguousToBranch,nextElement);
+						this._initSortableJSBranches();
+					}
+					
+				}
+				else{
+
+					// Element is branch to left
+					if( !previousElement || (previousElement && previousElement.className != "innercontainer") ){
+						let innerLinescontiguousToBranch = document.createElement("div");
+						innerLinescontiguousToBranch.className = "innercontainer";
+						innerLinescontiguousToBranch.innerHTML = innerLinesHTML.replaceAll("rgb(13, 140, 93)",this.line.color);
+						this.output.insertBefore(innerLinescontiguousToBranch,element);
+						this._initSortableJSBranches();
+
+					}
+				}
+					
+
 
 			}
+			
 
+
+			
 		}
+
+
+		// if(destination){
+
+		// 	let innerLinescontiguousToBranch = document.createElement("div");
+		// 	innerLinescontiguousToBranch.className = "innercontainer";
+		// 	innerLinescontiguousToBranch.innerHTML = innerLinesHTML.replaceAll("rgb(13, 140, 93)",this.line.color);
+
+
+		// 	if(!destination.classList.contains("branchreverse")){
+		// 		this.output.insertBefore(innerLinescontiguousToBranch,destination);
+		// 	}
+		// 	else{
+		// 		let next = destination.nextElementSibling;
+		// 		if(!next) this.output.insertBefore(innerLinescontiguousToBranch,lastZone)
+		// 		else this.output.insertBefore(innerLinescontiguousToBranch,next);
+
+		// 	}
+
+		// }
 	}
 
 	_manageDrawingSortable(type){
@@ -880,12 +968,10 @@ class App {
 	// OnDragend new "version"
 	onSortableJSUpdate(e){
 
-
 		let cloning = e.clone;
 		let destination = e.item;
 
 		
-
 		if(cloning.parentElement && cloning.parentElement.id == "dragelements" ){
 			
 			let type = cloning.getAttribute("type");
@@ -893,42 +979,14 @@ class App {
 			let realElement = this._manageDrawingSortable(type);	
 			if(realElement) destination.replaceWith(realElement);
 
-			let index = e.newIndex;
-			let elementBefore = this.output.children[index];
-
-			let innerLinescontiguousToBranch = document.createElement("div");
-			innerLinescontiguousToBranch.className = "innercontainer";
-			innerLinescontiguousToBranch.innerHTML = innerLinesHTML.replaceAll("rgb(13, 140, 93)",this.line.color);
-
-
-			
-
-			if(type == "drawingbranch") {
-
-				
-				this.output.insertBefore(innerLinescontiguousToBranch,elementBefore);
-				this._fixBranchesIssues();
-				this._initSortableJSBranches();
-
-			}
-			else if(type == "drawingbranchreverse"){
-
-				let next = elementBefore.nextElementSibling;
-				if(!next) this.output.insertBefore(innerLinescontiguousToBranch,lastZone)
-				else this.output.insertBefore(innerLinescontiguousToBranch,next);
-				this._fixBranchesIssues();
-				this._initSortableJSBranches();
-
-			}
-			
-
 		}
-		//Updating current elements
-		else if(destination.classList.contains("branch")){
-			this._fixBranchesIssues(destination);
-			this._initSortableJSBranches();
+		// //Updating current elements
+		// else if(destination.classList.contains("branch")){
+		// 	this._initSortableJSBranches();
 
-		}
+		// }
+		this._sanitizeBlocks();
+
 
 	}
 
@@ -964,7 +1022,7 @@ class App {
 
 		Sortable.create(this.output, {
 		animation: 150, 
-		handle: ['.blockcontainer',".indicator",'.innercontainer'],
+		handle: ['.blockcontainer',".indicator",'.innercontainer','.emptyfordraggingstart, .emptyfordraggingend'],
 		group: 'metro', 
 		draggable: '.blockcontainer',
 		// filter: '.emptyfordraggingstart, .emptyfordraggingend', 
@@ -982,7 +1040,7 @@ class App {
 
 		Sortable.create(document.getElementById("dragelements"), {
 		animation: 150, 
-		handle: '.indicator',
+		handle: ['.indicator','.emptyfordraggingstart, .emptyfordraggingend'],
 		// group: 'metro', 
 		group: { name: "metro", pull: 'clone'},
 		draggable: '.indicator',

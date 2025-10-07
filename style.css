@@ -305,9 +305,8 @@ button.connectionpoint::before {
 	clip-path: polygon(-9% -100%, 100% -100%, 109% 200%, -9% 200%);
 }
 
-.line.small{
-	width: 3rem;
-}
+
+
 
 .connectionpoint {
 	display: inline-block;
@@ -645,7 +644,7 @@ html body .img svg g.corrpoint path {
 
 body .branch{
 	/* height: 18rem !important; */
-	width: 16.12rem !important;
+	width: 15.82rem !important;
 	/* width: unset !important; */
 }
 
@@ -663,7 +662,7 @@ body .branch{
 	width: 110%;
 }
 
-.branchreverse{
+.branchreverse svg{
 	transform: scaleX(-1);
 }
 
@@ -674,10 +673,10 @@ body .branch{
 }
 
 .innercontainer{
-	display: flex;
-	flex-direction: column;
+	/* display: flex; */
+	/* flex-direction: column; */
 	/* justify-content: space-between; */
-	min-width: 3rem;
+	min-width: 6rem;
 	height: -webkit-fill-available;
 	min-height: 100%;
 	z-index: 1;
@@ -687,8 +686,10 @@ body .branch{
 
 .innercontainer .allsvgcontainer{
 	min-height: 10rem;
-	/* min-width: 100%; */
+	min-width: min( 100% , 6rem );
 	position: relative;
+	justify-content: flex-end;
+	
 	/* It helps sortablejs to make dragging new element easier on branches */
 	/* padding-left: 2rem; */
 

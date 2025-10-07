@@ -93,7 +93,7 @@ class EventManager {
 
 		// Save button
 		this.app.saveButton.onclick = () => {
-			this.app.download(dumbLineName() + ".json", JSON.stringify(this.app.exporter.exportJSON()));
+			this.app.download(dumbLineName() + ".json", this.app.exporter.exportJSON());
 		};
 
 		// Open button

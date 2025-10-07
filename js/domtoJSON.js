@@ -7,26 +7,18 @@ class Exporter {
 	}
 
 
+	HTMLtoJSON(partsDOM){
 
-
-	// Should work, designed only for the line's container
-	exportJSON() {
-
-		let lineColor = this.parent.line.color;
-		let lineNumber = this.parent.line.name;
-		let lineType = this.parent.line.type;
-		let custom = this.parent.line.custom;
-
-
+		
 		let parts = [];
-		let partsDOM = this.parent.output.children;
 
-		// Skipping dragzones 
-		for (var i = 1; i <= partsDOM.length - 2; i++) {
+		for (var i = 0; i <= partsDOM.length - 1; i++) {
 			let DOMpart = partsDOM[i];
 
-			let partType = DOMpart.className.split(" ")[1]
 
+			let partType = DOMpart.className.split(" ")[1];
+
+			if(DOMpart.className == "emptyfordraggingstart" || DOMpart.className == "emptyfordraggingend") continue;
 
 			// If point:
 			if (partType == "point") {
@@ -52,24 +44,60 @@ class Exporter {
 
 
 				parts.push({ "name": stationName, "type": stationType, "connected": stationHasConnection, "connections": stationConnections });
+				continue;
 
 			} else if (partType == "line") {
 
 				let isDashed = DOMpart.classList.contains("dashed");
 				parts.push(isDashed ? "block-dashed" : "block");
+				continue;
+			} else if (partType == "branch"){
 
-
+				let isDashed = DOMpart.classList.contains("dashed");
+				if( DOMpart.classList.contains("branchreverse") )parts.push(isDashed ? "branchreverse-dashed" : "branchreverse");
+				else parts.push(isDashed ? "branch-dashed" : "branch");
 
 			}
+			
 
+
+			if(DOMpart.className == "innercontainer"){
+				parts.push("innerblocks",
+
+					this.HTMLtoJSON(DOMpart.children[0].childNodes),this.HTMLtoJSON(DOMpart.children[1].childNodes)
+
+				);
+			}
+			
 
 		}
+			
+		return parts;
 
-		// return JSON.stringify(
-		return { "line": [lineType, lineNumber, lineColor,custom], "parts": parts }
+
+	}
+
+	// Should work, designed only for the line's container
+	exportJSON() {
+
+		// return;
+
+		let lineColor = this.parent.line.color;
+		let lineNumber = this.parent.line.name;
+		let lineType = this.parent.line.type;
+		let custom = this.parent.line.custom;
 
 
-		// );
+		// let parts = [];
+		let partsDOM = this.parent.output.children;
+
+		// console.log(partsDOM);
+
+		let parts = this.HTMLtoJSON(partsDOM);
+
+		// console.log(parts.length);
+
+		return JSON.stringify({ "line": [lineType, lineNumber, lineColor,custom], "parts": parts })
 	}
 
 
@@ -85,6 +113,10 @@ class Exporter {
 			let toAdd;
 
 			let innerblocks = false;
+
+			// console.log(DOMpart);
+		// console.log(typeof DOMpart,i);
+
 
 			// If block
 			if (typeof DOMpart == "string") {
@@ -114,50 +146,40 @@ class Exporter {
 					// DOMPart = ;
 				}
 
-				if(DOMpart == "block"){
+				else if(DOMpart == "block"){
 					toAdd = document.createElement("div");
-					result.appendChild(toAdd);
+
 					toAdd.className = "blockcontainer line";
 					// toAdd.draggable = "true";
 					if (DOMpart === "block-dashed") toAdd.classList.add("dashed");
 
 					toAdd.innerHTML = pathHTML.replace(this.parent.DEFAULT_COLOR, this.parent.line.color);
+					result.appendChild(toAdd);
+
 					toAdd = null;
 				}
 				else if(DOMpart.slice(0,6) == "branch"){
 
 					let reversed = DOMpart.slice(6) == "reverse";
+					let dashed = DOMpart.slice(13) == "dashed";
 
-					
+
 					toAdd = document.createElement("div");
 					toAdd.className = "blockcontainer branch";
 					// toAdd.draggable = "true";
 					if(reversed) toAdd.classList.add("branchreverse");
+					if(dashed) toAdd.classList.add("dashed");
 
 					if (DOMpart === "block-dashed") toAdd.classList.add("dashed");
 
 					toAdd.innerHTML = pathBranchHTML.replace(this.parent.DEFAULT_COLOR, this.parent.line.color);
 
-					// Very "smart" yeah.. 
-					// Contains the parts -> like a "column" 
-
-					// // ONLY for debugging - development
-					// smartPartContainerTop.innerHTML = `<div class="blockcontainer line" draggable="false"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div>`;
-
-					// smartPartContainerBottom.innerHTML = `<div class="blockcontainer line" draggable="false"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div>`;
-
-					// smartPartContainer.appendChild(smartPartContainerTop);
-					// smartPartContainer.appendChild(smartPartContainerBottom);
 					
 
 					if(reversed){
-					// console.log(result);
 						result.appendChild(toAdd);
-					// console.log(result);
-						// result.appendChild(smartPartContainer);
 					}
 					else{
-						// result.appendChild(smartPartContainer);
 						result.appendChild(toAdd);
 					}
 
@@ -173,7 +195,7 @@ class Exporter {
 				let isConnected = DOMpart.connected;
 
 				toAdd = document.createElement("div");
-				result.insertBefore(toAdd, result.lastChild);
+				result.appendChild(toAdd);
 
 				toAdd.className = "blockcontainer point";
 				// toAdd.draggable = "true";
@@ -463,7 +485,7 @@ class Exporter {
 
 		// Clear all existing parts 
 
-		for (let i = this.parent.output.children.length - 2; i >= 1; i--) {
+		for (let i = this.parent.output.children.length -1; i >= 0; i--) {
 			this.parent.output.removeChild(this.parent.output.children[i]);
 		}
 
@@ -472,6 +494,8 @@ class Exporter {
 
 
 		let result = this.jsonsubArraytoHTML(object.parts,lineType);
+
+
 		result.className = "allsvgcontainer pad3 pad4 pad2";
 		
 		let dragstart = document.createElement("div");
