@@ -80,22 +80,13 @@ class Exporter {
 	// Should work, designed only for the line's container
 	exportJSON() {
 
-		// return;
-
 		let lineColor = this.parent.line.color;
 		let lineNumber = this.parent.line.name;
 		let lineType = this.parent.line.type;
 		let custom = this.parent.line.custom;
 
+		let parts = this.HTMLtoJSON(this.parent.output.children);
 
-		// let parts = [];
-		let partsDOM = this.parent.output.children;
-
-		// console.log(partsDOM);
-
-		let parts = this.HTMLtoJSON(partsDOM);
-
-		// console.log(parts.length);
 
 		return JSON.stringify({ "line": [lineType, lineNumber, lineColor,custom], "parts": parts })
 	}
@@ -107,15 +98,14 @@ class Exporter {
 
 		let result = document.createElement("div");
 
+		result.className = "allsvgcontainer";
+
 		let len = object.length;
 		for (var i = 0; i < len; i++) {
 			let DOMpart = object[i];
 			let toAdd;
 
 			let innerblocks = false;
-
-			// console.log(DOMpart);
-		// console.log(typeof DOMpart,i);
 
 
 			// If block
@@ -385,25 +375,23 @@ class Exporter {
 					let maxConnectionLines = newPointConnection.childElementCount - 1; // exclude addConnectionLine button
 					switch (maxConnectionLines) {
 						case 2:
-							if (!this.parent.output.classList.contains("pad2")) this.parent.output.classList.add("pad2");
+							if (!result.classList.contains("pad2")) result.classList.add("pad2");
 							break;
 						case 3:
-							if (!this.parent.output.classList.contains("pad3")) this.parent.output.classList.add("pad3");
+							if (!result.classList.contains("pad3")) result.classList.add("pad3");
 							break;
 						case 4:
-							if (!this.parent.output.classList.contains("pad4")) this.parent.output.classList.add("pad4");
+							if (!result.classList.contains("pad4")) result.classList.add("pad4");
 							break;
 						case 5:
-							if (!this.parent.output.classList.contains("pad5")) this.parent.output.classList.add("pad5");
+							if (!result.classList.contains("pad5")) result.classList.add("pad5");
 							break;
 					}
 
 				}
-
-				if(lineType == "Tram") this.parent.output.classList.add("tramstyle");
+				if(lineType == "Tram") result.classList.add("tramstyle");
 
 				toAdd = null;
-
 			
 			}
 
@@ -495,9 +483,6 @@ class Exporter {
 
 		let result = this.jsonsubArraytoHTML(object.parts,lineType);
 
-
-		result.className = "allsvgcontainer pad3 pad4 pad2";
-		
 		let dragstart = document.createElement("div");
 		let dragend = document.createElement("div");
 		dragstart.className = "emptyfordraggingstart";

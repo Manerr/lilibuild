@@ -488,7 +488,7 @@ class App {
 		} catch (e) {
 			alert("Error on loading saved data - happens on first launch or when this error: "+e.toString());
 			this.saveLocalStorage();
-			// document.location.reload();
+			document.location.reload();
 		}
 
 		this._sanitizeBlocks();
