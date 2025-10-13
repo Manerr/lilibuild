@@ -31,6 +31,7 @@ class Exporter {
 
 				let stationHasConnection = DOMpart.className.search("connected") != -1;
 
+
 				let DOMconnections = DOMpart.children[2].querySelectorAll(".connectionpoint");
 
 				let stationConnections = [];

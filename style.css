@@ -40,14 +40,12 @@ body {
 }
 
 ::-webkit-scrollbar-corner {
-
-
 	display: block;
 }
 
 ::-webkit-scrollbar-thumb {
 	width: 80%;
-	height: 80%;
+	height: 50%;
 	border: 3px solid transparent;
 	background-color: #0d0e18;
 	cursor: pointer;
@@ -113,19 +111,19 @@ header {
 }
 
 .pad2 {
-	padding-bottom: 1.9rem;
+	padding-bottom: 3.5rem;
 }
 
 .pad3 {
-	padding-bottom: 3.9rem;
+	padding-bottom: 6.5rem;
 }
 
 .pad4 {
-	padding-bottom: 6.9rem;
+	padding-bottom: 9.5rem;
 }
 
 .pad5 {
-	padding-bottom: 10rem;
+	padding-bottom: 12rem;
 }
 
 #dragtarget {
@@ -156,10 +154,10 @@ div.terminus {
 	margin-right: auto !important;
 }
 
-.deleting .blockcontainer.line:hover,
-.deleting .point .img:hover,
-.deleting .branch:hover,
-.deleting .innercontainer:hover,.deleting .innercontainer .allsvgcontainer:hover{
+.deleting #dragtarget .blockcontainer.line:hover,
+.deleting #dragtarget .point .img:hover,
+.deleting #dragtarget .branch:hover,
+.deleting #dragtarget .innercontainer:hover,#dragtarget .deleting .innercontainer .allsvgcontainer:hover{
 	box-shadow: 0px 0px .2rem #777;
 	outline: .3rem solid #222;
 	border-radius: .3rem;
@@ -649,28 +647,19 @@ html body .img svg g.corrpoint path {
 body .branch{
 	/* height: 18rem !important; */
 	width: 15.82rem !important;
-	/* width: unset !important; */
 }
 
 
 .branch > .img{
-	/* position: relative; */
-	/* left: .1rem; */
-	/* height: 1.9rem; */
-	/* width: 125%; */
 	transform: scaleY(1.01255);
     height: 14rem;
-	/* left: -.1rem; */
 	z-index: 0;
-	/* filter: hue-rotate(90deg); */
 	width: 110%;
 }
 
 .branchreverse svg{
 	transform: scaleX(-1);
 }
-
-
 
 .after-branch.innercontainer{
 	align-items: flex-start;
@@ -679,13 +668,11 @@ body .branch{
 .innercontainer{
 	/* display: flex; */
 	/* flex-direction: column; */
-	/* justify-content: space-between; */
 	min-width: 6rem;
 	height: -webkit-fill-available;
 	min-height: 100%;
 	z-index: 1;
 	align-items: flex-end;
-	/* position: relative; */
 }
 
 .innercontainer .allsvgcontainer{
@@ -693,14 +680,11 @@ body .branch{
 	min-width: min( 100% , 6rem );
 	position: relative;
 	justify-content: flex-end;
-	
-	/* It helps sortablejs to make dragging new element easier on branches */
-	/* padding-left: 2rem; */
-
+	border-radius:.7rem;
 }
 
 .innercontainer .allsvgcontainer:hover{
-	background-color: rgba(233,233,233,.7);
+	background-color: rgba(233,233,233,.3);
 }
 
 .innercontainer .branchtop{
@@ -710,8 +694,6 @@ body .branch{
 .innercontainer .branchbottom{
 	top: 1.55rem;
 }
-
-
 
 
 
@@ -774,15 +756,10 @@ body .branch{
 
 /* New ''UI'' for drawing */
 
-/* #dragtarget{
-	position: relative;
-} */
-
 #dragelements{
 	position: absolute;
     bottom: 0;
     left: 0;
-    /* background: black; */
 	display: flex;
 	gap: .15rem;
 	padding: .5rem;
@@ -813,7 +790,6 @@ body .indicator{
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	/* height: 2rem !important; */
 	width: 2.7rem !important;
 	overflow: hidden;
 }
@@ -831,7 +807,6 @@ body .indicator{
 	width: unset !important;
 	height: 12rem !important;
 }
-
 
 
 #dragelements .indicator:hover .img svg{
@@ -854,7 +829,6 @@ body .indicator{
 }
 
 
-
 #printmodeonlyImg {
 	display: none;
 }
@@ -864,7 +838,6 @@ body .indicator{
 		min-width: 900px !important;
 	}
 }
-
 
 
 .ghost {

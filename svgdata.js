@@ -45,17 +45,32 @@ let pathHTML = '<div class="img" name="path">     \
 // </div>\
 // ';
 
-let pathBranchHTML = `\
-<div class="img" name="path">\
+let pathBranchHTML = `
+<div class="img" name="path">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 354 270">\
 
 
   <g id="layer-MC0" transform="matrix(1, 0, 0, 1, -3047.341354, -193.823337)">\
-    <path id="path3" style="fill: none; stroke-width: 14.172; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 4; stroke-dasharray: none; stroke-opacity: 1; stroke: rgb(13, 140, 93);filter: url(#inner-shadow-filter-0) url(#inner-shadow-filter-1);" transform="matrix(1.3333333,0,0,-1.3333333,1209.6121,204.09867)" d="m 1378.008,0 h 64.818 c 3.118,0 7.905,-1.23 10.637,-2.732 l 154.475,-88.078 c 2.732,-1.503 7.518,-2.732 10.636,-2.732 h 25.512 m -266.078,-93.545 h 64.8185 c 3.118,0 7.904,1.229 10.637,2.732 l 154.474,88.078998 c 2.732,1.502 7.519,2.732 10.637,2.732 h 25.511"></path>\
-  </g>\
-</svg>\
-</div>\
+    <path id="path3" style="fill: none; stroke-width: 14.172; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 4; stroke-dasharray: none; stroke-opacity: 1; stroke: rgb(13, 140, 93);filter: url(#inner-shadow-filter-0) url(#inner-shadow-filter-1);" transform="matrix(1.3333333,0,0,-1.3333333,1209.6121,204.09867)" d="m 1378.008,0 h 64.818 c 3.118,0 7.905,-1.23 10.637,-2.732 l 154.475,-88.078 c 2.732,-1.503 7.518,-2.732 10.636,-2.732 h 25.512 m -266.078,-93.545 h 64.8185 c 3.118,0 7.904,1.229 10.637,2.732 l 154.474,88.078998 c 2.732,1.502 7.519,2.732 10.637,2.732 h 25.511"></path>
+  </g>
+</svg>
+</div>
 `;
+
+let pathBiggerBranch = `
+<div class="img" name="path">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 354 378">
+  <g id="svg1" transform="matrix(1, 0, 0, 1, -163.98923, 44.225533)">
+    <g id="g1" transform="matrix(3.779528, 0, 0, 3.779528, 163.79671, -44.242833)">
+      <g id="layer-MC0" transform="matrix(0.26458333,0,0,0.26458333,-836.43823,-48.107424)">
+        <path id="path3" style="fill:none;stroke:#0d8c5d;stroke-width:18.896;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#inner-shadow-filter-0)" d="m 3161.3414,191.2969 h 86.424 c 4.1574,0 10.54,1.64 14.1827,3.64266 l 205.5813,172.23911 c 3.6426,2.004 10.024,3.64267 14.1813,3.64267 h 34.016 m -354.3853,179.56303 h 86.4247 c 4.1573,0 10.5387,-1.63866 14.1827,-3.64266 l 205.5799,-172.27503 c 3.6427,-2.00267 10.0253,-3.64267 14.1827,-3.64267 h 34.0146"></path>
+      </g>
+    </g>
+  </g>
+</svg>
+</div>
+`;
+
 
 let pointHTML = '<div class="img" name="pointempty">    \
 <svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px">         \
@@ -75,5 +90,3 @@ style="height: 100%;">    <g class="normalpoint" style="" transform="matrix(0, -
 innerLinesHTML = `<div class="allsvgcontainer branchtop"><div class="blockcontainer line small startgradient"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div></div><div class="allsvgcontainer branchbottom"><div class="blockcontainer line small startgradient" draggable="true"><div class="img" name="path">       <svg viewBox="0 0 150 33" xmlns="http://www.w3.org/2000/svg" width="150px" height="33px">    <g id="g2" transform="matrix(-0.6808769702911377, 0, 0, 2.9988629817962646, 1593.6453976157707, -5232.506874922715)" style="">          <g class="path" transform="translate(-2.502188,0.005053)" id="g1">        <path id="path1159" d="M 2122.774 1750.332 L 2343.078 1750.322" style="fill: none; stroke: rgb(13, 140, 93); stroke-width: 7.17943; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 3.864; stroke-dasharray: none; stroke-opacity: 1;">      </path>    </g>  </g></svg></div></div></div>`; 
 
 let ligne12JSON = `{"line":["metro","12","rgb(13, 140, 93)"],"parts":["block",{"name":"Mairie\\nd'Aubervilliers","type":"pointterminus","connected":false,"connections":[]},"block",{"name":"Aimé Césaire","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Front Populaire","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Porte de la Chapelle","type":"pointcorr","connected":true,"connections":["Tram connectionpoint lineT3B"]},"block",{"name":"Marx Dormoy","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Marcadet-Poissonniers","type":"pointcorr","connected":true,"connections":["metro connectionpoint line4"]},"block",{"name":"Jules Joffrin","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Abbesses","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Pigalle","type":"pointcorr","connected":true,"connections":["metro connectionpoint line2"]},"block",{"name":"Saint-Georges","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Notre-Dame-de-Lorette","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Trinité-d'Estienne d'Orves","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Saint-Lazare","type":"pointcorr","connected":true,"connections":["metro connectionpoint line13","metro connectionpoint line3","metro connectionpoint line14","RER connectionpoint lineE","Train connectionpoint lineJ","Train connectionpoint lineL"]},"block",{"name":"Madeleine","type":"pointcorr","connected":true,"connections":["metro connectionpoint line8","metro connectionpoint line14"]},"block",{"name":"Concorde","type":"pointcorr","connected":true,"connections":["metro connectionpoint line1","metro connectionpoint line8"]},"block",{"name":"Assemblée Nationale","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Solférino","type":"pointcorr","connected":true,"connections":["RER connectionpoint lineC"]},"block",{"name":"Rue du Bac","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Sèvres-Babylone","type":"pointcorr","connected":true,"connections":["metro connectionpoint line10"]},"block",{"name":"Rennes","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Notre-Dame-des-Champs","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Montparnasse\\nBienvenüe","type":"pointcorr","connected":true,"connections":["metro connectionpoint line13","metro connectionpoint line4","metro connectionpoint line6","Train connectionpoint lineN"]},"block",{"name":"Falguière","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Pasteur","type":"pointcorr","connected":true,"connections":["metro connectionpoint line6"]},"block",{"name":"Volontaires","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Vaugirard","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Convention","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Porte de Versailles","type":"pointcorr","connected":true,"connections":["Tram connectionpoint lineT2","Tram connectionpoint lineT3A"]},"block",{"name":"Corentin Celton","type":"pointempty","connected":false,"connections":[]},"block",{"name":"Mairie d'Issy","type":"pointterminus","connected":false,"connections":[]},"block"]}`;
-
-let DEBUG_LINE = `{"line":["metro","12","rgb(13, 140, 93)"],"parts":["branch","block",{"name":"Mairie\\nd'Aubervilliers","type":"pointterminus","connected":false,"connections":[]},"block",{"name":"Porte de la Chapelle","type":"pointcorr","connected":true,"connections":["Tram connectionpoint lineT3B"]},"block",{"name":"Marx Dormoy","type":"pointempty","connected":false,"connections":[]},"branchreverse"]}`;

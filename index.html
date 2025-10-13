@@ -5,12 +5,20 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<title>LiliBuild - Lite Line Builder</title>
+	<link rel="manifest" href="./manifest.json">
 	<link rel="stylesheet" type="text/css" href="asidemenubar.css" />
 	<link rel="stylesheet" type="text/css" href="windows.css" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<link rel="stylesheet" type="text/css" href="colors.css" />
 	<link rel="stylesheet" media="print" type="text/css" href="print.css" />
-	<link rel=icon href="favicon.png" sizes="32x32" type="image/png">
+	<link rel=icon href="icons/icon-32x32.png" sizes="32x32" type="image/png">
+	<meta name="theme-color" content="#0d0e18">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="apple-mobile-web-app-title" content="LiliBuild">
+	<link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+
 
 </head>
 
@@ -85,17 +93,7 @@
 					<img src="ui/new/pointer.svg"/>
 				</button>
 
-				
-				<!-- <button class="modern switch" type="button" title="Add path" value="2" id="bEdit" name="editButtonsValue">
-					<img src="ui/new/edit.svg"/>
-				</button>
-				<button class="modern switch" type="button" title="Add point" value="3" id="bEditPoint" name="editButtonsValue">
-					<img src="ui/new/editpoint.svg"/>
-				</button>
-				<button class="modern switch" type="button" title="Add branch" value="4" id="bEditBranch" name="editButtonsValue">
-					<img src="ui/new/editbranch.svg"/>
-				</button> -->
-
+			
 				
 				<button class="modern switch" type="button" title="Delete blocks" value="0" id="bDelete" name="editButtonsValue">
 					<img src="ui/new/delete.svg"/>
@@ -194,14 +192,9 @@
 
 				<div class="allsvgcontainer pad3 pad4 pad2">
 
-
 					<div class="emptyfordraggingstart"></div><div class="emptyfordraggingend"></div>
 
-
-
 				</div>
-
-
 
 			</div>
 		</div>
@@ -221,12 +214,15 @@
 			<img src="logo2.svg" />
 			<h2>LiLiBuild</h2>
 			<p>A Lite Line Builder for the Web</p>
-			<pre>V.1.4.01</pre>
+			<pre>V.1.5.0</pre>
 
 			<section id="changelog-box">
 				<hr/>
 				<ul id="changelog">
-					<li>[1.4.02] ANother export/import issue lol</li>
+					<li>[1.5.0] App works now offline - pwa support </li>
+					<li>[1.5.0] Better padding management for connections in branches </li>
+					<li>[1.4.03] Fixed deleting contour appearing on UI</li>
+					<li>[1.4.03] Fixed ANother export/import issue lol</li>
 					<li>[1.4.01] Fixed/added better deleting in branches</li>
 					<li>[1.4.01] Fixed an issue on gradients</li>
 					<li>[1.4.0] New drawing system</li>
@@ -393,11 +389,21 @@
 	</section>
 
 
-
-
 	<img alt="temp hidden picture for printing pdf" id="printmodeonlyImg" />
 
+	<script>
+	if ('serviceWorker' in navigator) {
+		window.addEventListener('load', () => {
+		navigator.serviceWorker.register('./sw.js')
+			.then(registration => {
+			})
+			.catch(error => {
+				console.error('Service Worker issue:', error);
+			});
+		});
+	}
 
+	</script>
 	<script type="text/javascript" defer src="svgdata.js">
 	</script>
 	<script type="text/javascript" defer src="./js/html-to-image.min.js">

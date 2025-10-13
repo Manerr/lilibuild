@@ -552,25 +552,7 @@ class EventManager {
 						newConnectionLine.setAttribute("type", transportType);
 
 
-						//Small piece of code that adds some padding on the bottom to be sure there's no y overflow (css should bee fixedddddd)
-						let maxConnectionLines = currentElement.parentElement.childElementCount
-
-						switch (maxConnectionLines) {
-							case 2:
-								if (!this.output.classList.contains("pad2")) this.output.classList.add("pad2");
-								break;
-							case 3:
-								if (!this.output.classList.contains("pad3")) this.output.classList.add("pad3");
-								break;
-							case 4:
-								if (!this.output.classList.contains("pad4")) this.output.classList.add("pad4");
-								break;
-							case 5:
-								if (!this.output.classList.contains("pad5")) this.output.classList.add("pad5");
-								break;
-						}
-
-
+						
 						currentElement.parentElement.insertBefore(newConnectionLine, currentElement);
 
 						// Add the connection directly to the new line
