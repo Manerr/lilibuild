@@ -1,5 +1,5 @@
 // sw.js
-const CACHE_NAME = '.lilibuild-CACHE-2';
+const CACHE_NAME = 'lilibuild-Cache-v_1_5_1';
 const FILES_TO_CACHE = [
   './',
   './logo2.svg',
@@ -65,7 +65,8 @@ const FILES_TO_CACHE = [
 
 
 self.addEventListener('install', event => {
-  
+      self.skipWaiting();
+
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {

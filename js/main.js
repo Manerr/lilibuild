@@ -16,8 +16,6 @@ let SWITCHING_CONNECTION = false;
 let LAST_X = null;
 
 
-// ligne12JSON = DEBUG_LINE;
-
 class App {
 
 	constructor() {
@@ -40,8 +38,6 @@ class App {
 
 		this.trueIndicator = document.createElement("div");
 
-
-		// let colorchanger = document.getElementById("colorvalue");
 
 		this.output = document.querySelector(".allsvgcontainer");
 
@@ -158,9 +154,6 @@ class App {
 	}
 
 
-	whenDeDragging(event) {
-		return ;
-	}
 
 	removeIndicator(event = null) {
 		// return
@@ -169,119 +162,7 @@ class App {
 		}
 	}
 
-	// basically a drawing function
-	outputOnmousemove(event) {
-
-		
-		// Not in drawing mode
-		if (CURRENTLY_DOING == deleting || CURRENTLY_DOING == pointing) {
-			this.removeIndicator();
-			return;
-		}
-
-		let mouseX = event.clientX;
-		let mouseY = event.clientY;
-
-		let target = event.target;
-		let className = target.className;
-
-
-		// trying to get the parentelement if it's one of the children : if it's the container -> return
-
-		if (className == "name" || className == "img" || className == "name terminus" || className == "connection") {
-			target = target.parentElement;
-		}
-
-
-		// console.log(target);
-
-		let nodeName = target.nodeName;
-
-		if (className == "allsvgcontainer" || nodeName == "SPAN" || nodeName == "img") {
-			return
-		}
-
-		let bbox = target.getBoundingClientRect();
-
-		let targetLeft = bbox.x;
-		let targetRight = bbox.x + bbox.width;
-
-		let targetMid = (targetLeft + targetRight) / 2;
-
-		let targetMidY = (bbox.y + bbox.height / 2) 
-
-
-
-		if (CURRENTLY_DOING == drawingpath && this.trueIndicator.className != "indicator line") {
-			this.trueIndicator.innerHTML = pathHTML.replace(this.DEFAULT_COLOR, this.line.color);
-			this.trueIndicator.className = "indicator line";
-		} else if (CURRENTLY_DOING == drawingpoint && this.trueIndicator.className != "indicator point") {
-			this.trueIndicator.innerHTML = editedpointHTML.replace(this.DEFAULT_COLOR, this.line.color);
-			this.trueIndicator.className = "indicator point";
-		}
-		if (CURRENTLY_DOING == drawingbranch && this.trueIndicator.className != "indicator line branch") {
-			this.trueIndicator.innerHTML = pathBranchHTML.replaceAll(this.DEFAULT_COLOR, this.line.color);
-			this.trueIndicator.className = "indicator line branch";
-		}
-
-
-		if (target == this.trueIndicator) { return }
-
-		// BRANCH LOGIC - wip
-
-		if(target.classList.contains("branch")){
-
-			let rigthBranchTop = target.nextElementSibling.firstChild;
-			let rigthBranchBottom = target.nextElementSibling.lastChild;
- 
-				// console.log(target);
-
-			let parent = target.parent;
-
-			// ADDING ON THE LEFT PART OF A BRANCH (one of the two sperated parts) ->
-			// between it or even inside at the right of a innercontainer:  
-
-
-
-
-
-			if(mouseX > targetMid){	
-				
-				// this.output.removeChild(this.indicator);
-				
-
-				// if(mouseY < targetMidY){
-				// 	rigthBranchTop.insertBefore(this.trueIndicator, rigthBranchTop.	firstChild);
-				// }
-				// else rigthBranchBottom.insertBefore(this.trueIndicator, rigthBranchBottom.firstChild);
-			
-			}
-
-		}
-
-
-
-		try {
-
-			if (mouseX > targetMid) {
-				if (target.nextElementSibling && target.nextElementSibling != this.trueIndicator) {
-					
-					
-					this.output.insertBefore(this.trueIndicator, target.nextElementSibling);
-				}
-			} else {
-				if (target.previousElementSibling && target.previousElementSibling != this.trueIndicator) {
-					this.output.insertBefore(this.trueIndicator, target);
-				}
-			}
-
-		} catch (error) {
-
-		}
-
-
-	}
-
+	
 	outputOnclick(event) {
 
 		if (CURRENTLY_DOING == deleting || CURRENTLY_DOING == pointing) {
@@ -445,22 +326,22 @@ class App {
 		}
 
 
-		if(max > 3){
+		if(max > 2){
 
 			nextPart.classList.add("bigger")
 
-			if(max == 4){
+			if(max < 4){
 				nextPart.classList.add("bigger1");
 				nextPart.classList.remove("bigger2");
 				nextPart.classList.remove("bigger3");
 				nextPart.classList.remove("bigger4");
 			}
-			else if(max == 5){
+			else if(max < 5){
 				nextPart.classList.add("bigger2");
 				nextPart.classList.remove("bigger3");
 				nextPart.classList.remove("bigger4");
 			}
-			else if(max == 6){
+			else if(max >= 5){
 				nextPart.classList.add("bigger3");
 				nextPart.classList.remove("bigger4");
 			}
@@ -478,8 +359,20 @@ class App {
 	manageAllConnectionsMargins(){
 
 		let connections = this.output.querySelectorAll(".allsvgcontainer .connection");
+		let parts = this.output.querySelectorAll(".allsvgcontainer .line");
+
+		
+		for (let index = 0; index < parts.length; index++) {
+
+
+
+			const part = parts[index];
+			part.classList.remove("bigger");
+
+		}
 
 		for (let index = 0; index < connections.length; index++) {
+
 			const connectionLines = connections[index].children;
 
 			this.manageAutoConnectionLines_Margin(connectionLines);
@@ -502,7 +395,7 @@ class App {
 		// return;
 
 		if (window.localStorage.lilibuild == undefined || window.localStorage.lilibuild == 'undefined') {
-			window.localStorage.lilibuild = ligne12JSON;
+			window.localStorage.lilibuild = ligne13JSON;
 
 		}
 
@@ -658,70 +551,6 @@ class App {
 
 	}
 
-	tryImport() {
-		this.exporter.importJSON(JSON.parse(ligne7bis))
-	}
-
-	// Output drag end handler
-	outputOndragend(event) {
-		let element = event.srcElement;
-		// let deltaX = (event.pageX - LAST_X);
-		let nodes = this.output.children;
-		let currentX = event.offsetX;
-		let beforeElement = null;
-		let afterElement = null;
-
-		currentX = event.clientX;
-
-		for (let i = nodes.length - 1; i >= 0; i--) {
-			let node = nodes[i];
-			let leftX = node.getBoundingClientRect().left;
-			let rightX = leftX + node.offsetWidth;
-			let midX = (rightX + leftX) / 2;
-
-			if (currentX < 0) {
-				currentX = 1;
-			}
-
-			if (currentX >= leftX && currentX <= rightX) {
-				if (currentX > midX) {
-					afterElement = node;
-				} else {
-					beforeElement = node;
-				}
-			}
-		}
-
-		if (afterElement && afterElement.className == "emptyfordraggingend") {
-			this.output.insertBefore(element, afterElement.previousElementSibling);
-			return;
-		} else if (beforeElement && beforeElement.className == "emptyfordraggingstart") {
-			this.output.insertBefore(element, beforeElement.nextElementSibling);
-			return;
-		}
-
-		// Himself!
-		if (afterElement == element) {
-			return;
-		}
-		// Himself!
-		if (beforeElement == element) {
-			return;
-		}
-
-		if (beforeElement == null && afterElement != null) {
-			beforeElement = afterElement.nextElementSibling;
-		} else if (afterElement == null && beforeElement == null) {
-			return;
-		}
-
-		this.output.insertBefore(element, beforeElement);
-		this.manageGradients();
-
-		this.manageAllConnectionsMargins();
-
-		return;
-	}
 
 	showCustomPrompt = function({ title = "Select a line", type = "metro" } = {}) {
 
@@ -816,7 +645,7 @@ class App {
 	}
 
 
-	// Not the best names chosen - handle missing subparts (for ex when you drag branches you dont drag the subcontainer containing elements so you cant anymore draw "on" it)
+	// Not the best names chosen - handle missing subparts (for ex when you drag branches you dont drag the subcontainer containing elements so you cant anymore draw "on" it) -- do a lot of stuff
 	_sanitizeBlocks(){
 
 		let parts = this.output.childNodes;
@@ -903,24 +732,6 @@ class App {
 		}
 
 
-		// if(destination){
-
-		// 	let innerLinescontiguousToBranch = document.createElement("div");
-		// 	innerLinescontiguousToBranch.className = "innercontainer";
-		// 	innerLinescontiguousToBranch.innerHTML = innerLinesHTML.replaceAll("rgb(13, 140, 93)",this.line.color);
-
-
-		// 	if(!destination.classList.contains("branchreverse")){
-		// 		this.output.insertBefore(innerLinescontiguousToBranch,destination);
-		// 	}
-		// 	else{
-		// 		let next = destination.nextElementSibling;
-		// 		if(!next) this.output.insertBefore(innerLinescontiguousToBranch,lastZone)
-		// 		else this.output.insertBefore(innerLinescontiguousToBranch,next);
-
-		// 	}
-
-		// }
 	}
 
 	_manageDrawingSortable(type){
@@ -1015,6 +826,7 @@ class App {
 
 		// }
 		this._sanitizeBlocks();
+		this.manageAllConnectionsMargins();
 
 
 	}

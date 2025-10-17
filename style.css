@@ -600,10 +600,16 @@ html body .img svg g.corrpoint path {
 	overflow: visible;
 }
 
+.img svg *{
+	pointer-events: none;
+}
+
 .point .img {
 	width: 2rem;
 	height: 2rem;
 }
+
+
 
 .img:hover {
 	/* filter: drop-shadow(0 .42rem #333333cc) drop-shadow(0 -.42rem #333333cc); */

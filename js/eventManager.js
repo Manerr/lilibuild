@@ -46,12 +46,6 @@ class EventManager {
 	bindOutputEvents() {
 		// Output drag zone events
 		this.app.outputdragzone.onclick = this.manageClick.bind(this.app);
-		// this.app.outputdragzone.ondragend = this.app.whenDeDragging.bind(this.app);
-
-		// Output container events
-		// this.app.output.ondragend = this.app.outputOndragend.bind(this.app);
-		// this.app.output.onmouseleave = this.app.removeIndicator.bind(this.app);
-		// this.app.output.onmousemove = this.app.outputOnmousemove.bind(this.app);
 
 
 	}
@@ -81,12 +75,12 @@ class EventManager {
 
 		// Reset button
 		this.app.resetButton.onclick = () => {
-			if (confirm("[Are you sure to reset the app's state and delete saved data?\nIt's only useful if you think something is broken.")) {
+			if (confirm("[Are you sure to reset the app's state and delete saved data?\n\n-> It's only useful if you think something is broken.")) {
 				// Bypass saving on reload
 				window.onbeforeunload = undefined;
 				window.onpagehide = undefined;
 				localStorage.removeItem("lilibuild");
-				localStorage.lilibuild = ligne12JSON;
+				localStorage.lilibuild = ligne13JSON;
 				document.location.reload();
 			}
 		};
@@ -595,7 +589,7 @@ class EventManager {
 					case "pointcorr":
 						// console.warn(currentElement)
 						// First of the line... 
-						if (trueCurrentElement.previousElementSibling.previousElementSibling == null) {
+						if (!trueCurrentElement.previousElementSibling || !trueCurrentElement.previousElementSibling.previousElementSibling) {
 							currentElement.innerHTML = pointTerminus.replace(this.DEFAULT_COLOR, this.line.color);
 							currentElement.setAttribute("name", "pointterminus");
 							// currentElement.src = "blocks/pointterminusLeft.svg";
@@ -729,6 +723,7 @@ class EventManager {
 
 
 		this.app.manageAutoConnectionLines_Margin(connectionLine.parentElement.children);
+
 		
 		}
 	}
