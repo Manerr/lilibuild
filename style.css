@@ -565,10 +565,6 @@ body .InsertBeforeit {
 	mask-image: linear-gradient(-90deg, white 25%, #00000000 96%);
 }
 
-/* .tramstyle .line .img {
-	mask-image: linear-gradient(white 38%, #aaaaaa 38%, #aaaaaa 62%, white 62%);
-	mask-mode: luminance;
-} */
 
 .tramstyle .line svg{
 	filter: saturate(0.42) brightness(1.33) url(#inner-shadow-filter-0) url(#inner-shadow-filter-1);
@@ -611,9 +607,6 @@ html body .img svg g.corrpoint path {
 
 
 
-.img:hover {
-	/* filter: drop-shadow(0 .42rem #333333cc) drop-shadow(0 -.42rem #333333cc); */
-}
 
 .point {
 	z-index: 8;
@@ -651,7 +644,6 @@ html body .img svg g.corrpoint path {
 /*** BRANCHES ***/
 
 body .branch{
-	/* height: 18rem !important; */
 	width: 15.82rem !important;
 }
 
@@ -672,8 +664,6 @@ body .branch{
 }
 
 .innercontainer{
-	/* display: flex; */
-	/* flex-direction: column; */
 	min-width: 6rem;
 	height: -webkit-fill-available;
 	min-height: 100%;
@@ -800,6 +790,15 @@ body .indicator{
 	overflow: hidden;
 }
 
+#dragelements .point .img svg{
+	width: 1.3rem !important;
+}
+
+#dragelements .line .img svg{
+	height: 1.2rem !important;
+}
+
+
 .indicator .img{
 	height: 2rem !important;
 }
@@ -823,15 +822,6 @@ body .indicator{
 	height: unset;
 	width: unset;
 	min-width: unset;
-}
-
-#dragelements :nth-child(2) .img{
-	transform: scaleY(.2);
-}
-
-#dragelements :nth-child(3) .img svg,#dragelements :nth-child(4) .img svg{
-	transform: scaleY(.9);
-
 }
 
 

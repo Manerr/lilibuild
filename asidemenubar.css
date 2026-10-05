@@ -4,6 +4,14 @@
 	background-color: #0d0e18;
 	overflow: hidden;
 	position: relative;
+	align-items: center;
+	width: 85vw;
+	min-width: 240px;
+	max-width: 700px;
+	margin: auto;
+	border-radius: 1.8rem;
+	height: 3.6rem;
+	margin-top: -.2rem;
 }
 
 #center-aside{
@@ -33,7 +41,6 @@
 	background: none;
 	width: 2.5rem;
 	height: 2.5rem;
-	margin: .3rem .4rem;
 	font-family: "parisine";
 	border-radius: .26rem;
 	padding: 0px;
@@ -49,31 +56,27 @@
 
 .modern img {
 	pointer-events: none;
-	width: 1.3rem;
+	width: 1.45rem;
 	margin: auto;
 }
 
 #logo-header{
 	width: 2.4rem;
 	margin: auto 0;
-	margin-left: 1rem;
+	margin-left: .45rem;
 	z-index: 7;
 }
 
 .modern:hover {
-	transition: .3s transform;
-	transform: scale(1.1);
-	border-color: #aaa;
+	background-color: #333;
 }
-
-.modern:active {
-	border-width: 2px;
-}
-
-
 
 .selected {
 	background-color: white;
+}
+
+.selected:hover{
+	background-color: #fff;
 }
 
 .selected img {
